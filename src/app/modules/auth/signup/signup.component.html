@@ -1,1 +1,59 @@
-<p>signup works!</p>
+<form (ngSubmit)="onSignup()" [formGroup]="form" *ngIf="form">
+	<div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-6">
+		<div class="sm:col-span-3">
+			<app-control-container label="Company Name" name="company_name" errorMsg="Company Name is Required">
+				<input type="text" formControlName="company_name" id="first-name" autocomplete="given-name" placeholder="HrPhase Technologies"
+					   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400">
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-3">
+			<app-control-container label="Name" name="name" errorMsg="Admin Name is Required">
+				<input type="text" formControlName="name"  autocomplete="given-name" placeholder="eg:John Smith"
+					   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400">
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-3">
+			<app-control-container label="Email" name="email" errorMsg="Company Email is Required">
+				<input id="email" formControlName="email" type="email" autocomplete="email" placeholder="johnsmith@gmail.com"
+					   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400">
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-3">
+			<app-control-container label="Mobile Number" name="mobile_number" errorMsg="Company Mobile Number is Required">
+				<input id="mobile_number" formControlName="mobile_number" type="text" autocomplete="email" placeholder="+91 9999999999"
+					   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400">
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-3">
+			<app-control-container label="Plan" name="plan" errorMsg="Plan is Required">
+				<select formControlName="plan" class="block w-full p-2 rounded-md border border-gray-300 bg-white text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+						<option value="Starter">Starter</option>
+						<option value="Essential">Essential</option>
+						<option value="Enterprise">Enterprise</option>
+
+				</select>
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-6">
+			<div class="relative flex gap-x-3">
+				<div class="flex h-6 items-center">
+					<input id="comments" name="agree_term_and_conditions" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" formControlName="agree_term_and_conditions">
+				</div>
+				<div class="text-sm leading-6">
+					<p class="text-gray-500 text-center md:text-left">I agree to your <a [href]="'termAndConditionUrl'" class="text-blue-600" target="_blank">Terms and Conditions</a>
+						and <a
+								[href]="'privacyPolicyUrl'" class="text-blue-600" target="_blank">Privacy Policy</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="sm:col-span-6">
+			<div class="w-full my-2">
+				<button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+			</div>
+		</div>
+
+	</div>
+</form>
+
+
