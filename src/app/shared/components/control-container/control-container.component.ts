@@ -1,4 +1,4 @@
-import { NgClass } from "@angular/common";
+import { NgClass, NgIf } from "@angular/common";
 import { Component, Host, Input, OnInit, Optional, SkipSelf } from "@angular/core";
 import { AbstractControl, ControlContainer, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { ErrorComponent } from "../error/error.component";
@@ -8,7 +8,8 @@ import { ErrorComponent } from "../error/error.component";
 	standalone: true,
 	imports: [
 		ErrorComponent,
-		NgClass
+		NgClass,
+		NgIf,
 	],
 	templateUrl: "./control-container.component.html",
 	providers: [
@@ -21,18 +22,12 @@ import { ErrorComponent } from "../error/error.component";
 })
 export class ControlContainerComponent implements OnInit {
 	control: AbstractControl | undefined;
-	@Input()
-	name: string = " ";
-	@Input()
-	label: string;
-	@Input()
-	errorMsg = "An error occurred";
-	@Input()
-	tooltipText: any;
-	@Input()
-	isReadOnly = false;
-	@Input()
-	isLabelOnSameLine = false;
+	@Input() name: string = " ";
+	@Input() label: string = "";
+	@Input() errorMsg = "An error occurred";
+	@Input() tooltipText: any;
+	@Input() isReadOnly = false;
+	@Input() isLabelOnSameLine = false;
 	required = false;
 
 	constructor(@Optional()

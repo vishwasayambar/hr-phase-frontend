@@ -1,21 +1,17 @@
 @if (!isLabelOnSameLine){
-	<ng-template>
-		<label @If(label) [ngClass]="{ required: status && !control.disabled }" class="form-label">
+		<label [ngClass]="{ required: status && !control.disabled }" class="form-label">
 			{{ label }}
 		</label>
 		<!--	<app-tooltip [target]="name" [tooltipText]="tooltipText" *ngIf="name && tooltipText && !control.disabled"></app-tooltip>-->
-	</ng-template>
 
 }
-<div [ngClass]="isLabelOnSameLine ? 'margin-top-control-label' : ''" class="mb-3">
+<div [ngClass]="isLabelOnSameLine ? 'margin-top-control-label' : 'mt-1'" class="mb-3">
 	<ng-content></ng-content>
 	<!-- For Checkbox like Control label is next to control this template render only for that case	-->
-	<ng-template @if(isLabelOnSameLine)>
-		<label @If(label) [ngClass]="{ required: status && !control.disabled }" class="form-label ms-2">
+		<label *ngIf="isLabelOnSameLine" [ngClass]="{ required: status && !control.disabled }" class="form-label ms-2">
 			{{ label }}
 		</label>
 <!--		<app-tooltip [target]="name" [tooltipText]="tooltipText" *ngIf="name && tooltipText && !control.disabled"></app-tooltip>-->
-	</ng-template>
 	@if (control.errors){
 		<ng-container>
 			<app-error [displayError]="
