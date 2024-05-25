@@ -79,7 +79,7 @@ export class StorageService {
 		localStorage.setItem("permissions", JSON.stringify(permissions));
 	}
 
-	getPermissions(): string {
+	getPermissions(): Array<string> {
 		return JSON.parse(localStorage.getItem("permissions"));
 	}
 

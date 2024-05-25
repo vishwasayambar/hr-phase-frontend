@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
 import { AUTH_PATH } from "../constants/constant";
 import { Employee } from "../models/employee";
@@ -14,6 +15,8 @@ export class AuthenticationService {
 	protected endpoint = AUTH_PATH;
     protected currentUserSubject: BehaviorSubject<Employee | null>;
     public currentUser: Observable<Employee | null>;
+	protected currentPermissionSubject: BehaviorSubject<string[]>;
+	public currentPermission: Observable<any>;
     protected loggedIn = new BehaviorSubject<boolean>(this.storageService.loggedIn());
     authStatus = this.loggedIn.asObservable();
 
@@ -21,9 +24,12 @@ export class AuthenticationService {
 		protected api: ApiService,
         private storageService: StorageService,
         private configService: ConfigService,
+		private router: Router,
 	) {
       this.currentUserSubject = new BehaviorSubject<Employee | null>(this.storageService.getUser());
       this.currentUser = this.currentUserSubject.asObservable();
+	  this.currentPermissionSubject = new BehaviorSubject(this.storageService.getPermissions());
+	  this.currentPermission = this.currentPermissionSubject.asObservable();
 	}
 
 	verifyActivationToken(data: object): Observable<any> {
@@ -34,17 +40,20 @@ export class AuthenticationService {
 		return this.api.post(this.endpoint + "accountActivate", data);
 	}
 
-	setUserSession(user: Employee, accessToken: string, permissions: string | any[], tenant: Tenant): void {
+	setUserSession(user: Employee, accessToken: string, permissions: string[], tenant: Tenant): void {
 		this.currentUserSubject.next(user);
 		this.storageService.setUser(user);
 		this.storageService.setToken(accessToken);
-		// this.currentPermissionSubject.next(permissions);
-		// this.storageService.setPermissions(permissions);
+		this.currentPermissionSubject.next(permissions);
+		this.storageService.setPermissions(permissions);
 		// this.permissionService.loadPermissions(permissions);
 		this.changeAuthStatus(true);
 		// this.updateCurrentRole(user.roles[0]);
 		// Sets customer data to firestore on login
       this.configService.setAppConfig(tenant)
+		if (!tenant.is_completed_wizard_setup) {
+					this.router.navigate(["/setups"]);
+				}
 		// this.configService.appConfig$.subscribe(tenant => {
 		// 	if (!tenant["is_completed_wizard_setup"]) {
 		// 		this.router.navigate(["/setups"]);
@@ -70,5 +79,12 @@ export class AuthenticationService {
   changeAuthStatus(value: boolean): void {
     this.loggedIn.next(value);
   }
+
+	// updateCurrentRole(role: Role): void {
+	// 	if (role && role.hasOwnProperty("name")) {
+	// 		this.role.next(role.name);
+	// 		this.roleService.set(role.name);
+	// 	}
+	// }
 
 }
