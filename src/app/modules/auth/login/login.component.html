@@ -1,1 +1,25 @@
-<p>login works!</p>
+<form (ngSubmit)="onLogin()" [formGroup]="form" *ngIf="form">
+	<div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-2">
+	
+		<div class="sm:col-span-3">
+			<app-control-container label="Email" name="email" errorMsg="Company Email is Required">
+				<input id="email" formControlName="email" type="email" autocomplete="email" placeholder="johnsmith@gmail.com"
+					   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400">
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-3">
+			<app-control-container label="Password" name="password" errorMsg="Password is Required">
+				<input type="text" formControlName="password" placeholder="*******"
+					   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400">
+			</app-control-container>
+		</div>
+		<div class="sm:col-span-3">
+			<div class="w-full my-2">
+				<button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+			</div>
+		</div>
+
+	</div>
+</form>
+
+
