@@ -17,6 +17,7 @@ export class AuthenticationService {
     public currentUser: Observable<Employee | null>;
 	protected currentPermissionSubject: BehaviorSubject<string[]>;
 	public currentPermission: Observable<any>;
+	public redirectUrl: string;
     protected loggedIn = new BehaviorSubject<boolean>(this.storageService.loggedIn());
     authStatus = this.loggedIn.asObservable();
 
@@ -51,9 +52,12 @@ export class AuthenticationService {
 		// this.updateCurrentRole(user.roles[0]);
 		// Sets customer data to firestore on login
       this.configService.setAppConfig(tenant)
-		if (!tenant.is_completed_wizard_setup) {
-					this.router.navigate(["/setups"]);
-				}
+		this.router.navigate(["/dashboard"]).then(r => true );
+		//
+		// if (!tenant.is_completed_wizard_setup) {
+		// 			this.router.navigate(["/setups"]);
+		// 		}else{
+		// }
 		// this.configService.appConfig$.subscribe(tenant => {
 		// 	if (!tenant["is_completed_wizard_setup"]) {
 		// 		this.router.navigate(["/setups"]);
@@ -70,6 +74,10 @@ export class AuthenticationService {
 		// 		}
 		// 	}
 		// });
+	}
+
+	login(data: object): Observable<any> {
+		return this.api.post(this.endpoint + "login", data);
 	}
 
   public get currentUserValue(): Employee | null {
