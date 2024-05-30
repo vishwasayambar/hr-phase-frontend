@@ -1,15 +1,32 @@
 import { Injector } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ActiveToast, ToastrService } from "ngx-toastr";
+import { AuthenticationService } from "./services/authentication.service";
+import { LoaderService } from "./services/loader.service";
 
 export abstract class BaseComponent {
 	isMobileDevice = window.innerWidth < 760;
 	router: Router;
+	isLoading = false;
 	activatedRouter: ActivatedRoute;
 	fb: UntypedFormBuilder;
+	authService: AuthenticationService;
+	loadingService: LoaderService
+	notifyService: ToastrService;
+
+	NOTIFICATION_TYPES = {
+		INFO: "info",
+		ERROR: "error",
+		WARNING: "warning",
+		SUCCESS: "success",
+	};
 	constructor(injector: Injector) {
 		this.router = injector.get(Router);
+		this.authService = injector.get(AuthenticationService);
+		this.notifyService = injector.get(ToastrService);
 		this.activatedRouter = injector.get(ActivatedRoute);
+		this.loadingService = injector.get(LoaderService);
 		this.fb = injector.get(UntypedFormBuilder);
 	}
 
@@ -33,4 +50,22 @@ export abstract class BaseComponent {
 			}
 		});
 	}
+
+	notify(message: string, type = this.NOTIFICATION_TYPES.SUCCESS, title = "", override = {}): ActiveToast<any> {
+		switch (type) {
+			default:
+				return this.notifyService.success(message, title ?? "Success", override);
+			case this.NOTIFICATION_TYPES.ERROR:
+				return this.notifyService.error(message, title ??  "Error", override);
+			case this.NOTIFICATION_TYPES.INFO:
+				return this.notifyService.info(message, title ?? "Info", override);
+			case this.NOTIFICATION_TYPES.WARNING:
+				return this.notifyService.warning(message, title ?? "Warning", override);
+		}
+	}
+
+	// setLoader(value:boolean) {
+	// 	this.isLoading = value;
+	// }
+
 }
