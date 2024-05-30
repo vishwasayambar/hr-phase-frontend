@@ -7,6 +7,7 @@ subDomain = subDomain !== "" ? subDomain + "." : "";
 export const SERVER_URL = `${window.location.protocol}//${environment.baseUrl + API_PREFIX}`;
 export const REGISTRATION_PATH = "registerTenant";
 export const AUTH_PATH = "auth/";
+export const DASHBOARD = "/dashboards";
 
 export enum TENANT_PLANS {
 	STARTER = "Starter",
