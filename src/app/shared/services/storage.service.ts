@@ -51,25 +51,9 @@ export class StorageService {
 
 	isValid(): boolean {
 		const token = this.getToken();
-		if (token) {
-			const payload = this.payload(token);
-			if (payload) {
-				return true;
-			}
-		}
-
-		return false;
+		return !!token;
 	}
 
-	payload(token: string): string {
-		const payload = token.split(".")[1];
-
-		return this.decode(payload);
-	}
-
-	decode(payload: string): string {
-		return JSON.parse(atob(payload));
-	}
 
 	loggedIn(): boolean {
 		return this.isValid();
