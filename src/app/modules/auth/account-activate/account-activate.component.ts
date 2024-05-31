@@ -13,6 +13,7 @@ export class AccountActivateComponent extends BaseComponent implements OnInit {
     form: UntypedFormGroup;
 	errorMessage: string;
 	isSubmitted = false;
+	isActivating = false;
 
 	constructor(injector: Injector, protected service: AuthenticationService) {
 		super(injector);
@@ -56,24 +57,23 @@ export class AccountActivateComponent extends BaseComponent implements OnInit {
   activateAccount(): void {
     this.isSubmitted = true;
     if (this.form.valid && this.form.value["password"] === this.form.value["password_confirmation"]) {
-      // this.isActivating = true;
+      this.isActivating = true;
       this.service
           .activateAccount(this.form.value)
           .subscribe(
               response => {
                 // this.showPasswordReset = false;
-                // this.notify("Account activated successfully");
-                console.log("Account activated successfully!");
+                this.notify("Account activated successfully");
                 this.service.setUserSession(response.user, response.access_token, response.permissions, response.tenant);
                 // this.role = response.user.roles[0];
               },
               errorResponse => {
                 this.errorMessage = errorResponse.error.errors;
-                // this.notify("Error in account activation", this.NOTIFICATION_TYPES.ERROR);
+                this.notify("Error in account activation", this.NOTIFICATION_TYPES.ERROR);
               },
           )
           .add(() => {
-            // this.isActivating = false;
+            this.isActivating = false;
           });
     } else {
       this.validateFormFields(this.form);
