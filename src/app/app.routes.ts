@@ -7,7 +7,7 @@ export const routes: Routes = [
 		title: "HrPhase Authentication",
 	},
 	{
-		path: "dashboards",
+		path: "dashboard",
 		loadChildren: () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule),
 		title: "HrPhase Authentication",
 	},
