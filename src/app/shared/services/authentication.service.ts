@@ -80,7 +80,21 @@ export class AuthenticationService {
 		return this.api.post(this.endpoint + "login", data);
 	}
 
-  public get currentUserValue(): Employee | null {
+	logout(): Observable<any> {
+		return this.api.get("logout");
+	}
+
+	clearUserSession(): void {
+		this.currentUserSubject.next(null);
+		this.storageService.removeUser();
+		this.storageService.removeToken();
+		this.storageService.removePermissions();
+		this.changeAuthStatus(false);
+		// this.roleService.remove();
+	}
+
+
+	public get currentUserValue(): Employee | null {
     return this.currentUserSubject.value;
   }
 
