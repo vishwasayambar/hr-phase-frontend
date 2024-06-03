@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from "./shared/guards/auth.guard";
 
 export const routes: Routes = [
 	{
@@ -9,6 +10,7 @@ export const routes: Routes = [
 	{
 		path: "dashboard",
 		loadChildren: () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule),
+		canActivate: [AuthGuard],
 		title: "HrPhase Authentication",
 	},
 	{
