@@ -9,6 +9,8 @@ export abstract class BaseComponent {
 	isMobileDevice = window.innerWidth < 760;
 	router: Router;
 	isLoading = false;
+	isLoggedIn = false;
+	isSidebarCollapsed = false;
 	activatedRouter: ActivatedRoute;
 	fb: UntypedFormBuilder;
 	authService: AuthenticationService;
@@ -28,6 +30,9 @@ export abstract class BaseComponent {
 		this.activatedRouter = injector.get(ActivatedRoute);
 		this.loadingService = injector.get(LoaderService);
 		this.fb = injector.get(UntypedFormBuilder);
+		this.authService.authStatus.subscribe((isLoggedIn) => {
+			this.isLoggedIn = isLoggedIn;
+		})
 	}
 
 	validateFormFields(form: UntypedFormGroup | UntypedFormArray): void {
@@ -63,6 +68,24 @@ export abstract class BaseComponent {
 				return this.notifyService.warning(message, title ?? "Warning", override);
 		}
 	}
+
+	toggleSidebar(){
+		console.log("testing", this.isSidebarCollapsed);
+		this.isSidebarCollapsed = !this.isSidebarCollapsed;
+	}
+
+	logout(): void {
+		this.authService
+			.logout()
+			.subscribe()
+			.add(() => {
+				this.authService.clearUserSession();
+				setTimeout(() => {
+					this.router.navigate(["/"]);
+				}, 10);
+			});
+	}
+
 
 	// setLoader(value:boolean) {
 	// 	this.isLoading = value;
