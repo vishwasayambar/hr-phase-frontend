@@ -6,4 +6,17 @@
 </div>
 }
 -->
-<router-outlet/>
+<div class="flex w-screen h-screen">
+	@if (isLoggedIn) {
+		<app-sidebar></app-sidebar>
+	}
+	<div class="grow bg-white dark:bg-gray-400 dark:text-white">
+		@if (isLoggedIn) {
+			<app-navbar></app-navbar>
+		}
+		<div>
+			<router-outlet/>
+		</div>
+	</div>
+
+</div>
