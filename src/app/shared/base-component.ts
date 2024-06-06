@@ -2,6 +2,7 @@ import { Injector } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActiveToast, ToastrService } from "ngx-toastr";
+import { TABLE_COLUMN_TEMPLATE } from "./constants/constant";
 import { AuthenticationService } from "./services/authentication.service";
 import { LoaderService } from "./services/loader.service";
 
@@ -16,6 +17,7 @@ export abstract class BaseComponent {
 	authService: AuthenticationService;
 	loadingService: LoaderService
 	notifyService: ToastrService;
+	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
 
 	NOTIFICATION_TYPES = {
 		INFO: "info",

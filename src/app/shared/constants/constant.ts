@@ -14,3 +14,10 @@ export enum TENANT_PLANS {
 	ESSENTIAL = "Essential",
 	ENTERPRISE = "Enterprise",
 }
+export enum TABLE_COLUMN_TEMPLATE {
+	NAME = "name",
+	EMAIL = "email",
+	POSITION = "position",
+	STATUS = "status",
+	ACTION = "action",
+}
