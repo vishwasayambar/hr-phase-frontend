@@ -11,7 +11,13 @@ export const routes: Routes = [
 		path: "dashboard",
 		loadChildren: () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule),
 		canActivate: [AuthGuard],
-		title: "HrPhase Authentication",
+		title: "HrPhase Dashboard",
+	},
+	{
+		path: "employee",
+		loadChildren: () => import("./modules/employee/employee.module").then(m => m.EmployeeModule),
+		canActivate: [AuthGuard],
+		title: "HrPhase Employees",
 	},
 	{
 		path: "",
