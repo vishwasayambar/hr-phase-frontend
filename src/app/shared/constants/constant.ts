@@ -8,7 +8,14 @@ export const SERVER_URL = `${window.location.protocol}//${environment.baseUrl + 
 export const REGISTRATION_PATH = "register";
 export const AUTH_PATH = "auth/";
 export const DASHBOARD = "/dashboard";
+export const EMPLOYEE_PATH = "employees";
+export const ROLE_PATH = "roles";
 
+export enum GENDER_LIST {
+	MALE = "Male",
+	FEMALE = "Female",
+	OTHER = "Other",
+}
 export enum TENANT_PLANS {
 	STARTER = "Starter",
 	ESSENTIAL = "Essential",
@@ -20,4 +27,11 @@ export enum TABLE_COLUMN_TEMPLATE {
 	POSITION = "position",
 	STATUS = "status",
 	ACTION = "action",
+}
+export enum EMPLOYEE_PROFILE_TABS {
+	PROFILE = "Profile",
+	ADDRESS = "Address",
+	BANK = "Bank",
+	EDUCATIONAL_DETAIL = "Education",
+	FAMILY_DETAIL = "Family",
 }
