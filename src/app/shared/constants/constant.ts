@@ -16,11 +16,13 @@ export enum GENDER_LIST {
 	FEMALE = "Female",
 	OTHER = "Other",
 }
+
 export enum TENANT_PLANS {
 	STARTER = "Starter",
 	ESSENTIAL = "Essential",
 	ENTERPRISE = "Enterprise",
 }
+
 export enum TABLE_COLUMN_TEMPLATE {
 	NAME = "name",
 	EMAIL = "email",
@@ -28,10 +30,38 @@ export enum TABLE_COLUMN_TEMPLATE {
 	STATUS = "status",
 	ACTION = "action",
 }
-export enum EMPLOYEE_PROFILE_TABS {
-	PROFILE = "Profile",
-	ADDRESS = "Address",
-	BANK = "Bank",
-	EDUCATIONAL_DETAIL = "Education",
-	FAMILY_DETAIL = "Family",
-}
+
+export const EMPLOYEE_PROFILE_TABS = [
+	{
+		id: "profile-styled-tab",
+		label: "Profile",
+		key: "profile",
+		tabElementId: "1",
+		triggerEl: "#profile-styled-tab",
+		targetEl: "#styled-profile",
+	},
+	{
+		id: "address-styled-tab",
+		label: "Address",
+		key: "address",
+		tabElementId: "2",
+		triggerEl: "#address-styled-tab",
+		targetEl: "#styled-address",
+	},
+	{
+		id: "bank-styled-tab",
+		label: "Bank",
+		key: "bank",
+		tabElementId: "3",
+		triggerEl: "#bank-styled-tab",
+		targetEl: "#styled-bank",
+	},
+	{
+		id: "educational-styled-tab",
+		label: "Education",
+		key: "educational",
+		tabElementId: "4",
+		triggerEl: "#educational-styled-tab",
+		targetEl: "#styled-educational",
+	}
+];
