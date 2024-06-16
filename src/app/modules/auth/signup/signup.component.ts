@@ -12,8 +12,6 @@ import { RegisterService } from "../../../shared/services/register.service";
 export class SignupComponent extends BaseComponent {
 	form: UntypedFormGroup;
 	signup: SignUp;
-	isSuccess = false;
-	isSigning = false;
 
 
 	constructor(injector: Injector, protected service: RegisterService) {
@@ -25,33 +23,19 @@ export class SignupComponent extends BaseComponent {
 	}
 
 	onSignup() {
+			console.log("IS VALID OR NOT", this.form.valid);
+			console.log(this.form.controls);
 		if (this.form.valid) {
-			this.isSigning = true;
-			this.service.create(this.form.value).subscribe({
-
-				next: () => {
-					this.notify("SignUp successfully!");
-					this.isSuccess = true;
-				},
-				error: err => {
-					this.notify(`SignUp Failed! ${err?.error?.text}`, this.NOTIFICATION_TYPES.ERROR);
-				}
+			this.service.create(this.form.value).subscribe(() => {
+				console.log("SignUp successfully!");
+			}, err => {
+				console.log("SIGNUP failed", err.error);
 			}).add(() => {
-				this.isSigning = false;
+				// this.saving = false;
 			});
 		} else {
 			this.validateFormFields(this.form);
 		}
-	}
-
-	resendActivationEmail(){
-		this.isSigning = true;
-		this.service.resendActivationEmail(this.form.getRawValue()['email']).subscribe({
-			next: () => this.notify("Activation email has been resent successfully!"),
-			error:  () => this.notify("Failed to resend activation email", this.NOTIFICATION_TYPES.ERROR),
-		}).add(() => {
-			this.isSigning = false;
-		})
 	}
 
 }

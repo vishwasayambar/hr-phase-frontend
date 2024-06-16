@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Employee } from "../models/employee";
+// import { ENTITIES } from "../constants/constants";
+// import { Customer } from "../models/customer";
+// import { Employee } from "../models/employee";
 import { Tenant } from "../models/tenant";
 
 @Injectable({providedIn: "root"})
 export class StorageService {
-	setUser(user: Employee): void {
-		localStorage.setItem("currentUser", JSON.stringify(user));
-	}
+	// setUser(user: Customer | Employee): void {
+	// 	localStorage.setItem("currentUser", JSON.stringify(user));
+	// }
 
 	getUser(): any {
 		return JSON.parse(localStorage.getItem("currentUser"));
@@ -51,9 +53,28 @@ export class StorageService {
 
 	isValid(): boolean {
 		const token = this.getToken();
-		return !!token;
+		if (token) {
+			const payload = this.payload(token);
+			if (payload) {
+				// return Object.values(this.iss).indexOf(payload.iss) > -1
+				//     ? true
+				//     : false;
+				return true;
+			}
+		}
+
+		return false;
 	}
 
+	payload(token: string): string {
+		const payload = token.split(".")[1];
+
+		return this.decode(payload);
+	}
+
+	decode(payload: string): string {
+		return JSON.parse(atob(payload));
+	}
 
 	loggedIn(): boolean {
 		return this.isValid();
@@ -63,7 +84,7 @@ export class StorageService {
 		localStorage.setItem("permissions", JSON.stringify(permissions));
 	}
 
-	getPermissions(): Array<string> {
+	getPermissions(): string {
 		return JSON.parse(localStorage.getItem("permissions"));
 	}
 
@@ -71,4 +92,11 @@ export class StorageService {
 		localStorage.removeItem("permissions");
 	}
 
+	// clearCache(): void {
+	// 	Object.values(ENTITIES).forEach(entity => {
+	// 		if (entity?.name) {
+	// 			localStorage.removeItem(entity?.name);
+	// 		}
+	// 	});
+	// }
 }

@@ -2,9 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ControlContainerComponent } from "../../shared/components/control-container/control-container.component";
-import { ErrorComponent } from "../../shared/components/error/error.component";
-import { SharedModule } from "../../shared/shared.module";
-import { AccountActivateComponent } from "./account-activate/account-activate.component";
 import { AppLogoComponent } from "./app-logo/app-logo.component";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { AuthComponent } from "./auth.component";
@@ -17,16 +14,13 @@ import { SignupComponent } from "./signup/signup.component";
 		AuthComponent,
 		LoginComponent,
 		SignupComponent,
-		AppLogoComponent,
-		AccountActivateComponent,
+		AppLogoComponent
 	],
 	imports: [
 		CommonModule,
 		AuthRoutingModule,
 		ControlContainerComponent,
 		ReactiveFormsModule,
-		ErrorComponent,
-		SharedModule
 	]
 })
 export class AuthModule {

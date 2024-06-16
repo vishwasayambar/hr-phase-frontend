@@ -28,7 +28,6 @@ export class ConfigService {
 			if (
 				window.location.href.toLocaleLowerCase().includes("signup") ||
 				window.location.href.toLocaleLowerCase().includes("login") ||
-				window.location.href.toLocaleLowerCase().includes("") ||
 				window.location.href.toLocaleLowerCase().includes("auth")
 			) {
 				return resolve(true);

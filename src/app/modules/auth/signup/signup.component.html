@@ -1,4 +1,3 @@
-@if(!isSuccess){
 <form (ngSubmit)="onSignup()" [formGroup]="form" *ngIf="form">
 	<div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-6">
 		<div class="sm:col-span-3">
@@ -50,33 +49,11 @@
 		</div>
 		<div class="sm:col-span-6">
 			<div class="w-full my-2">
-				<app-save-btn [isOnPopup]="true" [isSaving]="isSigning"
-							  id="sign-in-button"
-							  saveText="Sign in" savingText="Signing..."></app-save-btn>
+				<button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
 			</div>
 		</div>
+
 	</div>
 </form>
-}
-<!--   Registration Completed     -->
-<div *ngIf="isSuccess">
-	<div class="row">
-		<div class="col-sm-12 col-md-12 col-lg-12">
-			<div class="alert alert-success" role="alert">
-				<h4 class="alert-heading">Registration Completed!</h4>
-				<p>We have sent an activation email on:<b>{{form.getRawValue()['email']}}</b></p><br />
-				<p>Click on the <b>"Activate"</b> button to set up your password and get started with
-					BytePhase!
-				</p>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12 col-md-12 col-lg-12">
-			<p>Didn't receive the activation email?</p>
-			<app-save-btn (saveBtnClick)="resendActivationEmail()" [isSaving]="isSigning"
-						  class="mt-1 float-end" id="signup-resend-button" saveText="Resend Email"
-						  savingText="Resending Email..."></app-save-btn>
-		</div>
-	</div>
-</div>
+
+
