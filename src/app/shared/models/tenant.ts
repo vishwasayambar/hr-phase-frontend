@@ -10,6 +10,7 @@ export class Tenant {
     sms_credits: number;
     account_id: number;
     domain_url: string;
+    is_completed_wizard_setup: boolean;
     logo: string;
     workspaces: Array<Tenant>;
     signature: string;
