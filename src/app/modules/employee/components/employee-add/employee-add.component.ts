@@ -1,9 +1,10 @@
-import { Component, Injector, OnInit } from "@angular/core";
+import { AfterViewInit, Component, Injector, OnInit, ViewChild } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
 import { BaseComponent } from "../../../../shared/base-component";
 import { EMPLOYEE_PROFILE_TABS, GENDER_LIST } from "../../../../shared/constants/constant";
 import { Employee } from "../../../../shared/models/employee";
 import { EmployeeService } from "../../../../shared/services/employee.service";
+import { TabsComponent } from "../../../../shared/ui-components/tabs/tabs.component";
 
 @Component({
 	selector: "app-employee-add",
@@ -11,6 +12,8 @@ import { EmployeeService } from "../../../../shared/services/employee.service";
 	styleUrl: "./employee-add.component.scss"
 })
 export class EmployeeAddComponent extends BaseComponent implements OnInit {
+	@ViewChild(TabsComponent) tabsComponent: TabsComponent;
+
 	form: UntypedFormGroup;
 	genderList = Object.values(GENDER_LIST);
 	profileTabs = Object.values(EMPLOYEE_PROFILE_TABS);
@@ -41,6 +44,8 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 		}
 	}
 
+
+
 	create() {
 		console.log(this.form.value);
 		debugger;
@@ -61,5 +66,12 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 			this.validateFormFields(this.form);
 		}
 	}
+
+	// Method to call showTab
+	nextTab(tabId: string) {
+
+		this.tabsComponent.showTab(tabId);
+	}
+
 
 }
