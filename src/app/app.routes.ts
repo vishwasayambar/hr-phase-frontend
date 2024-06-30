@@ -8,6 +8,12 @@ export const routes: Routes = [
 		title: "HrPhase Authentication",
 	},
 	{
+		path: "accounts",
+		loadChildren: () => import("./modules/account/account.module").then(m => m.AccountModule),
+		canActivate: [AuthGuard],
+		title: "HrPhase Account",
+	},
+	{
 		path: "dashboard",
 		loadChildren: () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule),
 		canActivate: [AuthGuard],

@@ -1,0 +1,16 @@
+<app-tabs slot="vertical-content" [tabsArr]="accountSettingTabs" [isHorizontalTabs]="false" (currentTab)="setCurrentTab($event)">
+    <div vertical-content>
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="business_setting" role="tabpanel"
+             aria-labelledby="business_setting-tab">
+            <div class="addressArray">
+                Profile Business Settings
+            </div>
+        </div>
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="roles_and_permission" role="tabpanel"
+             aria-labelledby="roles_and_permission-tab">
+            <div class="addressArray">
+                <app-roles-and-permission></app-roles-and-permission>
+            </div>
+        </div>
+    </div>
+</app-tabs>
