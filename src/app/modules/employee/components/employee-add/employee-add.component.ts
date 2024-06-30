@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Injector, OnInit, ViewChild } from "@angular/core";
+import { Component, Injector, OnInit, ViewChild } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
 import { BaseComponent } from "../../../../shared/base-component";
 import { EMPLOYEE_PROFILE_TABS, GENDER_LIST } from "../../../../shared/constants/constant";
@@ -13,11 +13,11 @@ import { TabsComponent } from "../../../../shared/ui-components/tabs/tabs.compon
 })
 export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	@ViewChild(TabsComponent) tabsComponent: TabsComponent;
-
 	form: UntypedFormGroup;
 	genderList = Object.values(GENDER_LIST);
 	profileTabs = Object.values(EMPLOYEE_PROFILE_TABS);
 	isCreating = false;
+	isLastTab = false;
 	employee: Employee;
 	employeeId: number;
 
@@ -45,7 +45,6 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	}
 
 
-
 	create() {
 		console.log(this.form.value);
 		debugger;
@@ -69,9 +68,16 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 
 	// Method to call showTab
 	nextTab(tabId: string) {
-
 		this.tabsComponent.showTab(tabId);
+		if(this.tabsComponent.tabs._activeTab.id === "4"){
+			this.isLastTab = true;
+		}
 	}
 
-
+	setCurrentTab(){
+		this.isLastTab = false;
+		if(this.tabsComponent?.tabs?._activeTab.id === "4"){
+			this.isLastTab = true;
+		}
+	}
 }
