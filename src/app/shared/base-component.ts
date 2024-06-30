@@ -2,7 +2,7 @@ import { Injector } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActiveToast, ToastrService } from "ngx-toastr";
-import { TABLE_COLUMN_TEMPLATE } from "./constants/constant";
+import {PERMISSION_LIST, TABLE_COLUMN_TEMPLATE} from "./constants/constant";
 import { AuthenticationService } from "./services/authentication.service";
 import { LoaderService } from "./services/loader.service";
 
@@ -13,11 +13,13 @@ export abstract class BaseComponent {
 	isLoggedIn = false;
 	isSidebarCollapsed = false;
 	activatedRouter: ActivatedRoute;
+	userPermissionList: string | any[] = null;
 	fb: UntypedFormBuilder;
 	authService: AuthenticationService;
 	loadingService: LoaderService
 	notifyService: ToastrService;
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
+	PERMISSION_LIST = PERMISSION_LIST;
 
 	NOTIFICATION_TYPES = {
 		INFO: "info",
@@ -34,7 +36,13 @@ export abstract class BaseComponent {
 		this.fb = injector.get(UntypedFormBuilder);
 		this.authService.authStatus.subscribe((isLoggedIn) => {
 			this.isLoggedIn = isLoggedIn;
-		})
+		});
+		this.authService.currentPermission.subscribe(permissions => {
+			if (permissions) {
+				this.userPermissionList = permissions;
+				// this.initializeConstants();
+			}
+		});
 	}
 
 	validateFormFields(form: UntypedFormGroup | UntypedFormArray): void {

@@ -7,7 +7,7 @@ subDomain = subDomain !== "" ? subDomain + "." : "";
 export const SERVER_URL = `${window.location.protocol}//${environment.baseUrl + API_PREFIX}`;
 export const REGISTRATION_PATH = "register";
 export const AUTH_PATH = "auth/";
-export const DASHBOARD = "/dashboard";
+export const DASHBOARD = "/dashboards";
 export const EMPLOYEE_PATH = "employees";
 export const ROLE_PATH = "roles";
 export const PERMISSION_PATH = "permissions";
@@ -152,3 +152,38 @@ export const MODULE_WISE_PERMISSION_TABS = [
         targetEl: "#styled-educational",
     }
 ];
+
+export const PERMISSION_LIST = {
+    BUSINESS_SETTING_VIEW: "business_settings.view",
+    BUSINESS_SETTING_WRITE: "business_settings.write",
+    SALE_WRITE: "sale.write",
+    SALE_LIST: "sale.list",
+    SALE_DELETE: "sale.delete",
+    PART_WRITE: "part.write",
+    PART_LIST: "part.list",
+    PART_DELETE: "part.delete",
+    PART_SUPPLIER_WRITE: "part_supplier.write",
+    PART_SUPPLIER_LIST: "part_supplier.list",
+    PART_SUPPLIER_DELETE: "part_supplier.delete",
+    PURCHASE_WRITE: "purchase.write",
+    PURCHASE_LIST: "purchase.list",
+    PURCHASE_DELETE: "purchase.delete",
+    REPORT_VIEW: "report.view",
+    EMPLOYEE_WRITE: "employee.write",
+    EMPLOYEE_LIST: "employee.list",
+    TASK_WRITE: "task.write",
+    TASK_LIST: "task.list",
+    TASK_DELETE: "task.delete",
+    BILLING_LIST: "billing.list",
+    EXPENSES_WRITE: "expense.write",
+    EXPENSES_LIST: "expense.list",
+    EXPENSES_DELETE: "expense.delete",
+    EXPENSE_CATEGORY_WRITE: "expense_category.write",
+    EXPENSE_CATEGORY_LIST: "expense_category.list",
+    EXPENSE_CATEGORY_DELETE: "expense_category.delete",
+    PAYMENT_WRITE: "payment.write",
+    PAYMENT_DELETE: "payment.delete",
+    QUICK_REPLY_WRITE: "quick_reply.write",
+    QUICK_REPLY_LIST: "quick_reply.list",
+    QUICK_REPLY_DELETE: "quick_reply.delete",
+};
