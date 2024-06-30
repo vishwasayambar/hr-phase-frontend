@@ -47,7 +47,6 @@ export class AuthenticationService {
 		this.storageService.setToken(accessToken);
 		this.currentPermissionSubject.next(permissions);
 		this.storageService.setPermissions(permissions);
-		// this.permissionService.loadPermissions(permissions);
 		this.changeAuthStatus(true);
 		// this.updateCurrentRole(user.roles[0]);
 		// Sets customer data to firestore on login
