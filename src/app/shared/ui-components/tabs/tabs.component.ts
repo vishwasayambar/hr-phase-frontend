@@ -1,15 +1,21 @@
-import { AfterViewInit, Component, Injector, Input, input, OnInit } from "@angular/core";
+import {AfterViewInit, Component, EventEmitter, Injector, Input, input, OnInit, Output} from "@angular/core";
 import { TabItem, Tabs, TabsInterface, TabsOptions } from "flowbite";
 import { BaseComponent } from "../../base-component";
+import {NgIf} from "@angular/common";
 
 @Component({
 	selector: "app-tabs",
 	standalone: true,
-	imports: [],
+	imports: [
+		NgIf
+	],
 	templateUrl: "./tabs.component.html",
 })
 export class TabsComponent extends BaseComponent implements OnInit, AfterViewInit {
 	@Input() tabsArr: any = [];
+	@Input() isHorizontalTabs = true;
+	@Input() showIcon = false;
+	@Output() currentTab = new EventEmitter();
 	tabElements: TabItem[] = [];
 	tabs: TabsInterface | undefined;
 	selectedTabId: string;
@@ -17,10 +23,11 @@ export class TabsComponent extends BaseComponent implements OnInit, AfterViewIni
 	options: TabsOptions = {
 		defaultTabId: "1",
 		activeClasses: "text-blue-600 hover:text-blue-600 dark:text-white dark:hover:text-white border-blue-600 dark:border-white",
-		inactiveClasses: "text-gray-500 hover:text-gray-600 dark:text-gray-700 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 dark:hover:border-gray-300",
+		inactiveClasses: "text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 dark:hover:border-gray-300",
 		onShow: (res) => {
 			console.log(res);
 			this.selectedTabId = res._activeTab.id;
+			this.currentTab.emit(this.selectedTabId);
 		},
 	};
 
@@ -41,7 +48,7 @@ export class TabsComponent extends BaseComponent implements OnInit, AfterViewIni
 				targetEl: document.querySelector(tabsArrElement.targetEl),
 			});
 		}
-		const tabsElement = document.getElementById("styled-tab");
+		const tabsElement = document.getElementById(this.isHorizontalTabs ? 'horizontal-tab' : 'vertical-tab');
 		this.tabElements = this.tabElements.filter(item => item.triggerEl && item.targetEl);
 		this.tabs = new Tabs(tabsElement, this.tabElements, this.options);
 

@@ -1,14 +1,47 @@
-<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-	<ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="styled-tab"
-		role="tablist">
-		@for (tab of tabsArr; track tab.id) {
-			<li class="me-2" role="presentation">
-				<button class="inline-block p-4 border-b-2 rounded-t-lg" [id]="tab.id"
-						type="button" role="tab" aria-controls="profile"
-						aria-selected="false">{{ tab.label }}
-				</button>
-			</li>
-		}
-	</ul>
-</div>
-<ng-content/>
+<ng-template [ngIf]="isHorizontalTabs" [ngIfElse]="isVerticalTabs">
+    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="horizontal-tab"
+            role="tablist">
+            @for (tab of tabsArr; track tab.id) {
+                <li class="me-2" role="presentation">
+                    <button class="flex p-4 border-b-2 rounded-t-lg" [id]="tab.triggerTabsId"
+                            type="button" role="tab" aria-controls="profile"
+                            aria-selected="false">
+                        <span *ngIf="showIcon">
+                            <svg class="w-4 h-4 me-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 20 20">
+                                <path [attr.d]="tab.icon"/>
+                            </svg>
+                        </span>
+                        {{ tab.label }}
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+    <ng-content select="[horizontal-content]"></ng-content>
+</ng-template>
+<ng-template #isVerticalTabs>
+    <div class="md:flex m-1">
+        <ul class="flex-column space-y space-y-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-2 mb-4 md:mb-0"
+            id="vertical-tab">
+            @for (tab of tabsArr; track tab.id) {
+                <li>
+                    <button
+                            class="inline-flex items-center px-4 py-3 text-white bg-blue-700 rounded-md active w-full dark:bg-gray-800"
+                            aria-current="page" [id]="tab.triggerTabsId">
+                        <svg class="w-4 h-4 me-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             fill="currentColor" viewBox="0 0 20 20">
+                            <path [attr.d]="tab.icon"/>
+                        </svg>
+                        {{ tab.label }}
+                    </button>
+                </li>
+            }
+        </ul>
+        <div class="p-2 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+            <ng-content select="[vertical-content]"></ng-content>
+        </div>
+    </div>
+</ng-template>
+
