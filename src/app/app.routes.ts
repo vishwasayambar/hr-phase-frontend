@@ -14,13 +14,13 @@ export const routes: Routes = [
 		title: "HrPhase Account",
 	},
 	{
-		path: "dashboard",
+		path: "dashboards",
 		loadChildren: () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule),
 		canActivate: [AuthGuard],
 		title: "HrPhase Dashboard",
 	},
 	{
-		path: "employee",
+		path: "employees",
 		loadChildren: () => import("./modules/employee/employee.module").then(m => m.EmployeeModule),
 		canActivate: [AuthGuard],
 		title: "HrPhase Employees",
