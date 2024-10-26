@@ -15,8 +15,12 @@ export class PermissionService extends BaseService<Permission, number> {
         super(api, PERMISSION_PATH);
     }
 
-    getAllWith(): Observable<Array<Permission>> {
+    getAll(): Observable<Array<Permission>> {
         return this.api.get(this.endpoint);
+    }
+
+    getByRoleId(roleId: number): Observable<Array<Permission>> {
+        return this.api.get(this.endpoint + `/getByRoleId/${roleId}`);
     }
 
     getByUserId(userId: number): Observable<Array<Permission>> {
@@ -25,6 +29,10 @@ export class PermissionService extends BaseService<Permission, number> {
 
     saveUserPermissions(userId: number, permissions: {}): Observable<Array<Permission>> {
         return this.api.post(this.endpoint + `/${userId}/save`, permissions);
+    }
+
+    saveRolePermissions(roleId: number, permissions: {}): Observable<Array<Permission>> {
+        return this.api.post(this.endpoint + `/saveRolePermissions/${roleId}`, permissions);
     }
 
 }

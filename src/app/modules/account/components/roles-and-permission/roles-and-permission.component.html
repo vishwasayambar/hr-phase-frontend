@@ -1,10 +1,35 @@
-<!--<app-tabs [tabsArr]="moduleWisePermissionTabs" (currentTab)="setCurrentTab($event)">-->
-<!--    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-bank" role="tabpanel"-->
-<!--         aria-labelledby="settings-tab">-->
-<!--        <div class="addressArray">-->
+<select id="roles-dropdown" [(ngModel)]="value" (change)="onValueChange(value)"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    @for (role of roles; track role.id) {
+        <option [value]="role.id">{{ role.name }}</option>
+    }
+</select>
 
-<!--        </div>-->
-<!--    </div>-->
-<!--</app-tabs>-->
+<div class="flex">
+    <div class="flex flex-col text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        @for (module of groupedPermissions; track module.moduleName) {
+            <button aria-current="true" type="button" (click)="setModulePermissions(module.moduleName)"
+                    class="px-4 py-2 font-medium text-left rtl:text-right text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer focus:outline-none dark:bg-gray-800 dark:border-gray-600">
+                {{ module.moduleName }}
+            </button>
+        }
+    </div>
+    <div class="grow">
+        <div class="flex justify-end m-2">
+            <app-save-btn [isOnPopup]="true" [isSaving]="isSavingPermissions"
+                          id="save-permission-button" (saveBtnClick)="savePermission()"
+                          saveText="Save" savingText="Saving..."></app-save-btn>
+        </div>
+        <div class="permissions flex align-middle justify-around">
+            @for (permission of selectedModulePermission; track permission.id) {
+                <div>
+                    <input [id]="permission.name" (change)="onPermissionChange(permission, $event)"
+                           type="checkbox"
+                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    {{ permission.display_name }}
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
-ROLES AND PERMSISON

@@ -6,6 +6,8 @@ import {TabsComponent} from "../../shared/ui-components/tabs/tabs.component";
 import { RolesAndPermissionComponent } from './components/roles-and-permission/roles-and-permission.component';
 import {BankComponent} from "../../shared/components/bank/bank.component";
 import { AccountSettingTabsComponent } from './components/account-setting-tabs/account-setting-tabs.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -14,11 +16,14 @@ import { AccountSettingTabsComponent } from './components/account-setting-tabs/a
     RolesAndPermissionComponent,
     AccountSettingTabsComponent
   ],
-  imports: [
-    CommonModule,
-    AccountRoutingModule,
-    TabsComponent,
-    BankComponent
-  ]
+    imports: [
+        CommonModule,
+        AccountRoutingModule,
+        TabsComponent,
+        BankComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule
+    ]
 })
 export class AccountModule { }
