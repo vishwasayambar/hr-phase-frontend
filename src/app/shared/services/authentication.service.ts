@@ -51,7 +51,7 @@ export class AuthenticationService {
 		// this.updateCurrentRole(user.roles[0]);
 		// Sets customer data to firestore on login
       this.configService.setAppConfig(tenant)
-		this.router.navigate(["/dashboard"]).then(r => true );
+		this.router.navigate(["/dashboards"]).then(r => true );
 		//
 		// if (!tenant.is_completed_wizard_setup) {
 		// 			this.router.navigate(["/setups"]);
