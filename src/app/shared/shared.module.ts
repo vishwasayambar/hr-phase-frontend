@@ -21,12 +21,12 @@ import { UserBadgeComponent } from './components/user-badge/user-badge.component
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	SaveBtnComponent,
 	UserBadgeComponent,
+	UserPopoverComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
 	DropdownActionComponent,
 	HoverDirective,
-	UserPopoverComponent,
 	UserNotificationChannelComponent,
 	AddressComponent,
 	BankComponent,
