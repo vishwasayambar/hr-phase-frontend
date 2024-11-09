@@ -1,0 +1,31 @@
+<div>
+    <div (mouseenter)="isHovering = true"
+         (mouseleave)="isHovering = false"
+         class="d-flex flex-column align-items-center image-container">
+        <div *ngIf="!isShowProfileImage" [ngClass]="size" [ngStyle]="{'background-color':backgroundColor}"
+             class="profile-image" id="display-icon">{{ displayIconText }}
+        </div>
+        <div>
+<!--            <img *ngIf="isShowProfileImage" [ngClass]="size" [src]="iconOnly ? user?.avatar : (user?.avatar | profilePictureSize:'small') " alt="Profile Image"-->
+<!--                 class="profile-image" />-->
+        </div>
+<!--        @if (isHovering && currentUser.id === user.id && isOnProfilePage) {-->
+<!--            <div class="d-flex justify-content-around action-button gap-1">-->
+<!--                <div>-->
+<!--                    <button class="btn bg-light btn-small-12 p-1" title="Upload Profile Picture">-->
+<!--                        <i class="fa-thin fa-upload" [ngClass]="isMobileDevice ? '' : 'fs-3' "-->
+<!--                           (click)="fileInput.click()"></i>-->
+<!--                        <input #fileInput (change)="onFileChange($event)" accept="image/*"-->
+<!--                               class="custom-file-input"-->
+<!--                               id="customFile" type="file" style="display:none;">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <button class="btn bg-light btn-small-12 p-1" (click)="deleteProfile()" title="Delete Profile Picture">-->
+<!--                        <i class="fa-thin fa-trash" [ngClass]="isMobileDevice ? '' : 'fs-3' "></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        }-->
+    </div>
+</div>

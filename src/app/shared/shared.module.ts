@@ -16,9 +16,11 @@ import { DropdownActionComponent } from "./ui-components/dropdown-action/dropdow
 import { TabsComponent } from "./ui-components/tabs/tabs.component";
 import {PaginationComponent} from "./ui-components/pagination/pagination.component";
 import {ConfirmationPopupComponent} from "./components/confirmation-popup/confirmation-popup.component";
+import { UserBadgeComponent } from './components/user-badge/user-badge.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	SaveBtnComponent,
+	UserBadgeComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
@@ -38,7 +40,6 @@ const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
 @NgModule({
     declarations: [
         COMMON_COMP_LIST,
-
     ],
 	exports: [
 		COMMON_COMP_LIST,

@@ -32,6 +32,17 @@ export enum TABLE_COLUMN_TEMPLATE {
     ACTION = "action",
 }
 
+export const COMPONENT_SIZES = {
+    DEFAULT: "default",
+    SMALL: "small",
+    SMALL_1X: "small-1x",
+    MEDIUM: "medium",
+    SIDEBAR: "sidebar",
+    LARGE: "large",
+    EXTRA_LARGE: "extra-large",
+    DROPDOWN_PROFILE_IMAGES: "dropdown-profile-image"
+};
+
 export const EMPLOYEE_PROFILE_TABS = [
     {
         id: 1,
