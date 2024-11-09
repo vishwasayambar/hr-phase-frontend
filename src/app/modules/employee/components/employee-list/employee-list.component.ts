@@ -1,89 +1,77 @@
-import { AfterViewInit, Component, Injector, OnInit, ViewChild } from "@angular/core";
-import { BaseComponent } from "../../../../shared/base-component";
-import { TABLE_COLUMN_TEMPLATE } from "../../../../shared/constants/constant";
-import { UserPopoverComponent } from "../../../../shared/popovers/user-popover/user-popover.component";
+import {Component, Injector, OnInit} from "@angular/core";
+import {BaseComponent} from "../../../../shared/base-component";
+import {COMPONENT_SIZES} from "../../../../shared/constants/constant";
+import {EmployeeService} from "../../../../shared/services/employee.service";
+import {Employee} from "../../../../shared/models/employee";
+import {EmployeeColumn} from "../../../../shared/interfaces/employee-column";
 
 @Component({
 	selector: "app-employee-list",
 	templateUrl: "./employee-list.component.html",
-	styleUrl: "./employee-list.component.scss"
 })
-export class EmployeeListComponent extends BaseComponent implements OnInit{
-	columns: any = [];
-	dataList: any = [
+export class EmployeeListComponent extends BaseComponent implements OnInit {
+	protected readonly COMPONENT_SIZES = COMPONENT_SIZES;
+	
+	columns: EmployeeColumn[] = [
 		{
-			name: "Vishwa",
-			email: "vishwa@gmail.com",
-			position: "Full Stack Developer",
-			status: "Active",
-			actionButtonText: "Edit User"
+			fieldName: "name",
+			label: "Name",
+			template: "userTemplate",
+			visible: true,
 		},
 		{
-			name: "Bonnie Green",
-			email: "bonnieflowbite.com",
-			position: "Designer",
-			status: "Active",
-			actionButtonText: "Edit User"
+			fieldName: "display_name",
+			label: "Display Name",
+			visible: true,
 		},
 		{
-			name: "Jese Leos",
-			email: "jeseflowbite.com",
-			position: "Vue JS Developer",
-			status: "Active",
-			actionButtonText: "Edit User"
+			fieldName: "email",
+			label: "Email",
+			visible: true,
 		},
 		{
-			name: "Thomas Lean",
-			email: "thomesflowbite@gmail.com",
-			position: "UI/UX Engineer",
-			status: "Active",
-			actionButtonText: "Edit User"
+			fieldName: "mobile_number",
+			label: "Mobile Number",
+			visible: true,
 		},
 		{
-			name: "Thomas JAA",
-			email: "thomesflowbite@gmail.com",
-			position: "UI/UX Engineer",
-			status: "Active",
-			actionButtonText: "Edit User"
+			fieldName: "is_active",
+			label: "Status",
+			template: "statusTemplate",
+			visible: true,
 		},
 		{
-			name: "Thomas Rahul",
-			email: "thomesflowbite@gmail.com",
-			position: "UI/UX Engineer",
-			status: "Active",
-			actionButtonText: "Edit User"
+			fieldName: "roles",
+			label: "Role",
+			template: "roleTemplate",
+			visible: true,
 		},
 		{
-			name: "Thomas Soha",
-			email: "thomesflowbite@gmail.com",
-			position: "UI/UX Engineer",
-			status: "Active",
-			actionButtonText: "Edit User"
-		}
+			label: "Action",
+			template: "actionTemplate",
+			visible: true,
+		},
 	];
-
-	constructor(injector: Injector) {
+	dataList: Employee[];
+	
+	constructor(injector: Injector, protected service: EmployeeService) {
 		super(injector);
 	}
-
+	
 	ngOnInit() {
-		this.columns = [
-			{
-				template: "name"
-			},
-			{
-				template: "email"
-			},
-			{
-				template: "position"
-			},
-			{
-				template: "status"
-			},
-			{
-				template: "action"
-			},
-		];
+		this.fetchUsers();
 	}
-
+	
+	private fetchUsers() {
+		this.service.getListByQuery({}).subscribe({
+			next: (res) => {
+				this.dataList = res;
+			},
+			error: (err) => {
+				console.log("User List fetching error", err);
+			},
+		}).add(() => {
+		
+		});
+	}
 }
