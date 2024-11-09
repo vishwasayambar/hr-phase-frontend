@@ -5,6 +5,7 @@ import { ActiveToast, ToastrService } from "ngx-toastr";
 import {PERMISSION_LIST, TABLE_COLUMN_TEMPLATE} from "./constants/constant";
 import { AuthenticationService } from "./services/authentication.service";
 import { LoaderService } from "./services/loader.service";
+import {Employee} from "./models/employee";
 
 export abstract class BaseComponent {
 	isMobileDevice = window.innerWidth < 760;
@@ -18,6 +19,9 @@ export abstract class BaseComponent {
 	authService: AuthenticationService;
 	loadingService: LoaderService
 	notifyService: ToastrService;
+	currentUser: Employee = null;
+	darkThemeBtnClasses = 'dark:bg-gray-500 dark:hover:bg-gray-700';
+	lightThemeBtnClasses = 'bg-blue-400 hover:bg-blue-600 ';
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
 	PERMISSION_LIST = PERMISSION_LIST;
 
@@ -36,6 +40,12 @@ export abstract class BaseComponent {
 		this.fb = injector.get(UntypedFormBuilder);
 		this.authService.authStatus.subscribe((isLoggedIn) => {
 			this.isLoggedIn = isLoggedIn;
+		});
+		this.authService.currentUser.subscribe({
+			next: u => (this.currentUser = u),
+			error: (err) => {
+				console.error(err);
+			}
 		});
 		this.authService.currentPermission.subscribe(permissions => {
 			if (permissions) {
