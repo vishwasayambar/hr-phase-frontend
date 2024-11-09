@@ -49,7 +49,6 @@ export class UserBadgeComponent extends BaseComponent implements OnInit {
 	}
 	
 	get userName() {
-		debugger;
 		if (this.isVisibleOriginalName) {
 			return this.user?.name ?? '';
 		}
