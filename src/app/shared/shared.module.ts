@@ -14,6 +14,7 @@ import { HoverDirective } from "./directives/hover.directive";
 import { UserPopoverComponent } from "./popovers/user-popover/user-popover.component";
 import { DropdownActionComponent } from "./ui-components/dropdown-action/dropdown-action.component";
 import { TabsComponent } from "./ui-components/tabs/tabs.component";
+import {PaginationComponent} from "./ui-components/pagination/pagination.component";
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	SaveBtnComponent,
@@ -29,6 +30,7 @@ const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
 	UserRoleDropdownComponent,
 	ControlContainerComponent,
 	TabsComponent,
+	PaginationComponent,
 ];
 
 @NgModule({

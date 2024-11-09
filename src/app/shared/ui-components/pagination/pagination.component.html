@@ -1,0 +1,34 @@
+<nav aria-label="Page navigation example">
+    <ul class="flex justify-end -space-x-px text-sm">
+        <!-- Previous button -->
+        <li>
+            <a (click)="currentPage > 1 && setPage(currentPage - 1)"
+               class="flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-e-0 rounded-bl-lg
+          text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-600 dark:text-white dark:hover:bg-gray-600 cursor-pointer dark:bg-gray-800"
+               [ngClass]="{'cursor-not-allowed text-gray-300 bg-gray-100 border-gray-200 hover:bg-gray-100 hover:text-gray-300': currentPage === 1,
+                            'cursor-pointer': currentPage != 1}">
+                Previous
+            </a>
+        </li>
+
+        <!-- Page numbers -->
+        @for (page of pages; track page; let i = $index) {
+            <li>
+                <a (click)="setPage(startPage + i)"
+                   [ngClass]="{'active': currentPage === startPage + i}"
+                   class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 dark:border-gray-600 hover:bg-gray-100
+               dark:text-white dark:hover:bg-gray-600 cursor-pointer dark:bg-gray-800">
+                    {{ startPage + i }}
+                </a>
+            </li>
+        }
+
+        <!-- Next button -->
+        <li>
+            <a (click)="setPage(currentPage + 1)"
+               class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-600 dark:text-white dark:hover:bg-gray-600 cursor-pointer dark:bg-gray-800">
+                Next
+            </a>
+        </li>
+    </ul>
+</nav>
