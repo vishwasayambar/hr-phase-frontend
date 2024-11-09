@@ -7,6 +7,7 @@ export class Employee {
     id: number;
     type_id: number;
     name: string;
+    avatar: string;
     display_name: string;
     email: string;
     mobile_number: string;
