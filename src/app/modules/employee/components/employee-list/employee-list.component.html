@@ -66,12 +66,13 @@
                                                     [isVisibleOriginalName]="true"></app-user-badge>
                                     <div class="ps-3">
                                         <div class="text-base font-semibold visible opacity-100"
-                                             [appHover]="data.name"
+                                             [appHover]="data.email"
                                         >{{ data.name }}
                                         </div>
                                         <div class="font-normal text-gray-500">{{ data.email }}</div>
                                     </div>
-                                    <app-user-popover [id]="data.name" class="right-2"></app-user-popover>
+                                    <app-user-popover [id]="data.email" class="right-2"
+                                                      [user]="data"></app-user-popover>
                                 </th>
                             }
                             @case ('actionTemplate') {
