@@ -8,17 +8,17 @@ const routes: Routes = [
 	{
 		path: "",
 		component: EmployeeComponent,
-		title: "Employee",
+		title: "Employee Management",
 		children: [
 			{
 				path: "list",
 				component: EmployeeListComponent,
-				title: "Employee",
+				title: "Employee Listing",
 			},
 			{
 				path: "add",
 				component: EmployeeAddComponent,
-				title: "Employee",
+				title: "Add New Employee",
 			},
 			{
 				path: "",
