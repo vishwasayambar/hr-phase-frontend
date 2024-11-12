@@ -20,8 +20,8 @@ export abstract class BaseComponent {
 	loadingService: LoaderService
 	notifyService: ToastrService;
 	currentUser: Employee = null;
-	darkThemeBtnClasses = 'dark:bg-gray-500 dark:hover:bg-gray-700';
-	lightThemeBtnClasses = 'bg-blue-400 hover:bg-blue-600 ';
+	darkThemeBtnClasses = ' dark:bg-gray-500 dark:hover:bg-gray-700 ';
+	lightThemeBtnClasses = ' bg-blue-400 hover:bg-blue-600 ';
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
 	PERMISSION_LIST = PERMISSION_LIST;
 
