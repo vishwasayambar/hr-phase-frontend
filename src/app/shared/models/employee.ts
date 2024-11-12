@@ -28,7 +28,7 @@ export class Employee {
     last_login: Date;
     created_at: Date;
     updated_at: Date;
-    roles: Array<any>;
+    roles: { name:string , id:string }[];
     // attachments: Attachment;
     payment_received: number;
     payment_remaining: number;
