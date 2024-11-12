@@ -11,6 +11,7 @@ import {EmployeeColumn} from "../../../../shared/interfaces/employee-column";
 })
 export class EmployeeListComponent extends BaseComponent implements OnInit {
 	protected readonly COMPONENT_SIZES = COMPONENT_SIZES;
+	currentPage = 1;
 	
 	columns: EmployeeColumn[] = [
 		{
@@ -62,10 +63,22 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
 		this.fetchUsers();
 	}
 	
+	changePage(page: any){
+		this.currentPage = page
+		this.fetchUsers();
+	}
+	
 	private fetchUsers() {
-		this.service.getListByQuery({}).subscribe({
-			next: (res) => {
-				this.dataList = res;
+		this.service.getListByQuery({
+			page: this.currentPage,
+			paginate: "True",
+			order_by: 'date_of_birth',
+			order_by_direction: 'desc',
+			per_page: 20,
+		}).subscribe({
+			next: res => {
+				// @ts-ignore
+				this.dataList = res.data;
 			},
 			error: (err) => {
 				console.log("User List fetching error", err);

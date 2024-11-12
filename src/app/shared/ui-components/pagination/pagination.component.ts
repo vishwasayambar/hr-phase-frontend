@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, output, signal} from '@angular/core';
 import {NgClass} from "@angular/common";
 
 @Component({
@@ -8,6 +8,7 @@ import {NgClass} from "@angular/common";
 	templateUrl: './pagination.component.html',
 })
 export class PaginationComponent {
+	changePage = output<number>();
 	totalPages = 10;
 	currentPage = 1;
 	startPage = 1; // Tracks the starting page number in each set
@@ -15,7 +16,7 @@ export class PaginationComponent {
 	
 	setPage(page: number) {
 		this.currentPage = page;
-		
+		this.changePage.emit(this.currentPage);
 		if (page > this.totalPages) {
 			// Load the next set of pages
 			this.loadNextSet();
