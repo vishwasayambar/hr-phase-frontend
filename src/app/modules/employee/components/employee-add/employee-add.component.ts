@@ -1,10 +1,10 @@
-import { Component, Injector, OnInit, ViewChild } from "@angular/core";
-import { UntypedFormGroup } from "@angular/forms";
-import { BaseComponent } from "../../../../shared/base-component";
-import { EMPLOYEE_PROFILE_TABS, GENDER_LIST } from "../../../../shared/constants/constant";
-import { Employee } from "../../../../shared/models/employee";
-import { EmployeeService } from "../../../../shared/services/employee.service";
-import { TabsComponent } from "../../../../shared/ui-components/tabs/tabs.component";
+import {Component, Injector, OnInit, ViewChild} from "@angular/core";
+import {UntypedFormGroup} from "@angular/forms";
+import {BaseComponent} from "../../../../shared/base-component";
+import {EMPLOYEE_PROFILE_TABS, GENDER_LIST} from "../../../../shared/constants/constant";
+import {Employee} from "../../../../shared/models/employee";
+import {EmployeeService} from "../../../../shared/services/employee.service";
+import {TabsComponent} from "../../../../shared/ui-components/tabs/tabs.component";
 
 @Component({
 	selector: "app-employee-add",
@@ -20,12 +20,13 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	isLastTab = false;
 	employee: Employee;
 	employeeId: number;
-
+	
 	constructor(injector: Injector, protected service: EmployeeService) {
 		super(injector);
 	}
-
+	
 	ngOnInit() {
+		this.getManagerList();
 		this.employeeId = +this.activatedRouter.snapshot.parent.paramMap.get("employee_id");
 		if (this.employeeId) {
 			this.isCreating = true;
@@ -37,17 +38,13 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 				error: (err: any) => {
 					this.notify(err.message, this.NOTIFICATION_TYPES.ERROR);
 				}
-
 			}).add(() => this.isCreating = true);
 		} else {
 			this.form = Employee.getForm(new Employee({}));
 		}
 	}
-
-
+	
 	create() {
-		console.log(this.form.value);
-		debugger;
 		if (this.form.valid) {
 			this.isCreating = true;
 			this.service.create(this.form.value).subscribe({
@@ -65,19 +62,20 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 			this.validateFormFields(this.form);
 		}
 	}
-
+	
 	// Method to call showTab
 	nextTab(tabId: string) {
 		this.tabsComponent.showTab(tabId);
-		if(this.tabsComponent.tabs._activeTab.id === "4"){
+		if (this.tabsComponent.tabs._activeTab.id === "4") {
 			this.isLastTab = true;
 		}
 	}
-
-	setCurrentTab(){
-		this.isLastTab = false;
-		if(this.tabsComponent?.tabs?._activeTab.id === "4"){
-			this.isLastTab = true;
-		}
+	
+	setCurrentTab() {
+		this.isLastTab = this.tabsComponent?.tabs?._activeTab.id === "4";
+	}
+	
+	private getManagerList() {
+		this.service.getEmployeeList()
 	}
 }
