@@ -13,7 +13,7 @@ export interface EntityInterface<T, ID> {
 
 	getById(id: number): Observable<T>;
 
-	getListByQuery(params: object): Observable<Array<T>>;
+	getListByQuery(params: object): Observable<{data:Array<T>}>;
 
 	delete(id: ID): Observable<any>;
 }
@@ -26,7 +26,7 @@ export abstract class BaseService<T, ID> implements EntityInterface<T, ID> {
 		return this.api.get(`${this.base}/${id}`);
 	}
 
-	getListByQuery(params = {}): Observable<Array<T>> {
+	getListByQuery(params = {}): Observable<{data:Array<T>}> {
 		return this.api.getListByQuery(this.base, params);
 	}
 
