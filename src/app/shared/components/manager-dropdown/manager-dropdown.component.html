@@ -1,0 +1,8 @@
+@if ((managerOptions?.length && this.searchQuery === '') || (this.searchQuery !== '')) {
+    <app-searchable-dropdown
+            [options]="managerOptions" templateType="Employee"
+            displayField="name"
+            placeholder="Select Manager"
+            (selectionChange)="handleSelection($event)" (filterChange)="filterChange($event)">
+    </app-searchable-dropdown>
+}
