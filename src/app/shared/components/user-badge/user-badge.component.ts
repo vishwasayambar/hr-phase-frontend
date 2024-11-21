@@ -16,6 +16,7 @@ export class UserBadgeComponent extends BaseComponent implements OnInit {
 	@Input() isUserTextOnly = false;
 	@Input() isClickable = true;
 	@Input() isVisibleOriginalName = false;
+	@Input() isInDropDown = false;
 	isShowAvatar = false;
 	isHovering = false;
 	isShowProfileImage = false;

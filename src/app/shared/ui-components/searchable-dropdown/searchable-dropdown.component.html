@@ -15,7 +15,7 @@
             @switch (templateType()) {
                 @case ('Employee') {
                     @for (option of filteredOptions; track option.id) {
-                        <app-user-badge (mousedown)="selectOption(option)" [user]="option"
+                        <app-user-badge (mousedown)="selectOption(option)" [user]="option" [isInDropDown]="true"
                                         [size]="COMPONENT_SIZES.DROPDOWN_PROFILE_IMAGES"
                                         [isVisibleOriginalName]="true"></app-user-badge>
                     }
