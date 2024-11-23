@@ -64,7 +64,6 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
                 this.isSavingPermissions = false
             })
         }
-        debugger;
     }
 
     onValueChange(value: number) {
@@ -74,7 +73,6 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
             this.permissionService.getByRoleId(value).subscribe({
                 next: res => {
                     this.roleWisePermissionArray = res;
-                    debugger;
                         this.groupPermissions();
                     console.log(this.roleWisePermissionArray, "Permission Array");
                 },
