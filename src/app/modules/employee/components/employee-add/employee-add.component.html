@@ -6,7 +6,6 @@
                 <app-user-notification-channel [form]="form" label="Send Activation Link">
                 </app-user-notification-channel>
                 <div class="grid md:gap-6 mb-6 md:grid-cols-4">
-
                     <app-control-container
                             errorMsg="Customer type is required field" label="Customer Type" name="role_id">
                         <app-user-role-dropdown [formControl]="$any(form).controls['role_id']"
@@ -75,10 +74,7 @@
                             }
                         </select>
                     </app-control-container>
-                    <app-control-container errorMsg="Reporting Manager is a required field" label="Reporting Manager"
-                                           name="reporting_manager_id">
-                        <app-manager-dropdown formControlName="reporting_manager_id"></app-manager-dropdown>
-                    </app-control-container>
+
                     <app-control-container label="Emergency Contact Name" name="emergency_contact_name"
                                            errorMsg="Emergency Contact Name is Required">
                         <input id="emergency_contact_name" formControlName="emergency_contact_name" type="text"
@@ -107,7 +103,6 @@
                                 Days
                             </div>
                         </div>
-
                     </app-control-container>
                     <app-control-container label="Date of Joining" name="date_of_joining"
                                            errorMsg="Date of Joining is Required">
@@ -130,6 +125,67 @@
                  aria-labelledby="dashboard-tab">
                 <div class="addressArray">
                     <app-address *ngIf="form" [form]="form"></app-address>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-employee-position" role="tabpanel"
+                 aria-labelledby="employee-position-tab">
+                <div class="grid md:gap-6 mb-6 md:grid-cols-3">
+                    <app-control-container errorMsg="Reporting Manager is a required field" label="Reporting Manager"
+                                           name="reporting_manager_id">
+                        <app-manager-dropdown formControlName="reporting_manager_id"></app-manager-dropdown>
+                    </app-control-container>
+                    <app-control-container errorMsg="Department is a required field" label="Department"
+                                           name="department_id">
+                        <app-department-dropdown formControlName="department_id"></app-department-dropdown>
+                    </app-control-container>
+                    <app-control-container errorMsg="Grade is a required field" label="Grade"
+                                           name="grade">
+                        <select id="grade" formControlName="grade"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Select a department</option>
+                            @for (grade of gradeList; track grade) {
+                                <option>{{ grade }}</option>
+                            }
+                        </select>
+                    </app-control-container>
+                    <app-control-container errorMsg="Attendance Scheme is a required field" label="Attendance Scheme"
+                                           name="attendance_scheme">
+                        <select id="attendance-scheme" formControlName="attendance_scheme"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Select a department</option>
+                            @for (attendance_scheme of attendanceSchemeList; track attendance_scheme) {
+                                <option>{{ attendance_scheme }}</option>
+                            }
+                        </select>
+                    </app-control-container>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-pf-esi-lwf" role="tabpanel"
+                 aria-labelledby="pf-esi-lwf-tab">
+                <div class="grid md:gap-6 mb-6 md:grid-cols-2">
+                    <!--                    TODO:: Need to add more fields later -->
+                    <app-control-container label="PF Number" name="pf_number"
+                                           errorMsg="PF Number is Required">
+                        <div class="flex flex-col">
+                            <input id="pf-number" formControlName="pf_number" type="text"
+                                   placeholder="PY/KRP/1234345456"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <div class="ps-2 text-gray-400 text-sm">
+                                <div>
+                                    <span>Format:</span> (Region Code/Office Code/Ext Code/Extn No/Member Acc No)
+                                </div>
+                                <div>
+                                    <span>Example:</span> PY/KRP/1234345456
+                                </div>
+                            </div>
+                        </div>
+                    </app-control-container>
+                    <app-control-container label="UAN Number" name="uan_number"
+                                           errorMsg="UAN Number is Required">
+                        <input id="uan_number" formControlName="uan_number" type="number"
+                               placeholder="PY/KRP/1234345456"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </app-control-container>
                 </div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-bank" role="tabpanel"

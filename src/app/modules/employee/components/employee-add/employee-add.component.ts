@@ -1,25 +1,33 @@
 import {Component, Injector, OnInit, ViewChild} from "@angular/core";
 import {UntypedFormGroup} from "@angular/forms";
 import {BaseComponent} from "../../../../shared/base-component";
-import {EMPLOYEE_PROFILE_TABS, GENDER_LIST} from "../../../../shared/constants/constant";
+import {
+	ATTENDANCE_SCHEME_LIST,
+	EMPLOYEE_PROFILE_TABS,
+	GENDER_LIST,
+	GRADE_LIST
+} from "../../../../shared/constants/constant";
 import {Employee} from "../../../../shared/models/employee";
 import {EmployeeService} from "../../../../shared/services/employee.service";
 import {TabsComponent} from "../../../../shared/ui-components/tabs/tabs.component";
+import {TabItem} from "flowbite";
 
 @Component({
 	selector: "app-employee-add",
 	templateUrl: "./employee-add.component.html",
-	styleUrl: "./employee-add.component.scss"
 })
 export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	@ViewChild(TabsComponent) tabsComponent: TabsComponent;
 	form: UntypedFormGroup;
 	genderList = Object.values(GENDER_LIST);
 	profileTabs = Object.values(EMPLOYEE_PROFILE_TABS);
+	attendanceSchemeList = Object.values(ATTENDANCE_SCHEME_LIST);
+	gradeList = Object.values(GRADE_LIST);
 	isCreating = false;
 	isLastTab = false;
 	employee: Employee;
 	employeeId: number;
+	allTabs: TabItem[];
 	
 	constructor(injector: Injector, protected service: EmployeeService) {
 		super(injector);
@@ -66,13 +74,14 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	// Method to call showTab
 	nextTab(tabId: string) {
 		this.tabsComponent.showTab(tabId);
-		if (this.tabsComponent.tabs._activeTab.id === "4") {
+		this.allTabs = this.tabsComponent.tabs._items;
+		if (this.tabsComponent.tabs._activeTab.id === this.allTabs[this.allTabs?.length - 1]?.id) {
 			this.isLastTab = true;
 		}
 	}
 	
 	setCurrentTab() {
-		this.isLastTab = this.tabsComponent?.tabs?._activeTab.id === "4";
+		this.allTabs ? this.isLastTab = this.tabsComponent?.tabs?._activeTab.id === this.allTabs[this.allTabs?.length - 1]?.id : null;
 	}
 	
 	private getManagerList() {

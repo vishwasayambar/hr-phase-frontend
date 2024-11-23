@@ -10,12 +10,21 @@ export const AUTH_PATH = "auth/";
 export const DASHBOARD = "/dashboards";
 export const EMPLOYEE_PATH = "employees";
 export const ROLE_PATH = "roles";
+export const DEPARTMENT_PATH = "departments";
 export const PERMISSION_PATH = "permissions";
 
 export enum GENDER_LIST {
     MALE = "Male",
     FEMALE = "Female",
     OTHER = "Other",
+}
+
+export enum ATTENDANCE_SCHEME_LIST {
+    GENERAL_SCHEME = "General Scheme",
+}
+
+export enum GRADE_LIST {
+  G3 = 'G3',
 }
 
 export enum TENANT_PLANS {
@@ -66,19 +75,39 @@ export const EMPLOYEE_PROFILE_TABS = [
     },
     {
         id: 3,
+        label: "Employee Position",
+        key: "employee_position",
+        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        tabElementId: "3",
+        triggerTabsId: "employee-position-styled-tab",
+        triggerEl: "#employee-position-styled-tab",
+        targetEl: "#styled-employee-position",
+    },
+    {
+        id: 4,
+        label: "PE,ESI & LWF",
+        key: "pf_esi_lwf",
+        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        tabElementId: "4",
+        triggerTabsId: "pf-esi-lwf-styled-tab",
+        triggerEl: "#pf-esi-lwf-styled-tab",
+        targetEl: "#styled-pf-esi-lwf",
+    },
+    {
+        id: 5,
         label: "Bank",
         key: "bank",
         icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
-        tabElementId: "3",
+        tabElementId: "5",
 		triggerTabsId: "bank-styled-tab",
         triggerEl: "#bank-styled-tab",
         targetEl: "#styled-bank",
     },
     {
-        id: 4,
+        id: 6,
         label: "Education",
         key: "educational",
-        tabElementId: "4",
+        tabElementId: "6",
         icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
 		triggerTabsId: "educational-styled-tab",
         triggerEl: "#educational-styled-tab",

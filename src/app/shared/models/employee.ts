@@ -24,7 +24,12 @@ export class Employee {
 	bank: Bank;
 	address: [];
 	reporting_manager_id: number;
+	department_id: number;
+	grade: string;
+	attendance_scheme: string;
 	is_active: boolean;
+	pf_number: string;
+	uan_number: number;
 	roles: { name: string, id: string }[];
 	data: any;
 	ip: string;
@@ -62,8 +67,13 @@ export class Employee {
 			father_name: [employee.father_name || null],
 			gender: [employee.gender || null],
 			reporting_manager_id: [employee.reporting_manager_id || null],
+			department_id: [employee.department_id || null],
+			grade: [employee.grade || null],
+			attendance_scheme: [employee.attendance_scheme || null],
 			date_of_joining: [employee.date_of_joining || null],
 			probation_period: [employee.probation_period || null],
+			pf_number: [employee.pf_number || null],
+			uan_number: [employee.uan_number || null],
 			address: Address.getFormArray(employee.address),
 			bank: Bank.getFormArray(employee.bank),
 			// ip_addresses: IpAddress.getFormArray(employee.ip_addresses),
