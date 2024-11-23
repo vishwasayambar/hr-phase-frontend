@@ -19,6 +19,7 @@ import {ConfirmationPopupComponent} from "./components/confirmation-popup/confir
 import { UserBadgeComponent } from './components/user-badge/user-badge.component';
 import { ManagerDropdownComponent } from './components/manager-dropdown/manager-dropdown.component';
 import {SearchableDropdownComponent} from "./ui-components/searchable-dropdown/searchable-dropdown.component";
+import { DepartmentDropdownComponent } from './components/department-dropdown/department-dropdown.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	SaveBtnComponent,
@@ -26,6 +27,7 @@ const COMMON_COMP_LIST: any[] | Type<any> = [
 	UserPopoverComponent,
 	ManagerDropdownComponent,
 	SearchableDropdownComponent,
+	DepartmentDropdownComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
