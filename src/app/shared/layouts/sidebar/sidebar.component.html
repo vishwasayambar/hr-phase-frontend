@@ -1,14 +1,14 @@
-<div class="duration-500 bg-blue-300 dark:bg-gray-600 dark:text-white p-2 sticky z-10 h-svh"
-     [ngClass]="!isSidebarCollapsed ? 'w-[51px]' : 'w-[300px] '">
+<div class="duration-500 bg-gray-200 dark:bg-gray-700 text-white dark:text-white p-2.5 sticky z-10 h-svh"
+     [ngClass]="!isSidebarCollapsed ? 'w-[50px]' : 'w-[200px] '">
     <div class="flex flex-col">
 		<span (click)="toggleSidebar()" class="flex justify-between border-b-2 dark:border-white border-black">
-			<span class="overflow-hidden me-1 pb-1">
-				<img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+			<span class="overflow-hidden pb-1">
+				<img class="h-8 w-auto" src="assets/images/hrphase1-logo.png"
                      alt="Your Company">
 			</span>
-			<span class="">
-				<svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="none" viewBox="0 0 24 24"
-                     stroke-Width={1.5} stroke="currentColor" className="size-6">
+			<span class="bg-pink-700 font-bold my-1 rounded-sm">
+				<svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" fill="none" viewBox="0 0 24 24"
+                     stroke-Width={1.5} stroke="currentColor" class="size-8">
 					<path stroke-Linecap="round" stroke-Linejoin="round"
                           d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"/>
 				</svg>
@@ -16,8 +16,9 @@
 		</span>
         <div class="menus">
             @for (menu of menus; track menu.id) {
-            <a class="sidebar-content m-1 overflow-hidden flex flex-row"
-                [routerLink]="menu.link">
+            <a class="sidebar-content overflow-hidden flex flex-row font-medium gap-2 my-2 p-1 rounded-md"
+                [routerLink]="menu.link"    [ngClass]="{'bg-pink-600': menu.link === selectedMenuLink, 'bg-gray-400': menu.link !== selectedMenuLink}"
+               (click)="selectMenu(menu.link)">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="none" viewBox="0 0 24 24"
                          stroke-width={1.5} stroke="currentColor" class="size-6">
@@ -29,6 +30,5 @@
             </a>
             }
         </div>
-
     </div>
 </div>

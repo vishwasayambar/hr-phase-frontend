@@ -3,6 +3,7 @@ import { FormArray, FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedF
 import { BaseComponent } from "../../base-component";
 import { Bank } from "../../models/bank";
 import { ControlContainerComponent } from "../control-container/control-container.component";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: "app-bank",
@@ -10,7 +11,8 @@ import { ControlContainerComponent } from "../control-container/control-containe
 	imports: [
 		ControlContainerComponent,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		NgClass
 	],
 	templateUrl: "./bank.component.html",
 })
