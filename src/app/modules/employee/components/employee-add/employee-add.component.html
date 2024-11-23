@@ -1,5 +1,5 @@
 <form (ngSubmit)="create()" [formGroup]="form" *ngIf="form">
-    <app-tabs [tabsArr]="profileTabs" [showIcon]="true" (currentTab)="setCurrentTab()">
+    <app-tabs [tabsArr]="profileTabs" [showIcon]="true" (currentTab)="setCurrentTab($event)">
         <div horizontal-content id="default-styled-tab-content" class="rounded-lg bg-gray-50 dark:bg-gray-800">
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel"
                  aria-labelledby="profile-tab">
@@ -15,29 +15,29 @@
                     <app-control-container label="Name" name="name" errorMsg="Employee Name is Required">
                         <input id="name" formControlName="name" type="text"
                                placeholder="John Smith"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
 
                     <app-control-container label="Display Name" name="display_name" errorMsg="Display Name is Required">
                         <input id="display_name" formControlName="display_name" type="text"
                                placeholder="Johny"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Email" name="email" errorMsg="Email is Required">
                         <input id="email" formControlName="email" type="email"
                                placeholder="Johny@xyz.com"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Mobile Number" name="mobile_number"
                                            errorMsg="Mobile Number is Required">
                         <input id="mobile_number" formControlName="mobile_number" type="number"
                                placeholder="+91 0000-0000-00"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Phone Number" name="phone_number" errorMsg="Phone Number is Required">
                         <input id="phone_number" formControlName="phone_number" type="number"
                                placeholder="0000-0000-00" pattern="/^[789]\d{9}$/" [maxlength]="10"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Date of birth" name="date_of_birth"
                                            errorMsg="Date of birth is Required">
@@ -49,7 +49,7 @@
                                 </svg>
                             </div>
                             <input id="date_of_birth" formControlName="date_of_birth" type="datetime-local"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
                                    placeholder="Select date">
                         </div>
                     </app-control-container>
@@ -57,18 +57,18 @@
                                            errorMsg="Tax number is Required">
                         <input id="tax_number" formControlName="tax_number" type="text"
                                placeholder="eg:ABCD1234A"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Aadhaar Number" errorMsg="Tax number is Required"
                                            name="unique_identification_number">
                         <input id="unique_identification_number" formControlName="unique_identification_number"
                                type="text"
                                placeholder="Type aadhaar number"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container errorMsg="Gender is a required field" label="Gender" name="gender">
                         <select id="gender" formControlName="gender"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                             @for (gender of genderList; track genderList) {
                                 <option>{{ gender }}</option>
                             }
@@ -79,26 +79,26 @@
                                            errorMsg="Emergency Contact Name is Required">
                         <input id="emergency_contact_name" formControlName="emergency_contact_name" type="text"
                                placeholder="Johny"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Emergency Contact Number" name="emergency_contact_number"
                                            errorMsg="Emergency Contact Number is Required">
                         <input id="emergency_contact_number" formControlName="emergency_contact_number" type="tel"
                                placeholder="+91 0000-0000-00"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Father's Name" name="father_name"
                                            errorMsg="Father's Name is Required">
                         <input id="father_name" formControlName="father_name" type="text"
                                placeholder="Rony"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                     <app-control-container label="Probation Period" name="probation_period"
                                            errorMsg="Probation Period is Required">
                         <div class="flex items-center">
                             <input id="probation_period" formControlName="probation_period" type="number"
                                    placeholder="10 Days"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                             <div class="ps-2">
                                 Days
                             </div>
@@ -114,7 +114,7 @@
                                 </svg>
                             </div>
                             <input id="date_of_joining" formControlName="date_of_joining" type="datetime-local"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
                                    placeholder="Select date">
                         </div>
                     </app-control-container>
@@ -141,7 +141,7 @@
                     <app-control-container errorMsg="Grade is a required field" label="Grade"
                                            name="grade">
                         <select id="grade" formControlName="grade"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                             <option disabled selected>Select a department</option>
                             @for (grade of gradeList; track grade) {
                                 <option>{{ grade }}</option>
@@ -151,7 +151,7 @@
                     <app-control-container errorMsg="Attendance Scheme is a required field" label="Attendance Scheme"
                                            name="attendance_scheme">
                         <select id="attendance-scheme" formControlName="attendance_scheme"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                             <option disabled selected>Select a department</option>
                             @for (attendance_scheme of attendanceSchemeList; track attendance_scheme) {
                                 <option>{{ attendance_scheme }}</option>
@@ -169,7 +169,7 @@
                         <div class="flex flex-col">
                             <input id="pf-number" formControlName="pf_number" type="text"
                                    placeholder="PY/KRP/1234345456"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                             <div class="ps-2 text-gray-400 text-sm">
                                 <div>
                                     <span>Format:</span> (Region Code/Office Code/Ext Code/Extn No/Member Acc No)
@@ -184,7 +184,7 @@
                                            errorMsg="UAN Number is Required">
                         <input id="uan_number" formControlName="uan_number" type="number"
                                placeholder="PY/KRP/1234345456"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
                 </div>
             </div>
@@ -204,6 +204,18 @@
                     the content visibility and styling.</p>
             </div>
             <div class="flex justify-end p-3">
+                @if (this.tabsComponent?.tabs?._activeTab?.id !== '1'){
+                    <button (click)="previousTab()" type="button"
+                            [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
+                            class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M13 5H1m0 0l4 4m-4-4l4-4"/>
+                        </svg>
+                        <span class="ms-2">Previous</span>
+                    </button>
+                }
                 <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
                     <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
                                   id="add-employee-button"
@@ -211,7 +223,8 @@
                 </ng-template>
                 <ng-template #isNotLastTab>
                     <button (click)="nextTab('next')" type="button"
-                            class="text-white bg-blue-400 hover:bg-blue-500 focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
+                            [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
+                            class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
                         <span class="me-2">Next</span>
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 14 10">

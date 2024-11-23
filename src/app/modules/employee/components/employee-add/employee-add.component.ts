@@ -80,8 +80,12 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 		}
 	}
 	
-	setCurrentTab() {
-		this.allTabs ? this.isLastTab = this.tabsComponent?.tabs?._activeTab.id === this.allTabs[this.allTabs?.length - 1]?.id : null;
+	previousTab() {
+		this.tabsComponent.showPreviousTab();
+	}
+	
+	setCurrentTab(event: string) {
+		this.tabsComponent?.tabs?._items ? this.isLastTab = this.tabsComponent?.tabs?._activeTab.id === this.tabsComponent?.tabs?._items[this.tabsComponent?.tabs?._items?.length - 1]?.id : event;
 	}
 	
 	private getManagerList() {
