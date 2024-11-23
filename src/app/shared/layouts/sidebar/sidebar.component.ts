@@ -14,6 +14,8 @@ import {RouterLink} from "@angular/router";
     styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent extends BaseComponent implements OnInit {
+    selectedMenuLink: string | null = `/${window.location.href.toLocaleLowerCase().split('/')[3]}`;
+    
     menus: ({
         title: string;
         id: string;
@@ -59,5 +61,9 @@ export class SidebarComponent extends BaseComponent implements OnInit {
                 visible: true, // this.userPermissionList.includes(this.PERMISSION_LIST.EMPLOYEE_LIST),
             },
         ];
+    }
+    
+    selectMenu(menuId: string): void {
+        this.selectedMenuLink = menuId;
     }
 }
