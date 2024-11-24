@@ -1,16 +1,17 @@
-<button type="{{type}}" [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
-        class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2"
-		[id]="id" (click)="onSave()" [disabled]="isDisabled"
+<button type="{{type}}" [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses + ' '  + class"
+        class="flex w-full justify-center px-3
+py-1.5 text-sm font-semibold leading-6 text-white shadow-sm"
+        [id]="id" (click)="onSave()" [disabled]="isDisabled"
 >
-	@if (isSaving) {
-		<span>
+    @if (isSaving) {
+        <span>
 			<svg class="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-				 viewBox="0 0 24 24">
+                 viewBox="0 0 24 24">
 				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 				<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
 			</svg>
 		</span>
-	}
-	{{ isSaving ? savingText : saveText }}
-	<ng-content></ng-content>
+    }
+    {{ isSaving ? savingText : saveText }}
+    <ng-content></ng-content>
 </button>

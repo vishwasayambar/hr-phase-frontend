@@ -218,7 +218,7 @@
                 }
                 <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
                     <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
-                                  id="add-employee-button"
+                                  id="add-employee-button" [class]="'rounded-full'"
                                   saveText="Create" savingText="Creating..."></app-save-btn>
                 </ng-template>
                 <ng-template #isNotLastTab>

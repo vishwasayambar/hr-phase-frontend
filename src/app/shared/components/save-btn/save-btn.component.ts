@@ -15,7 +15,7 @@ export class SaveBtnComponent extends BaseComponent {
 	@Input() gaEvent = "create_event_analytics";
 	@Input() height = 35;
 	@Input() width: number | string = "auto";
-	@Input() class = "";
+	@Input() class = "rounded-md";
 	@Input() isDisabled = false;
 	@Input() id = "save-button";
 	@Output() saveBtnClick: EventEmitter<any> = new EventEmitter();
