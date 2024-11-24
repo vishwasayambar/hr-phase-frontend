@@ -1,11 +1,11 @@
-import {Component, input, Input, OnInit, output} from '@angular/core';
+import {Component, input, Input, OnChanges, OnInit, output, SimpleChanges} from '@angular/core';
 import {COMPONENT_SIZES} from "../../constants/constant";
 
 @Component({
 	selector: 'app-searchable-dropdown',
 	templateUrl: './searchable-dropdown.component.html',
 })
-export class SearchableDropdownComponent implements OnInit {
+export class SearchableDropdownComponent implements OnInit, OnChanges {
 	protected readonly COMPONENT_SIZES = COMPONENT_SIZES;
 	@Input() options: any[] = [];
 	@Input() displayField: string = 'name';
@@ -18,6 +18,11 @@ export class SearchableDropdownComponent implements OnInit {
 	showDropdown = false;
 	
 	ngOnInit() {
+		this.filteredOptions = this.options;
+	}
+	
+	ngOnChanges(changes: SimpleChanges): void {
+		this.options = changes['options'].currentValue;
 		this.filteredOptions = this.options;
 	}
 	
