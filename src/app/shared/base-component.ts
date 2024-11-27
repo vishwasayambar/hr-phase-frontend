@@ -21,7 +21,7 @@ export abstract class BaseComponent {
 	notifyService: ToastrService;
 	currentUser: Employee = null;
 	darkThemeBtnClasses = ' dark:bg-gray-500 dark:hover:bg-pink-700 ';
-	lightThemeBtnClasses = ' bg-pink-500 hover:bg-pink-600 hover:text-white ';
+	lightThemeBtnClasses = ' bg-pink-500 hover:bg-pink-600 hover:text-white text-white ';
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
 	PERMISSION_LIST = PERMISSION_LIST;
 
@@ -106,6 +106,13 @@ export abstract class BaseComponent {
 			});
 	}
 
+	// This method is to close FlowBite Modals as its methods not work therefore we are closing by DOM
+	closeModal(id: string){
+		const closeButton = document.getElementById(id);
+		if (closeButton) {
+			closeButton.click();
+		}
+	}
 
 	// setLoader(value:boolean) {
 	// 	this.isLoading = value;
