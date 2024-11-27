@@ -1,5 +1,5 @@
-import {Component, input, Input, OnChanges, OnInit, output, SimpleChanges} from '@angular/core';
-import {COMPONENT_SIZES} from "../../constants/constant";
+import { Component, input, Input, OnChanges, OnInit, output, SimpleChanges } from '@angular/core';
+import { COMPONENT_SIZES } from "../../constants/constant";
 
 @Component({
 	selector: 'app-searchable-dropdown',
@@ -10,6 +10,7 @@ export class SearchableDropdownComponent implements OnInit, OnChanges {
 	@Input() options: any[] = [];
 	@Input() displayField: string = 'name';
 	@Input() placeholder: string = 'Search...';
+	@Input() defaultSelection: string = '';
 	templateType = input();
 	selectionChange = output<any>();
 	filterChange = output<any>();
@@ -19,10 +20,12 @@ export class SearchableDropdownComponent implements OnInit, OnChanges {
 	
 	ngOnInit() {
 		this.filteredOptions = this.options;
+		this.searchQuery = this.defaultSelection; //This is default selection
 	}
 	
 	ngOnChanges(changes: SimpleChanges): void {
 		this.options = changes['options'].currentValue;
+		this.searchQuery = changes['defaultSelection'].currentValue;
 		this.filteredOptions = this.options;
 	}
 	
