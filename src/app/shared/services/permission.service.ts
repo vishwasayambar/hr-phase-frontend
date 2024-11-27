@@ -32,7 +32,7 @@ export class PermissionService extends BaseService<Permission, number> {
     }
 
     saveRolePermissions(roleId: number, permissions: {}): Observable<Array<Permission>> {
-        return this.api.post(this.endpoint + `/saveRolePermissions/${roleId}`, permissions);
+        return this.api.put(this.endpoint + `/saveRolePermissions/${roleId}`, permissions);
     }
 
 }
