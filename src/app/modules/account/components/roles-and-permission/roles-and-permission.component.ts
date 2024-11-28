@@ -52,7 +52,7 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 	syncRolePermission() {
 		if (this.currentRoleId) {
 			this.isSavingPermissions = true
-			this.permissionService.saveRolePermissions(this.currentRoleId, {
+			this.permissionService.assignPermissionsToRole(this.currentRoleId, {
 				selectedPermission: this.selectedPermissions,
 				deSelectedPermission: this.deSelectedPermissions
 			}).subscribe({
