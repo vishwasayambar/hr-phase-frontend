@@ -24,9 +24,13 @@ export class SearchableDropdownComponent implements OnInit, OnChanges {
 	}
 	
 	ngOnChanges(changes: SimpleChanges): void {
-		this.options = changes['options'].currentValue;
-		this.searchQuery = changes['defaultSelection'].currentValue;
-		this.filteredOptions = this.options;
+		if (changes['defaultSelection']?.currentValue) {
+			this.options = changes['options']?.currentValue;
+			this.filteredOptions = this.options;
+		}
+		if (changes['defaultSelection']?.currentValue) {
+			this.searchQuery = changes['defaultSelection']?.currentValue;
+		}
 	}
 	
 	filterOptions() {
