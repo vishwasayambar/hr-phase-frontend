@@ -74,7 +74,6 @@ export class ManagerDropdownComponent implements OnInit {
 	
 	handleSelection(event: any) {
 		this.searchQuery = event;
-		this.fetchEmployees();
 		this.value = event.id;
 		this.selectedManager = event;
 		this.onChange(event.id);
