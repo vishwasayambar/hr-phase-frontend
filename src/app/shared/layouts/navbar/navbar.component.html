@@ -5,10 +5,7 @@
 				<div class="user-dropdown">
 					<label id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
 						   class="py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 cursor-pointer dark:bg-gray-500 dark:text-white">
-						<img class="w-8 h-auto rounded-full dark:border-2"
-							 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-							 alt="Maria">
-						<span class="text-gray-600 dark:text-white font-medium truncate max-w-[7.5rem]">Maria</span>
+                        <app-user-badge [user]="authUser" [size]="COMPONENT_SIZES.SMALL" [iconOnly]="false"></app-user-badge>
 						<svg class="transform transition-transform duration-200 w-4 h-4 peer-checked:rotate-180"
 							 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 							 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
