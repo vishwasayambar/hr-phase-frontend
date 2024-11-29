@@ -21,6 +21,7 @@ import { ManagerDropdownComponent } from './components/manager-dropdown/manager-
 import {SearchableDropdownComponent} from "./ui-components/searchable-dropdown/searchable-dropdown.component";
 import { DepartmentDropdownComponent } from './components/department-dropdown/department-dropdown.component';
 import { SelectDropdownComponent } from './ui-components/select-dropdown/select-dropdown.component';
+import { CustomDropdownComponent } from './ui-components/custom-dropdown/custom-dropdown.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	SaveBtnComponent,
@@ -30,7 +31,8 @@ const COMMON_COMP_LIST: any[] | Type<any> = [
 	SearchableDropdownComponent,
 	DepartmentDropdownComponent,
 	SelectDropdownComponent,
-	UserRoleDropdownComponent
+	UserRoleDropdownComponent,
+	CustomDropdownComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
