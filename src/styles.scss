@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
 .common-full-height{
 	height: 90vh;
 	background: lightgray;
