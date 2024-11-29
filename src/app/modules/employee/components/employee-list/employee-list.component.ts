@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from "@angular/core";
+import { AfterViewInit, Component, Injector, OnInit } from "@angular/core";
 import {BaseComponent} from "../../../../shared/base-component";
 import {COMPONENT_SIZES} from "../../../../shared/constants/constant";
 import {EmployeeService} from "../../../../shared/services/employee.service";
@@ -9,9 +9,10 @@ import {EmployeeColumn} from "../../../../shared/interfaces/employee-column";
 	selector: "app-employee-list",
 	templateUrl: "./employee-list.component.html",
 })
-export class EmployeeListComponent extends BaseComponent implements OnInit {
+export class EmployeeListComponent extends BaseComponent implements OnInit  {
 	protected readonly COMPONENT_SIZES = COMPONENT_SIZES;
 	currentPage = 1;
+	actionButtonArray : { name: string; icon: string }[];
 	
 	columns: EmployeeColumn[] = [
 		{
@@ -61,6 +62,7 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
 	
 	ngOnInit() {
 		this.fetchUsers();
+		this.initializeActionButtons();
 	}
 	
 	changePage(page: any){
@@ -86,5 +88,23 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
 		}).add(() => {
 		
 		});
+	}
+	
+	private initializeActionButtons() {
+		this.actionButtonArray = [
+			{
+				name: 'view Employee',
+				icon: 'bi bi-eye-fill',
+			}, {
+				name: 'Change Status',
+				icon: 'bi bi-vignette',
+			},
+		];
+	}
+	
+	actionClick(event: string){
+	if(event === 'view Employee'){
+		this.router.navigate(['/employees/add'])
+	}
 	}
 }
