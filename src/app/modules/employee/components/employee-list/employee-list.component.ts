@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Injector, OnInit } from "@angular/core";
 import {BaseComponent} from "../../../../shared/base-component";
-import {COMPONENT_SIZES} from "../../../../shared/constants/constant";
+import { COMPONENT_SIZES, EMPLOYEE_ACTION_BUTTON_NAME_LIST } from "../../../../shared/constants/constant";
 import {EmployeeService} from "../../../../shared/services/employee.service";
 import {Employee} from "../../../../shared/models/employee";
 import {EmployeeColumn} from "../../../../shared/interfaces/employee-column";
@@ -93,18 +93,34 @@ export class EmployeeListComponent extends BaseComponent implements OnInit  {
 	private initializeActionButtons() {
 		this.actionButtonArray = [
 			{
-				name: 'view Employee',
+				name: EMPLOYEE_ACTION_BUTTON_NAME_LIST.VIEW_EMPLOYEE,
 				icon: 'bi bi-eye-fill',
 			}, {
-				name: 'Change Status',
+				name: EMPLOYEE_ACTION_BUTTON_NAME_LIST.CHANGE_STATUS,
 				icon: 'bi bi-vignette',
+			}, {
+				name: EMPLOYEE_ACTION_BUTTON_NAME_LIST.FORGET_USER,
+				icon: 'bi bi-trash3-fill',
 			},
 		];
 	}
 	
-	actionClick(event: string){
-	if(event === 'view Employee'){
-		this.router.navigate(['/employees/add'])
+	actionClick(event: string, employee: Employee) {
+		if (event === EMPLOYEE_ACTION_BUTTON_NAME_LIST.VIEW_EMPLOYEE) {
+			this.router.navigate([`/employees/${employee.id}/profiles`])
+		} else if (event === EMPLOYEE_ACTION_BUTTON_NAME_LIST.FORGET_USER) {
+			this.forgetEmployeeInfo(employee);
+		}
 	}
+	
+	private forgetEmployeeInfo(employee: Employee) {
+		this.service.delete(employee.id).subscribe({
+			next: res => {
+				this.notify("User Deleted Successfully!");
+			},
+			error: err => {
+				this.notify("Error in Deleted Employee!", this.NOTIFICATION_TYPES.ERROR);
+			},
+		})
 	}
 }

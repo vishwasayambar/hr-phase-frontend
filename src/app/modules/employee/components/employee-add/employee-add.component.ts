@@ -42,11 +42,12 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 				next: response => {
 					this.employee = new Employee(response);
 					this.form = Employee.getForm(this.employee);
+					debugger;
 				},
 				error: (err: any) => {
 					this.notify(err.message, this.NOTIFICATION_TYPES.ERROR);
 				}
-			}).add(() => this.isCreating = true);
+			}).add(() => this.isCreating = false);
 		} else {
 			this.form = Employee.getForm(new Employee({}));
 		}
@@ -55,17 +56,7 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	create() {
 		if (this.form.valid) {
 			this.isCreating = true;
-			this.service.create(this.form.value).subscribe({
-				next: (response) => {
-					this.employee = new Employee(response);
-					this.notify("Employee created successfully!");
-				},
-				error: (err) => {
-					this.notify(err, this.NOTIFICATION_TYPES.ERROR);
-				},
-			}).add(() => {
-				this.isCreating = false;
-			});
+			this.employee.id ? this.updateEmployee() : this.createEmployee();
 		} else {
 			this.validateFormFields(this.form);
 		}
@@ -90,5 +81,33 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	
 	private getManagerList() {
 		this.service.getEmployeeList()
+	}
+	
+	private createEmployee() {
+		this.service.create(this.form.value).subscribe({
+			next: (response) => {
+				this.employee = new Employee(response);
+				this.notify("Employee created successfully!");
+			},
+			error: (err) => {
+				this.showErrorInNotifier(err);
+			},
+		}).add(() => {
+			this.isCreating = false;
+		});
+	}
+	
+	private updateEmployee() {
+		this.service.update(this.form.value).subscribe({
+			next: (response) => {
+				this.employee = new Employee(response);
+				this.notify("Employee Updated successfully!");
+			},
+			error: (err) => {
+				this.showErrorInNotifier(err);
+			},
+		}).add(() => {
+			this.isCreating = false;
+		});
 	}
 }

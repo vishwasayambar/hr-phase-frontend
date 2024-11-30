@@ -41,6 +41,12 @@ export enum TABLE_COLUMN_TEMPLATE {
     ACTION = "action",
 }
 
+export enum EMPLOYEE_ACTION_BUTTON_NAME_LIST {
+    VIEW_EMPLOYEE = "View Employee",
+    CHANGE_STATUS = "Change Status",
+    FORGET_USER = "Forget User",
+}
+
 export const COMPONENT_SIZES = {
     DEFAULT: "default",
     SMALL: "small",
