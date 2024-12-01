@@ -56,7 +56,7 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	create() {
 		if (this.form.valid) {
 			this.isCreating = true;
-			this.employee.id ? this.updateEmployee() : this.createEmployee();
+			this.employee?.id ? this.updateEmployee() : this.createEmployee();
 		} else {
 			this.validateFormFields(this.form);
 		}
