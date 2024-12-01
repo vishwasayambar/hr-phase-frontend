@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Injector, Input, OnInit, Output} from "@angular/core";
+import { Component, EventEmitter, forwardRef, Injector, input, Input, OnInit, Output } from "@angular/core";
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
 import {BaseComponent} from "../../base-component";
 import {RoleService} from "../../services/role.service";
@@ -16,7 +16,7 @@ import {Role} from "../../models/role";
 	],
 })
 export class UserRoleDropdownComponent extends BaseComponent implements OnInit, ControlValueAccessor {
-	@Input() isEditMode = true;
+	isEditMode = input(true);
 	@Input() isFilter = false;
 	@Input() placeholder = "Role";
 	@Input() id = "role";

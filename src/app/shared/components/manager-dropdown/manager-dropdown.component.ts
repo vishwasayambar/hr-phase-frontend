@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import { Component, forwardRef, input, Input, OnInit } from '@angular/core';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {EmployeeService} from "../../services/employee.service";
 import {Employee} from "../../models/employee";
@@ -17,6 +17,7 @@ import {Employee} from "../../models/employee";
 export class ManagerDropdownComponent implements OnInit {
 	@Input() managerOptions: Employee[];
 	@Input("value") _value: any = null;
+	isEditMode = input(true);
 	selectedManager: any;
 	searchQuery: string = ''
 	

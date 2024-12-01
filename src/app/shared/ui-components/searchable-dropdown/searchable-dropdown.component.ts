@@ -11,6 +11,7 @@ export class SearchableDropdownComponent implements OnInit, OnChanges {
 	@Input() displayField: string = 'name';
 	@Input() placeholder: string = 'Search...';
 	@Input() defaultSelection: string = '';
+	isEditMode = input(true);
 	templateType = input();
 	selectionChange = output<any>();
 	filterChange = output<any>();
@@ -47,5 +48,9 @@ export class SearchableDropdownComponent implements OnInit, OnChanges {
 	
 	hideDropdown() {
 		setTimeout(() => this.showDropdown = false, 200); // Delay to allow item selection
+	}
+	
+	openDropDown(){
+		this.showDropdown = this.isEditMode();
 	}
 }

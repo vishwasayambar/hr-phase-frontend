@@ -25,6 +25,7 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	gradeList = Object.values(GRADE_LIST);
 	isCreating = false;
 	isLastTab = false;
+	isEditMode = false;
 	employee: Employee;
 	employeeId: number;
 	allTabs: TabItem[];
@@ -42,6 +43,8 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 				next: response => {
 					this.employee = new Employee(response);
 					this.form = Employee.getForm(this.employee);
+					this.form.disable();
+					this.isEditMode = false;
 				},
 				error: (err: any) => {
 					this.notify(err.message, this.NOTIFICATION_TYPES.ERROR);
@@ -108,5 +111,15 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 		}).add(() => {
 			this.isCreating = false;
 		});
+	}
+	
+	editForm(){
+		this.isEditMode = true;
+		this.form.enable();
+	}
+	
+	editCancel(){
+		this.isEditMode = false;
+		this.form.disable();
 	}
 }

@@ -1,3 +1,4 @@
 @if (roles.length > 0) {
-    <app-select-dropdown [options]="roles" [templateType]="entities.ROLE" (selectionChange)="onValueChange($event)"></app-select-dropdown>
+    <app-select-dropdown [options]="roles" [templateType]="entities.ROLE" (selectionChange)="onValueChange($event)"
+    [isEditMode]="isEditMode()"></app-select-dropdown>
 }

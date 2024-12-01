@@ -1,6 +1,40 @@
 <form (ngSubmit)="create()" [formGroup]="form" *ngIf="form">
     <app-tabs [tabsArr]="profileTabs" [showIcon]="true" (currentTab)="setCurrentTab($event)">
         <div horizontal-content id="default-styled-tab-content" class="rounded-lg bg-gray-50 dark:bg-gray-800">
+            <div class="flex justify-end">
+                @if (isEditMode){
+                    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" (saveBtnClick)="editCancel()"
+                                  id="cancel-button" [class]="'rounded-full'" type="button"
+                                  saveText="Cancel" savingText="Canceling..."><i class="bi bi-x-circle ms-2"></i></app-save-btn>
+                    <div class="flex justify-end ms-2">
+                        @if (this.tabsComponent?.tabs?._activeTab?.id !== '1'){
+                            <button (click)="previousTab()" type="button"
+                                    [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
+                                    class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
+                                <i class="bi bi-arrow-left"></i>
+                                <span class="ms-2">Previous</span>
+                            </button>
+                        }
+                        <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
+                            <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
+                                          id="add-employee-button" [class]="'rounded-full'"
+                                          saveText="Create" savingText="Creating..."></app-save-btn>
+                        </ng-template>
+                        <ng-template #isNotLastTab>
+                            <button (click)="nextTab('next')" type="button"
+                                    [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
+                                    class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
+                                <span class="me-2">Next</span>
+                                <i class="bi bi-arrow-right text-xl"></i>
+                            </button>
+                        </ng-template>
+                    </div>
+                } @else {
+                    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" type="button"
+                                  id="edit-button" [class]="'rounded-full'" (saveBtnClick)="editForm()"
+                                  saveText="Edit" savingText="Editing..."><i class="bi bi-pencil-square ms-2 font-bold"></i></app-save-btn>
+                }
+            </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel"
                  aria-labelledby="profile-tab">
                 <app-user-notification-channel [form]="form" label="Send Activation Link">
@@ -8,7 +42,7 @@
                 <div class="grid md:gap-6 mb-6 md:grid-cols-4">
                     <app-control-container
                             errorMsg="Customer type is required field" label="Customer Type" name="role_id">
-                        <app-user-role-dropdown [formControl]="$any(form).controls['role_id']"
+                        <app-user-role-dropdown [formControl]="$any(form).controls['role_id']" [isEditMode]="isEditMode"
                                                 id="customer-detail-user-type"></app-user-role-dropdown>
                     </app-control-container>
 
@@ -132,7 +166,7 @@
                 <div class="grid md:gap-6 mb-6 md:grid-cols-3">
                     <app-control-container errorMsg="Reporting Manager is a required field" label="Reporting Manager"
                                            name="reporting_manager_id">
-                        <app-manager-dropdown formControlName="reporting_manager_id"></app-manager-dropdown>
+                        <app-manager-dropdown formControlName="reporting_manager_id" [isEditMode]="isEditMode"></app-manager-dropdown>
                     </app-control-container>
                     <app-control-container errorMsg="Department is a required field" label="Department"
                                            name="department_id">
@@ -202,37 +236,6 @@
                     another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
                     control
                     the content visibility and styling.</p>
-            </div>
-            <div class="flex justify-end p-3">
-                @if (this.tabsComponent?.tabs?._activeTab?.id !== '1'){
-                    <button (click)="previousTab()" type="button"
-                            [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
-                            class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M13 5H1m0 0l4 4m-4-4l4-4"/>
-                        </svg>
-                        <span class="ms-2">Previous</span>
-                    </button>
-                }
-                <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
-                    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
-                                  id="add-employee-button" [class]="'rounded-full'"
-                                  saveText="Create" savingText="Creating..."></app-save-btn>
-                </ng-template>
-                <ng-template #isNotLastTab>
-                    <button (click)="nextTab('next')" type="button"
-                            [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
-                            class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
-                        <span class="me-2">Next</span>
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </button>
-                </ng-template>
             </div>
         </div>
     </app-tabs>

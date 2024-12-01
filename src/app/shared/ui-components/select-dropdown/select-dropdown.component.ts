@@ -8,6 +8,7 @@ import { ENTITIES } from "../../constants/constant";
 export class SelectDropdownComponent implements OnInit {
 	protected readonly ENTITIES = ENTITIES;
 	@Input() options: any[] = [];
+	isEditMode = input(false);
 	placeholder = input('Search...');
 	templateType = input('');
 	defaultSelection = input();
@@ -34,5 +35,9 @@ export class SelectDropdownComponent implements OnInit {
 	
 	hideDropdown() {
 		setTimeout(() => this.showDropdown = false, 100); // Delay to allow item selection
+	}
+	
+	openDropdown(){
+		this.showDropdown = this.isEditMode();
 	}
 }
