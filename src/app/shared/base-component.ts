@@ -2,7 +2,7 @@ import { Injector } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActiveToast, ToastrService } from "ngx-toastr";
-import {PERMISSION_LIST, TABLE_COLUMN_TEMPLATE} from "./constants/constant";
+import { ENTITIES, PERMISSION_LIST, TABLE_COLUMN_TEMPLATE } from "./constants/constant";
 import { AuthenticationService } from "./services/authentication.service";
 import { LoaderService } from "./services/loader.service";
 import {Employee} from "./models/employee";
@@ -24,6 +24,7 @@ export abstract class BaseComponent {
 	lightThemeBtnClasses = ' bg-pink-500 hover:bg-pink-600 hover:text-white text-white ';
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
 	PERMISSION_LIST = PERMISSION_LIST;
+	entities = ENTITIES;
 
 	NOTIFICATION_TYPES = {
 		INFO: "info",
@@ -112,6 +113,11 @@ export abstract class BaseComponent {
 		if (closeButton) {
 			closeButton.click();
 		}
+	}
+	
+	showErrorInNotifier(err: ErrorEvent){
+		debugger;
+		this.notify(err?.error?.message, this.NOTIFICATION_TYPES.ERROR);
 	}
 
 	// setLoader(value:boolean) {
