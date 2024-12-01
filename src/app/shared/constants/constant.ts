@@ -19,6 +19,11 @@ export enum GENDER_LIST {
     OTHER = "Other",
 }
 
+export const USER_STATUS_LIST = [
+    'Active',
+    'In Active'
+];
+
 export enum ATTENDANCE_SCHEME_LIST {
     GENERAL_SCHEME = "General Scheme",
 }
@@ -45,6 +50,11 @@ export enum EMPLOYEE_ACTION_BUTTON_NAME_LIST {
     VIEW_EMPLOYEE = "View Employee",
     CHANGE_STATUS = "Change Status",
     FORGET_USER = "Forget User",
+}
+
+export enum ENTITIES {
+    EMPLOYEE = "employee",
+    ROLE = "role",
 }
 
 export const COMPONENT_SIZES = {
