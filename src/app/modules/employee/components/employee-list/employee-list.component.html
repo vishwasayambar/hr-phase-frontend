@@ -111,3 +111,6 @@
     </table>
     <app-pagination (changePage)="changePage($event)"/>
 </div>
+@if (isVisibleStatusChangePopup) {
+    <app-update-users-status (closeStatusChangePopup)="closeStatusChangePopup()" [user]="currentSelectedEmployee"></app-update-users-status>
+}

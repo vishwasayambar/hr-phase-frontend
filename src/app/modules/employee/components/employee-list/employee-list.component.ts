@@ -13,6 +13,8 @@ export class EmployeeListComponent extends BaseComponent implements OnInit  {
 	protected readonly COMPONENT_SIZES = COMPONENT_SIZES;
 	currentPage = 1;
 	actionButtonArray : { name: string; icon: string }[];
+	isVisibleStatusChangePopup = false;
+	currentSelectedEmployee: Employee;
 	
 	columns: EmployeeColumn[] = [
 		{
@@ -110,6 +112,9 @@ export class EmployeeListComponent extends BaseComponent implements OnInit  {
 			this.router.navigate([`/employees/${employee.id}/profiles`])
 		} else if (event === EMPLOYEE_ACTION_BUTTON_NAME_LIST.FORGET_USER) {
 			this.forgetEmployeeInfo(employee);
+		} else if (event === EMPLOYEE_ACTION_BUTTON_NAME_LIST.CHANGE_STATUS) {
+			this.currentSelectedEmployee = employee;
+			this.isVisibleStatusChangePopup = true;
 		}
 	}
 	
@@ -122,5 +127,10 @@ export class EmployeeListComponent extends BaseComponent implements OnInit  {
 				this.notify("Error in Deleted Employee!", this.NOTIFICATION_TYPES.ERROR);
 			},
 		})
+	}
+	
+	closeStatusChangePopup() {
+		this.isVisibleStatusChangePopup = false;
+		this.fetchUsers();
 	}
 }
