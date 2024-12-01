@@ -42,7 +42,6 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 				next: response => {
 					this.employee = new Employee(response);
 					this.form = Employee.getForm(this.employee);
-					debugger;
 				},
 				error: (err: any) => {
 					this.notify(err.message, this.NOTIFICATION_TYPES.ERROR);
