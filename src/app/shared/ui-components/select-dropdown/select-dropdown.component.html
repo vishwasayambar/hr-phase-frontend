@@ -11,12 +11,23 @@
     @if (showDropdown) {
         <div
                 class="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto z-10 dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
-
-            @for (option of options; track option) {
-                <div (mousedown)="onValueChange(option)"
-                     class="px-4 py-2 cursor-pointer hover:bg-pink-500 hover:text-white dark:text-white">
-                    {{ option.display_name }}
-                </div>
+            @switch (templateType()) {
+                @case (ENTITIES.ROLE) {
+                    @for (option of options; track option) {
+                        <div (mousedown)="onValueChange(option)"
+                             class="px-4 py-2 cursor-pointer hover:bg-pink-500 hover:text-white dark:text-white">
+                            {{ option.display_name }}
+                        </div>
+                    }
+                }
+                @default {
+                    @for (option of options; track option) {
+                        <div (mousedown)="onValueChange(option)"
+                             class="px-4 py-2 cursor-pointer hover:bg-pink-500 hover:text-white dark:text-white">
+                            {{ option }}
+                        </div>
+                    }
+                }
             }
         </div>
     }
