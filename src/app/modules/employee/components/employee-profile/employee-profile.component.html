@@ -1,3 +1,21 @@
 <div>
+    <app-user-profile [userId]="userId" [user]="user"/>
+</div>
+<div class="profile-tabs my-1">
+    <ul class="hidden text-sm font-medium text-center text-gray-500 shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+        @for (tab of employeeProfileTabs; track tab.id; let i = $index) {
+            {{ employeeProfileTabs | async }}
+            <li class="w-full focus-within:z-10">
+                <a [routerLink]="tab.link"
+                   class="inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 dark:border-gray-700 active dark:bg-gray-700 dark:text-white"
+                   [ngClass]="{'rounded-s-md' : $first, 'rounded-e-md' : $last, 'border border-red-500 text-pink-500 dark:border dark:border-white': currentTabId() === i}"
+                   aria-current="page">
+                    {{ tab.name }}
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<div class="mt-2 bg-white dark:bg-gray-800">
     <router-outlet/>
 </div>
