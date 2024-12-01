@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { EmployeeAddComponent } from "./components/employee-add/employee-add.component";
 import { EmployeeListComponent } from "./components/employee-list/employee-list.component";
 import { EmployeeComponent } from "./employee.component";
+import { EmployeeProfileComponent } from "./components/employee-profile/employee-profile.component";
 
 const routes: Routes = [
 	{
@@ -19,6 +20,19 @@ const routes: Routes = [
 				path: "add",
 				component: EmployeeAddComponent,
 				title: "Add New Employee",
+			},
+			{
+				path: ":employee_id",
+				component: EmployeeProfileComponent,
+				data: { employee_id: null },
+				title: "BytePhase Employees Profile List",
+				children: [
+					{
+						path: "profiles",
+						component: EmployeeAddComponent,
+						title: "Employee Profile",
+					}
+				]
 			},
 			{
 				path: "",
