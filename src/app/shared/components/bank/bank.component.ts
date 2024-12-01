@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from "@angular/core";
+import { Component, Injector, input, Input, OnInit } from "@angular/core";
 import { FormArray, FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormGroup } from "@angular/forms";
 import { BaseComponent } from "../../base-component";
 import { Bank } from "../../models/bank";
@@ -19,6 +19,7 @@ import {NgClass} from "@angular/common";
 export class BankComponent extends BaseComponent implements OnInit {
 	@Input() form: UntypedFormGroup;
 	@Input() id = "bank";
+	isEditMode = input(true)
 	stateList: any = [];
 	cityList: any = [];
 

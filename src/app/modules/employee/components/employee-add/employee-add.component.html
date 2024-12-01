@@ -10,7 +10,7 @@
                         @if (this.tabsComponent?.tabs?._activeTab?.id !== '1'){
                             <button (click)="previousTab()" type="button"
                                     [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
-                                    class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
+                                    class="text-white focus:outline-none align-baseline font-medium dark:hover:text-white rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:focus:ring-white dark:focus:ring-2">
                                 <i class="bi bi-arrow-left"></i>
                                 <span class="ms-2">Previous</span>
                             </button>
@@ -18,12 +18,12 @@
                         <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
                             <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
                                           id="add-employee-button" [class]="'rounded-full'"
-                                          saveText="Create" savingText="Creating..."></app-save-btn>
+                                          saveText="Create" savingText="Creating..."><i class="bi bi-check2-circle ms-2"></i></app-save-btn>
                         </ng-template>
                         <ng-template #isNotLastTab>
                             <button (click)="nextTab('next')" type="button"
                                     [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
-                                    class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
+                                    class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-white dark:focus:ring-white dark:focus:ring-2">
                                 <span class="me-2">Next</span>
                                 <i class="bi bi-arrow-right text-xl"></i>
                             </button>
@@ -158,7 +158,7 @@
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-address" role="tabpanel"
                  aria-labelledby="dashboard-tab">
                 <div class="addressArray">
-                    <app-address *ngIf="form" [form]="form"></app-address>
+                    <app-address *ngIf="form" [form]="form" [isEditMode]="isEditMode"></app-address>
                 </div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-employee-position" role="tabpanel"
@@ -225,7 +225,7 @@
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-bank" role="tabpanel"
                  aria-labelledby="settings-tab">
                 <div class="addressArray">
-                    <app-bank *ngIf="form" [form]="form"></app-bank>
+                    <app-bank *ngIf="form" [form]="form" [isEditMode]="isEditMode"></app-bank>
                 </div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-educational" role="tabpanel"
