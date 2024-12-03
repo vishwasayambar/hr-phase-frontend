@@ -23,6 +23,7 @@ import { DepartmentDropdownComponent } from './components/department-dropdown/de
 import { SelectDropdownComponent } from './ui-components/select-dropdown/select-dropdown.component';
 import { CustomDropdownComponent } from './ui-components/custom-dropdown/custom-dropdown.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { SaveCancelBtnComponent } from './components/save-cancel-btn/save-cancel-btn.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	SaveBtnComponent,
@@ -35,6 +36,7 @@ const COMMON_COMP_LIST: any[] | Type<any> = [
 	UserRoleDropdownComponent,
 	CustomDropdownComponent,
 	UserProfileComponent,
+	SaveCancelBtnComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
