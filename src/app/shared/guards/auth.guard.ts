@@ -6,7 +6,6 @@ import { StorageService } from "../services/storage.service";
 
 export const AuthGuard: CanActivateFn = (route, state) => {
     const url: string = state.url;
-  console.log(url);
       const authService = inject(AuthenticationService);
       const storageService =  inject(StorageService);
       const router =  inject(Router);

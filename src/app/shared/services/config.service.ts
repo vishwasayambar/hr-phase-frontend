@@ -24,7 +24,6 @@ export class ConfigService {
 
 	load(): Promise<any> {
 		return new Promise(resolve => {
-			console.log(window.location.href.toLocaleLowerCase().includes("auth"));
 			if (
 				window.location.href.toLocaleLowerCase().includes("signup") ||
 				window.location.href.toLocaleLowerCase().includes("login") ||

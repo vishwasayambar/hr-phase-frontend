@@ -26,7 +26,6 @@ export class TabsComponent extends BaseComponent implements OnInit, AfterViewIni
 		activeClasses: "text-white dark:text-white dark:hover:text-white border-blue-600 dark:border-white dark:bg-pink-700",
 		inactiveClasses: "text-white hover:text-blue-300 dark:text-gray-200 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 dark:hover:border-gray-300",
 		onShow: (res) => {
-			console.log(res);
 			this.selectedTabId = res._activeTab.id;
 			this.currentTab.emit(this.selectedTabId);
 		},

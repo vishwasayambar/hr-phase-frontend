@@ -91,7 +91,6 @@ export abstract class BaseComponent {
 	}
 
 	toggleSidebar(){
-		console.log("testing", this.isSidebarCollapsed);
 		this.isSidebarCollapsed = !this.isSidebarCollapsed;
 	}
 

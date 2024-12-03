@@ -96,7 +96,6 @@ export class UserRoleAndPermissionComponent extends BaseComponent implements OnI
 					
 					if (hasPermission) {
 						this.selectedPermissions.push(updatedPermission);
-						console.log(this.selectedPermissions);
 					}
 					
 					return updatedPermission;
@@ -113,7 +112,6 @@ export class UserRoleAndPermissionComponent extends BaseComponent implements OnI
 	onPermissionChange(permission: any, event: any) {
 		if (event.target.checked) {
 			// If permission is checked and not already present, add it to the selected permissions
-			console.log("####", this.isPermissionPresent(permission.name))
 			if (this.isPermissionPresent(permission.name) === false) {
 				this.selectedPermissions.push(permission);
 			}

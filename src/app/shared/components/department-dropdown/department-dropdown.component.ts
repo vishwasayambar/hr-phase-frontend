@@ -64,7 +64,6 @@ export class DepartmentDropdownComponent implements OnInit {
 	private fetchDepartments() {
 		this.service.getListByQuery({}).subscribe({
 			next: res => {
-				console.log('Department List', res);
 				this.departmentList = res.data;
 			},
 			error: err => {
