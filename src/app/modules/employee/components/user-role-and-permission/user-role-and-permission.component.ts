@@ -1,46 +1,36 @@
-import {Component, Injector, OnInit} from '@angular/core';
-import {MODULE_WISE_PERMISSION_TABS} from "../../../../shared/constants/constant";
-import {BaseComponent} from "../../../../shared/base-component";
-import {Role} from "../../../../shared/models/role";
-import {RoleService} from "../../../../shared/services/role.service";
-import {PermissionService} from "../../../../shared/services/permission.service";
-import {forkJoin} from "rxjs";
+import { Component, Injector, OnInit } from '@angular/core';
+import { BaseComponent } from "../../../../shared/base-component";
+import { RoleService } from "../../../../shared/services/role.service";
+import { PermissionService } from "../../../../shared/services/permission.service";
+import { forkJoin } from "rxjs";
 
 @Component({
 	selector: 'app-user-role-and-permission',
 	templateUrl: './user-role-and-permission.component.html',
 })
 export class UserRoleAndPermissionComponent extends BaseComponent implements OnInit {
-	moduleWisePermissionTabs = Object.values(MODULE_WISE_PERMISSION_TABS);
-	currentTab: string;
 	selectedModuleName: string;
 	selectedModulePermission: any[] = [];
-	roles: Role[] = [];
-	roleWisePermissionArray: any[] = [];
 	allPermissions: any[] = [];
-	groupedPermissions: any[] = [];
 	selectedPermissions: any[] = [];
-	value: number;
 	isSavingPermissions = false;
-	permissionId: number;
-	modules: any = []
+	userPermissionNamesArray: any = []
+	currentUserId: number;
+	filteredPermissionOfUser: { permissions: any; moduleName: any }[]
+	isEditMode = false;
 	
 	constructor(injector: Injector, private service: RoleService, private permissionService: PermissionService) {
 		super(injector);
+		this.currentUserId = +this.activatedRouter.parent.snapshot.params?.['employee_id'];
 	}
 	
 	ngOnInit() {
 		forkJoin({
-			roles: this.service.getRoles(),
 			permissions: this.permissionService.getAll(),
 		}).subscribe({
 			next: (res) => {
-				this.roles = res.roles;
-				this.value = res.roles[0]?.id; // Use optional chaining to avoid errors if roles array is empty
 				this.allPermissions = res.permissions;
-				if (this.value) {
-					this.onValueChange(this.value);
-				}
+				this.getUserPermissionAndMapWithAllPermission();
 			},
 			error: (err) => {
 				console.error('Error loading roles or permissions', err);
@@ -49,30 +39,34 @@ export class UserRoleAndPermissionComponent extends BaseComponent implements OnI
 	}
 	
 	savePermission() {
-		if (this.value) {
+		if (this.currentUserId) {
 			this.isSavingPermissions = true
-			this.permissionService.assignPermissionsToRole(this.value, this.selectedPermissions).subscribe({
+			this.permissionService.updateUserDirectPermission(this.currentUserId, {
+				selectedPermission: this.selectedPermissions,
+			}).subscribe({
 				next: (res) => {
-					console.log(res)
+					this.getUserPermissionAndMapWithAllPermission();
+					this.selectedModuleName = this.filteredPermissionOfUser[0].moduleName;
+					this.notify('User Permission Updated Successfully!');
 				},
 				error: (err) => {
-					console.log(err)
+					this.showErrorInNotifier(err);
+					console.log(err);
 				},
 			}).add(() => {
 				this.isSavingPermissions = false
+				this.isEditMode = false;
 			})
 		}
 	}
 	
-	onValueChange(value: number) {
-		this.value = value;
-		console.log(value);
-		
-		this.permissionService.getByRoleId(value).subscribe({
+	getUserPermissionAndMapWithAllPermission() {
+		this.permissionService.getByUserId(this.currentUserId).subscribe({
 			next: res => {
-				this.roleWisePermissionArray = res;
-				this.groupPermissions();
-				console.log(this.roleWisePermissionArray, "Permission Array");
+				this.userPermissionNamesArray = res;
+				this.filteredPermissionOfUser = this.mapUserPermissionWithAllPermission(res);
+				this.selectedModulePermission = this.filteredPermissionOfUser[0]?.permissions;
+				this.selectedModuleName = this.filteredPermissionOfUser[0].moduleName;
 			},
 			error: err => {
 				console.log(err)
@@ -80,34 +74,62 @@ export class UserRoleAndPermissionComponent extends BaseComponent implements OnI
 		})
 	}
 	
-	groupPermissions() {
-		this.groupedPermissions = [];
-		for (let key in this.roleWisePermissionArray) {
-			if (this.roleWisePermissionArray.hasOwnProperty(key)) {
-				this.groupedPermissions.push({
-					moduleName: key,
-					permissions: this.roleWisePermissionArray[key]
-				});
-				this.selectedModulePermission = this.roleWisePermissionArray[this.groupedPermissions[0]['moduleName']];
-			}
-		}
+	mapUserPermissionWithAllPermission(userPermissions: any) {
+		return this.allPermissions.map(module => {
+			const moduleName = module.name;
+			
+			// Get permissions for the current module from the role-wise array
+			const moduleUserPermissions = userPermissions[moduleName] || [];
+			return {
+				moduleName: moduleName,
+				permissions: module.items.map((permission: { name: any; display_name: any; }) => {
+					// Check if the permission is included in the moduleRolePermissions
+					const hasPermission = moduleUserPermissions.some((userPermission: {
+						name: any;
+					}) => userPermission.name === permission.name);
+					
+					const updatedPermission = {
+						name: permission.name,
+						display_name: permission.display_name,
+						hasPermission: hasPermission,
+					};
+					
+					if (hasPermission) {
+						this.selectedPermissions.push(updatedPermission);
+						console.log(this.selectedPermissions);
+					}
+					
+					return updatedPermission;
+				}),
+			};
+		});
 	}
 	
 	setModulePermissions(moduleName: any) {
 		this.selectedModuleName = moduleName;
-		this.selectedModulePermission = this.roleWisePermissionArray[moduleName]
-		console.log(this.selectedModulePermission);
+		this.selectedModulePermission = this.filteredPermissionOfUser.find(res => res.moduleName === moduleName)?.permissions;
 	}
 	
 	onPermissionChange(permission: any, event: any) {
-		debugger
 		if (event.target.checked) {
-			this.selectedPermissions.push(permission);
-		} else {
-			const index = this.selectedPermissions.findIndex(p => p.id === permission.id);
-			if (index > -1) {
-				this.selectedPermissions.splice(index, 1);
+			// If permission is checked and not already present, add it to the selected permissions
+			console.log("####", this.isPermissionPresent(permission.name))
+			if (this.isPermissionPresent(permission.name) === false) {
+				this.selectedPermissions.push(permission);
 			}
+			
+		} else {
+			// If permission is unchecked, remove it from the selected permissions
+			this.selectedPermissions = this.selectedPermissions.filter(
+				selectedPermission => selectedPermission.name !== permission.name
+			);
 		}
+	}
+	
+	isPermissionPresent(permissionName: string): boolean {
+		// If the module exists, check its permissions for the given permission name
+		return this.selectedPermissions.some((permission: {
+			name: string;
+		}) => permission.name === permissionName) || false;
 	}
 }

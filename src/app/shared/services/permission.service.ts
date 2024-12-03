@@ -26,9 +26,9 @@ export class PermissionService extends BaseService<Permission, number> {
     getByUserId(userId: number): Observable<Array<Permission>> {
         return this.api.get(this.endpoint + `/getByUserId/${userId}`);
     }
-
-    saveUserPermissions(userId: number, permissions: {}): Observable<Array<Permission>> {
-        return this.api.post(this.endpoint + `/${userId}/save`, permissions);
+    
+    updateUserDirectPermission(userId: number, permissions: {}): Observable<Array<Permission>> {
+        return this.api.put(this.endpoint + `/updateUserDirectPermission/${userId}`, permissions);
     }
     
     assignPermissionsToRole(roleId: number, permissions: {}): Observable<Array<Permission>> {
