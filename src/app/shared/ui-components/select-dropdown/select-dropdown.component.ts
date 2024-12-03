@@ -8,7 +8,7 @@ import { ENTITIES } from "../../constants/constant";
 export class SelectDropdownComponent implements OnInit {
 	protected readonly ENTITIES = ENTITIES;
 	@Input() options: any[] = [];
-	isEditMode = input(false);
+	isEditMode = input(true);
 	placeholder = input('Search...');
 	templateType = input('');
 	defaultSelection = input();
