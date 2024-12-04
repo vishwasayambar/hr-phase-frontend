@@ -25,7 +25,7 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	gradeList = Object.values(GRADE_LIST);
 	isCreating = false;
 	isLastTab = false;
-	isEditMode = false;
+	isEditMode = true;
 	employee: Employee;
 	employeeId: number;
 	allTabs: TabItem[];
