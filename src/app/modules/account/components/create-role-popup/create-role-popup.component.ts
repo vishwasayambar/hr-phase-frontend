@@ -30,6 +30,7 @@ export class CreateRolePopupComponent extends BaseComponent implements OnInit {
 				next: res => {
 					this.role = new Role(res);
 					this.savePopup.emit(this.role);
+					this.notify("Role Created Successfully!");
 				},
 				error: err => {
 					console.log(err);
