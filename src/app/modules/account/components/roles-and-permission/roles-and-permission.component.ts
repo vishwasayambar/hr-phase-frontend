@@ -17,7 +17,6 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 	roleWisePermissionArray: any[] = [];
 	allPermissions: Permission[] = [];
 	selectedPermissions: any[] = [];
-	deSelectedPermissions: any[] = [];
 	currentRoleId: number;
 	currentRole: Role;
 	isSavingPermissions = false;
@@ -54,10 +53,10 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 			this.isSavingPermissions = true
 			this.permissionService.assignPermissionsToRole(this.currentRoleId, {
 				selectedPermission: this.selectedPermissions,
-				deSelectedPermission: this.deSelectedPermissions
 			}).subscribe({
 				next: (res) => {
 					this.onRoleChange(this.currentRole); // To fetch the updated permissions
+					this.notify("Permission Added for Role.")
 				},
 				error: (err) => {
 					console.log(err)
@@ -69,13 +68,13 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 	}
 	
 	
+	// Map permissions with roles to identify which permissions a role has
 	mapPermissionsWithRoles(allPermissions: any[], roleWisePermissions: any[]) {
 		return allPermissions.map(module => {
 			const moduleName = module.name;
 			
 			// Get permissions for the current module from the role-wise array
 			const moduleRolePermissions = roleWisePermissions[moduleName] || [];
-			
 			return {
 				moduleName: moduleName,
 				permissions: module.items.map((permission: { name: any; display_name: any; }) => {
@@ -84,11 +83,16 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 						name: any;
 					}) => rolePermission.name === permission.name);
 					
-					return {
-						name: permission.name,
-						display_name: permission.display_name,
-						hasPermission: hasPermission,
+					const updatedPermission = {
+						name: permission.name, // Permission name
+						display_name: permission.display_name, // Display name of the permission
+						hasPermission: hasPermission, // Whether the permission is assigned
 					};
+					// Add permission to selectedPermissions if the role already has it
+					if (hasPermission) {
+						this.selectedPermissions.push(updatedPermission);
+					}
+					return updatedPermission; // Return the updated permission object
 				}),
 			};
 		});
@@ -97,6 +101,8 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 	// When the role changes, update the permissions view like get roles selected and deselected permissions
 	onRoleChange(role: Role) {
 		this.currentRoleId = role.id;
+		this.currentRole = role;
+		this.selectedPermissions = [];
 		this.permissionService.getByRoleId(role.id).subscribe({
 			next: res => {
 				this.roleWisePermissionArray = res;
@@ -117,18 +123,35 @@ export class RolesAndPermissionComponent extends BaseComponent implements OnInit
 	
 	onPermissionChange(permission: any, event: any) {
 		if (event.target.checked) {
-			this.selectedPermissions.push(permission);
+			// If permission is checked and not already present, add it to the selected permissions
+			if (this.isPermissionPresent(permission.name) === false) {
+				permission.hasPermission = true;
+				this.selectedPermissions.push(permission);
+			}
 		} else {
-			this.deSelectedPermissions.push(permission);
+			// If permission is unchecked, remove it from the selected permissions
+			this.selectedPermissions = this.selectedPermissions.filter(
+				selectedPermission => selectedPermission.name !== permission.name
+			);
 		}
 	}
-	
-	roleCreated(role: Role) {
-		debugger;
-		this.roles = [role, ...this.roles]; // Combines new Role and creating a new reference
-		this.currentRole = role;
-		this.onRoleChange(role);
+
+// Check if a permission is already selected
+	isPermissionPresent(permissionName: string): boolean {
+		// Return true if the permission exists in the selected permissions array
+		return this.selectedPermissions.some((permission: { name: string; }) =>
+			permission.name === permissionName
+		) || false;
 	}
+
+
+// Handle actions when a new role is created
+	roleCreated(role: Role) {
+		this.roles = [role, ...this.roles]; // Add the new role to the roles list
+		this.currentRole = role; // Set the new role as the current role
+		this.onRoleChange(role); // Reload permissions for the new role
+	}
+	
 	
 	filterChange(event: any) {
 		//TODO:: This is for if we have add something on search in Input of Role select box
