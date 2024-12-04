@@ -113,6 +113,7 @@ export class UserRoleAndPermissionComponent extends BaseComponent implements OnI
 		if (event.target.checked) {
 			// If permission is checked and not already present, add it to the selected permissions
 			if (this.isPermissionPresent(permission.name) === false) {
+				permission.hasPermission = true;
 				this.selectedPermissions.push(permission);
 			}
 			
