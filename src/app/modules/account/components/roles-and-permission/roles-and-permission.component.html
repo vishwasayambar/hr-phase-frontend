@@ -10,12 +10,12 @@
     <app-create-role-popup (savePopup)="roleCreated($event)"></app-create-role-popup>
 </div>
 <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
-<div class="flex">
-    <div class="flex flex-col text-sm font-medium rounded-lg">
+<div class="flex flex-wrap">
+    <div class="flex flex-col text-sm font-medium rounded-lg" [ngClass]="isMobileDevice ? 'w-full' : ''">
         @for (module of filteredPermissionOfRole; track module.moduleName) {
             <button aria-current="true" type="button" (click)="getModulePermissions(module.moduleName)"
                     [ngClass]=" darkThemeBtnClasses + lightThemeBtnClasses + (selectedModuleName === module.moduleName ? ' bg-pink-600 dark:bg-pink-600' : '')"
-                    class="px-4 py-2 my-0.5 font-medium text-left rtl:text-right border-b border-gray-200 rounded-lg cursor-pointer focus:outline-none dark:border-gray-600">
+                    class="px-4 py-2 my-0.5 text-center font-medium rtl:text-right border-b border-gray-200 rounded-lg cursor-pointer focus:outline-none dark:border-gray-600">
                 {{ module.moduleName }}
             </button>
         }
@@ -26,7 +26,7 @@
                           id="save-permission-button" (saveBtnClick)="syncRolePermission()"
                           saveText="Save" savingText="Saving..."></app-save-btn>
         </div>
-        <div class="permissions flex align-middle justify-around">
+        <div class="permissions flex align-middle" [ngClass]="isMobileDevice ? 'flex-wrap gap-4' : 'justify-around'">
             @for (permission of selectedModulePermission; track permission.name) {
                 <div>
                     <input [id]="permission.name" (change)="onPermissionChange(permission, $event)"
