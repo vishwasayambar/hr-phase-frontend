@@ -24,8 +24,10 @@ import { SelectDropdownComponent } from './ui-components/select-dropdown/select-
 import { CustomDropdownComponent } from './ui-components/custom-dropdown/custom-dropdown.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SaveCancelBtnComponent } from './components/save-cancel-btn/save-cancel-btn.component';
+import { DataGridComponent } from './components/data-grid/data-grid.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
+	DataGridComponent,
 	SaveBtnComponent,
 	UserBadgeComponent,
 	UserPopoverComponent,
