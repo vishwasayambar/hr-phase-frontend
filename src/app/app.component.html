@@ -6,16 +6,19 @@
 </div>
 }
 -->
-<div class="flex w-screen bg-gray-200 dark:bg-gray-700 ">
-	@if (!isMobileDevice && isLoggedIn) {
-		<app-sidebar></app-sidebar>
-	}
-	<div class="grow dark:text-white">
-		@if (isLoggedIn) {
-			<app-navbar></app-navbar>
-		}
-		<div >
-			<router-outlet/>
-		</div>
-	</div>
+<div class="h-screen">
+    <div class="flex w-screen bg-gray-200 dark:bg-gray-700">
+        @if (!isMobileDevice && isLoggedIn) {
+            <app-sidebar></app-sidebar>
+        }
+        <div class="grow dark:text-white">
+            @if (isLoggedIn) {
+                <app-navbar></app-navbar>
+            }
+            <div>
+                <router-outlet/>
+            </div>
+        </div>
+    </div>
+
 </div>
