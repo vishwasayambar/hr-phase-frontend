@@ -1,89 +1,126 @@
-<!--TODO:: In All Project always use these type of height is remain constant to screen even when screen size changes-->
-<div class="w-full h-[calc(100vh-7rem)]">
-    <div class="relative overflow-x-auto h-[calc(100vh-6rem)]">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
-            <tr>
-                @if (showMultiSelection()) {
-                    <th class="px-4 py-1">
-                        <div class="flex items-center">
-                            <input id="checkbox-all-search" type="checkbox"
-                                   class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        </div>
-                    </th>
+<ng-template [ngIf]="isTrashedList()" [ngIfElse]="isNotTrashedList">
+    <app-trashed-data-grid [columns]="columns" [service]="service"
+                           [entity]="entity()" [showMultiSelection]="true"
+                           [isVisibleDeleteAction]="true" [isVisibleRestoreAction]="true"/>
+</ng-template>
+<ng-template #isNotTrashedList>
+    <div class="flex justify-between items-center mx-3">
+        <div class="text-2xl font-medium">{{ entity() | titlecase }}</div>
+        <div class="flex gap-2">
+            @if (isVisibleTrashedList()) {
+                <button type="button"
+                        [ngClass]=" lightThemeBtnClasses + darkThemeBtnClasses "
+                        (click)="isTrashedList.set(true)"
+                        class="px-3 py-2 text-xs font-medium text-center inline-flex items-center rounded-lg">
+                    <span>Trash</span>
+                </button>
+            }
+            @if (isVisibleCreateAction()) {
+                @if (entity() === entities.DEPARTMENT) {
+                    <button type="button"
+                            [ngClass]=" lightThemeBtnClasses + darkThemeBtnClasses "
+                            (click)="isVisibleDepartmentPopup.set(true)"
+                            class="px-3 py-2 text-xs font-medium text-center inline-flex items-center rounded-lg">
+                        <span>Create {{ entity() | titlecase }}</span><i
+                            class="bi bi-plus-lg ms-2 text-xl leading-none"></i>
+                    </button>
                 }
-                @for (column of columns; track column.fieldName) {
-                    <th class="px-6 py-3">
-                        {{ column.label }}
-                    </th>
-                }
-            </tr>
-            </thead>
-            <tbody class="">
-            <ng-template #noData>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                    <td [colSpan]="columns?.length + 1" class=" h-[calc(100vh-10rem)]">
-                        No departments available, Click Plus Button to Create.
-                    </td>
+            }
+        </div>
+    </div>
+    <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
+    <!--TODO:: In All Project always use these type of height is remain constant to screen even when screen size changes-->
+    <div class="w-full h-[calc(100vh-9rem)]">
+        <div class="relative overflow-x-auto h-[calc(100vh-9rem)]">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
+                <tr>
+                    @if (showMultiSelection()) {
+                        <th class="px-4 py-1">
+                            <div class="flex items-center">
+                                <input id="checkbox-all-search" type="checkbox"
+                                       class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                        </th>
+                    }
+                    @for (column of columns; track column.fieldName) {
+                        <th class="px-6 py-3">
+                            {{ column.label }}
+                        </th>
+                    }
                 </tr>
-            </ng-template>
-            <ng-template [ngIf]="dataList?.length > 1" [ngIfElse]="noData" class="h-[calc(100vh-10rem)]">
-                @for (data of dataList; track data.id) {
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        @if (showMultiSelection()) {
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input type="checkbox"
-                                           class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                </div>
-                            </td>
-                        }
-                        @for (column of columns; track column.fieldName) {
-                            @switch (column.template) {
-                                @case ('nameTemplate') {
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ data[column.fieldName] }}
-                                    </th>
-                                }
-                                @case ('dateTemplate') {
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ data[column.fieldName] | date: 'medium' }}
-                                    </th>
-                                }
-                                @case ('actionTemplate') {
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        @if (isVisibleEditAction()) {
-                                            <button type="button"
-                                                    [ngClass]=" lightThemeBtnClasses + darkThemeBtnClasses "
-                                                    (click)="edit(data)"
-                                                    class="me-2 px-2 py-2 text-xs font-medium text-center inline-flex items-center rounded-lg focus:outline-none">
-                                                <i class="bi bi-pencil-fill"></i>
-                                            </button>
-                                        }
-                                        @if (isVisibleDeleteAction()) {
-                                            <button type="button"
-                                                    [ngClass]=" lightThemeBtnClasses + darkThemeBtnClasses "
-                                                    (click)="delete(data)"
-                                                    class="px-2 py-2 text-xs font-medium text-center inline-flex items-center rounded-lg">
-                                                <i class="bi bi-trash3-fill"></i>
-                                            </button>
-                                        }
-                                    </th>
-                                }
-                                @default {
-                                    <td class="px-6 py-4">
-                                        {{ data[column.fieldName] }}
-                                    </td>
+                </thead>
+                <tbody class="">
+                <ng-template #noData>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                        <td [colSpan]="columns?.length + 1" class=" h-[calc(100vh-10rem)]">
+                            No departments available, Click Plus Button to Create.
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template [ngIf]="dataList?.length > 1" [ngIfElse]="noData" class="h-[calc(100vh-10rem)]">
+                    @for (data of dataList; track data.id) {
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            @if (showMultiSelection()) {
+                                <td class="w-4 p-4">
+                                    <div class="flex items-center">
+                                        <input type="checkbox"
+                                               class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                </td>
+                            }
+                            @for (column of columns; track column.fieldName) {
+                                @switch (column.template) {
+                                    @case ('nameTemplate') {
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ data[column.fieldName] }}
+                                        </th>
+                                    }
+                                    @case ('dateTemplate') {
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ data[column.fieldName] | date: 'medium' }}
+                                        </th>
+                                    }
+                                    @case ('actionTemplate') {
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @if (isVisibleEditAction()) {
+                                                <button type="button"
+                                                        [ngClass]=" lightThemeBtnClasses + darkThemeBtnClasses "
+                                                        (click)="edit(data)"
+                                                        class="me-2 px-2 py-2 text-xs font-medium text-center inline-flex items-center rounded-lg focus:outline-none">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            }
+                                            @if (isVisibleDeleteAction()) {
+                                                <button type="button"
+                                                        [ngClass]=" lightThemeBtnClasses + darkThemeBtnClasses "
+                                                        (click)="delete(data)"
+                                                        class="px-2 py-2 text-xs font-medium text-center inline-flex items-center rounded-lg">
+                                                    <i class="bi bi-trash3-fill"></i>
+                                                </button>
+                                            }
+                                        </th>
+                                    }
+                                    @default {
+                                        <td class="px-6 py-4">
+                                            {{ data[column.fieldName] }}
+                                        </td>
+                                    }
                                 }
                             }
-                        }
-                    </tr>
-                }
-            </ng-template>
-            </tbody>
-        </table>
+                        </tr>
+                    }
+                </ng-template>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+</ng-template>
+
+@if (isVisibleDepartmentPopup()) {
+    <app-create-department-popup (savePopup)="closePopup()" (closePopup)="closePopup()"
+                                 [department]="selectedEntity"></app-create-department-popup>
+}
