@@ -3,7 +3,7 @@ import {BaseComponent} from "../../../../shared/base-component";
 import { COMPONENT_SIZES, EMPLOYEE_ACTION_BUTTON_NAME_LIST } from "../../../../shared/constants/constant";
 import {EmployeeService} from "../../../../shared/services/employee.service";
 import {Employee} from "../../../../shared/models/employee";
-import {EmployeeColumn} from "../../../../shared/interfaces/employee-column";
+import {Columns} from "../../../../shared/interfaces/columns";
 
 @Component({
 	selector: "app-employee-list",
@@ -16,7 +16,7 @@ export class EmployeeListComponent extends BaseComponent implements OnInit  {
 	isVisibleStatusChangePopup = false;
 	currentSelectedEmployee: Employee;
 	
-	columns: EmployeeColumn[] = [
+	columns: Columns[] = [
 		{
 			fieldName: "name",
 			label: "Name",
@@ -73,15 +73,8 @@ export class EmployeeListComponent extends BaseComponent implements OnInit  {
 	}
 	
 	private fetchUsers() {
-		this.service.getListByQuery({
-			page: this.currentPage,
-			paginate: "True",
-			order_by: 'date_of_birth',
-			order_by_direction: 'desc',
-			per_page: 20,
-		}).subscribe({
+		this.service.getListByQuery(this.paramsOfGetListByQuery(this.currentPage, 'id', 'desc')).subscribe({
 			next: res => {
-				// @ts-ignore
 				this.dataList = res.data;
 			},
 			error: (err) => {
