@@ -105,7 +105,17 @@ export abstract class BaseComponent {
 				}, 10);
 			});
 	}
-
+	
+	paramsOfGetListByQuery(currentPage: number, orderBy: string, orderByDirection: string) {
+		return {
+			page: currentPage,
+			paginate: "True",
+			order_by: orderBy,
+			order_by_direction: orderByDirection,
+			per_page: 20,
+		}
+	};
+	
 	// This method is to close FlowBite Modals as its methods not work therefore we are closing by DOM
 	closeModal(id: string){
 		const closeButton = document.getElementById(id);

@@ -20,11 +20,7 @@
                 [routerLink]="menu.link"    [ngClass]="{'bg-pink-600': menu.link === selectedMenuLink, 'bg-gray-400': menu.link !== selectedMenuLink}"
                (click)="selectMenu(menu.link)">
                 <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="none" viewBox="0 0 24 24"
-                         stroke-width={1.5} stroke="currentColor" class="size-6">
-                        <path stroke-Linecap="round" stroke-Linejoin="round"
-                              [attr.d]="menu.icon"/>
-                    </svg>
+                    <i [class]="menu.icon + ' text-xl me-1'"></i>
                 </span>
                 {{ menu.title }}
             </a>

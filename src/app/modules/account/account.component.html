@@ -1,5 +1,5 @@
-<app-tabs slot="vertical-content" [tabsArr]="accountSettingTabs" [isHorizontalTabs]="false" (currentTab)="setCurrentTab($event)">
-    <div vertical-content>
+<app-tabs slot="vertical-content" [tabsArr]="accountSettingTabs" [isHorizontalTabs]="false" [showIcon]="true" (currentTab)="setCurrentTab($event)">
+    <div vertical-content [ngClass]="isMobileDevice ? 'w-[23rem]' : ''">
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="business_setting" role="tabpanel"
              aria-labelledby="business_setting-tab">
             <div class="addressArray">
@@ -10,6 +10,12 @@
              aria-labelledby="roles_and_permission-tab">
             <div class="addressArray">
                 <app-roles-and-permission></app-roles-and-permission>
+            </div>
+        </div>
+        <div class="hidden p-1 rounded-lg bg-gray-50 dark:bg-gray-800" id="department-list" role="tabpanel"
+             aria-labelledby="department-list-tab">
+            <div class="departmentListArray">
+               <app-department-list/>
             </div>
         </div>
     </div>

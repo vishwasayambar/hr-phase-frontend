@@ -41,6 +41,7 @@ export class Employee {
 	last_login: Date;
 	created_at: Date;
 	updated_at: Date;
+	deleted_at: Date;
 	// attachments: Attachment;
 	payment_received: number;
 	payment_remaining: number;
