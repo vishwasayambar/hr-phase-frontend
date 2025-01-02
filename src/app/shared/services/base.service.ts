@@ -14,8 +14,14 @@ export interface EntityInterface<T, ID> {
 	getById(id: number): Observable<T>;
 
 	getListByQuery(params: object): Observable<{data:Array<T>}>;
+	
+	getTrashedListByQuery(params: object): Observable<{data:Array<T>}>;
 
 	delete(id: ID): Observable<any>;
+	
+	permanentDelete(id: ID): Observable<any>;
+	
+	restore(id: ID): Observable<any>;
 }
 
 export abstract class BaseService<T, ID> implements EntityInterface<T, ID> {
@@ -28,6 +34,10 @@ export abstract class BaseService<T, ID> implements EntityInterface<T, ID> {
 
 	getListByQuery(params = {}): Observable<{data:Array<T>}> {
 		return this.api.getListByQuery(this.base, params);
+	}
+	
+	getTrashedListByQuery(params = {}): Observable<{data:Array<T>}> {
+		return this.api.getTrashedListByQuery(`${this.base}/trashedListByQuery`, params);
 	}
 
 	create(t: T): Observable<T> {
@@ -44,5 +54,13 @@ export abstract class BaseService<T, ID> implements EntityInterface<T, ID> {
 
 	delete(id: ID): Observable<T> {
 		return this.api.delete<T>(`${this.base}/${id}`);
+	}
+	
+	permanentDelete(id: ID): Observable<any> {
+		return this.api.permanentDelete<T>(`${this.base}/permanentDelete/${id}`);
+	}
+	
+	restore(id: ID): Observable<any> {
+		return this.api.restore<T>(`${this.base}/restore/${id}`);
 	}
 }
