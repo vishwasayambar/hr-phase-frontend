@@ -5,6 +5,7 @@ export class Department {
 	name: string;
 	created_at: Date;
 	updated_at: Date;
+	deleted_at: Date;
 	
 	constructor(paramsObject: object) {
 		return Object.assign(this, paramsObject);
