@@ -53,6 +53,7 @@ export enum EMPLOYEE_ACTION_BUTTON_NAME_LIST {
 }
 
 export enum ENTITIES {
+    NAME = "name", // This is for those having id, name to access nameTemplate
     EMPLOYEE = "employee",
     ROLE = "role",
     DEPARTMENT = "department",

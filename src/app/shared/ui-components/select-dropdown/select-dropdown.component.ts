@@ -19,6 +19,8 @@ export class SelectDropdownComponent implements OnInit {
 	ngOnInit() {
 		if (this.templateType() === ENTITIES.ROLE) {
 			this.value = this.options[0].display_name;
+		}else if (this.templateType() === ENTITIES.NAME) {
+			this.value = this.options[0].name;
 		} else {
 			this.value = this.defaultSelection();
 		}
@@ -27,6 +29,8 @@ export class SelectDropdownComponent implements OnInit {
 	onValueChange(option: any) {
 		if (this.templateType() === ENTITIES.ROLE) {
 			this.value = option.display_name
+		}else if (this.templateType() === ENTITIES.NAME) {
+			this.value = option.name
 		} else {
 			this.value = option
 		}

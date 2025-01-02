@@ -20,6 +20,14 @@
                         </div>
                     }
                 }
+                @case (ENTITIES.NAME) {
+                    @for (option of options; track option) {
+                        <div (mousedown)="onValueChange(option)"
+                             class="px-4 py-2 cursor-pointer hover:bg-pink-500 hover:text-white dark:text-white">
+                            {{ option.name }}
+                        </div>
+                    }
+                }
                 @default {
                     @for (option of options; track option) {
                         <div (mousedown)="onValueChange(option)"

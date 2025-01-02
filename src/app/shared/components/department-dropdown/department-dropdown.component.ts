@@ -2,6 +2,7 @@ import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Department} from "../../models/Department";
 import {DepartmentService} from "../../services/department.service";
+import { ENTITIES, USER_STATUS_LIST } from "../../constants/constant";
 
 @Component({
 	selector: 'app-department-dropdown',
@@ -54,7 +55,7 @@ export class DepartmentDropdownComponent implements OnInit {
 		this.onTouched = fn;
 	}
 	
-	handleSelection(event: any) {
+	onDepartmentChange(event: any) {
 		this.value = event.id;
 		this.selectedDepartment = event;
 		this.onChange(event.id);
@@ -71,4 +72,7 @@ export class DepartmentDropdownComponent implements OnInit {
 			},
 		})
 	}
+	
+	protected readonly USER_STATUS_LIST = USER_STATUS_LIST;
+	protected readonly ENTITIES = ENTITIES;
 }
