@@ -26,6 +26,12 @@ export class DepartmentListComponent {
 		},
 		{
 			fieldName: "updated_at",
+			label: "Updated At",
+			template: "dateTemplate",
+			visible: true,
+		},
+		{
+			fieldName: "deleted_at",
 			label: "Deleted At",
 			template: "dateTemplate",
 			visible: true,

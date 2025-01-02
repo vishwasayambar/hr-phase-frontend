@@ -57,7 +57,7 @@ export class DataGridComponent extends BaseComponent implements OnInit {
 	delete(data: any) {
 		this.service.delete(data.id).subscribe({
 			next: res => {
-				this.notify(this.entity() + ' has been deleted Successfully!');
+				this.notify(this.entity() + ' has been moved to trashed!');
 				this.fetchData();
 				this.onDeleteClick.emit(res);
 			},
@@ -71,6 +71,12 @@ export class DataGridComponent extends BaseComponent implements OnInit {
 		if (this.entity() === this.entities.DEPARTMENT) {
 			this.isVisibleDepartmentPopup.set(false);
 		}
+		this.selectedEntity = null;
+		this.fetchData();
+	}
+	
+	returnToActiveRecords() {
+		this.isTrashedList.set(false)
 		this.selectedEntity = null;
 		this.fetchData();
 	}
