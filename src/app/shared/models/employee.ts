@@ -17,8 +17,12 @@ export class Employee {
 	father_name: string;
 	unique_identification_number: string;
 	tax_number: string;
+	joining_date: Date;
+	confirmation_date: Date;
+	joining_status: string;
+	notice_period: number;
+	referred_by_id: number;
 	probation_period: number;
-	date_of_joining: Date;
 	reporting_manager_id: number;
 	department_id: number;
 	grade: string;
@@ -67,11 +71,15 @@ export class Employee {
 			emergency_contact_number: [employee.emergency_contact_number || null],
 			father_name: [employee.father_name || null],
 			gender: [employee.gender || null],
+			joining_date: [employee.joining_date || null],
+			confirmation_date: [employee.confirmation_date || null],
+			joining_status: [employee.joining_status || null],
+			notice_period: [employee.notice_period || null],
+			referred_by_id: [employee.referred_by_id || null],
 			reporting_manager_id: [employee.reporting_manager_id || null],
 			department_id: [employee.department_id || null],
 			grade: [employee.grade || null],
 			attendance_scheme: [employee.attendance_scheme || null],
-			date_of_joining: [employee.date_of_joining || null],
 			probation_period: [employee.probation_period || null],
 			pf_number: [employee.pf_number || null],
 			uan_number: [employee.uan_number || null],

@@ -2,7 +2,12 @@ import { Injector } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActiveToast, ToastrService } from "ngx-toastr";
-import { ENTITIES, PERMISSION_LIST, TABLE_COLUMN_TEMPLATE } from "./constants/constant";
+import {
+	COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES,
+	ENTITIES,
+	PERMISSION_LIST,
+	TABLE_COLUMN_TEMPLATE
+} from "./constants/constant";
 import { AuthenticationService } from "./services/authentication.service";
 import { LoaderService } from "./services/loader.service";
 import {Employee} from "./models/employee";
@@ -20,6 +25,8 @@ export abstract class BaseComponent {
 	loadingService: LoaderService
 	notifyService: ToastrService;
 	currentUser: Employee = null;
+	entitites = ENTITIES;
+	commonFormControlTypes = COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES;
 	darkThemeBtnClasses = ' dark:bg-gray-500 dark:hover:bg-pink-700 ';
 	lightThemeBtnClasses = ' bg-pink-500 hover:bg-pink-600 hover:text-white text-white ';
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;

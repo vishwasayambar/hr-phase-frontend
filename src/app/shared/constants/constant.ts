@@ -24,6 +24,17 @@ export const USER_STATUS_LIST = [
     'In Active'
 ];
 
+export const JOINING_STATUS_LIST = [
+    'Confirm',
+    'Trainee',
+    'Contract',
+    'Probation',
+];
+
+export enum COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES {
+    JOINING_STATUS = "joining_status",
+}
+
 export enum ATTENDANCE_SCHEME_LIST {
     GENERAL_SCHEME = "General Scheme",
 }
@@ -93,10 +104,20 @@ export const EMPLOYEE_PROFILE_TABS = [
     },
     {
         id: 3,
+        label: "Joining Details",
+        key: "joining_details",
+        icon: "bi bi-person-rolodex",
+        tabElementId: "3",
+        triggerTabsId: "joining-details-styled-tab",
+        triggerEl: "#joining-details-styled-tab",
+        targetEl: "#styled-joining-details",
+    },
+    {
+        id: 3,
         label: "Employee Position",
         key: "employee_position",
         icon: "bi bi-person-rolodex",
-        tabElementId: "3",
+        tabElementId: "4",
         triggerTabsId: "employee-position-styled-tab",
         triggerEl: "#employee-position-styled-tab",
         targetEl: "#styled-employee-position",
@@ -106,7 +127,7 @@ export const EMPLOYEE_PROFILE_TABS = [
         label: "PE,ESI & LWF",
         key: "pf_esi_lwf",
         icon: "bi bi-bank2",
-        tabElementId: "4",
+        tabElementId: "5",
         triggerTabsId: "pf-esi-lwf-styled-tab",
         triggerEl: "#pf-esi-lwf-styled-tab",
         targetEl: "#styled-pf-esi-lwf",
@@ -116,7 +137,7 @@ export const EMPLOYEE_PROFILE_TABS = [
         label: "Bank",
         key: "bank",
         icon: "bi bi-bank",
-        tabElementId: "5",
+        tabElementId: "6",
 		triggerTabsId: "bank-styled-tab",
         triggerEl: "#bank-styled-tab",
         targetEl: "#styled-bank",
@@ -125,7 +146,7 @@ export const EMPLOYEE_PROFILE_TABS = [
         id: 6,
         label: "Education",
         key: "educational",
-        tabElementId: "6",
+        tabElementId: "7",
         icon: "bi bi-backpack2",
 		triggerTabsId: "educational-styled-tab",
         triggerEl: "#educational-styled-tab",

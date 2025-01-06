@@ -2,12 +2,13 @@
     <app-tabs [tabsArr]="profileTabs" [showIcon]="true" (currentTab)="setCurrentTab($event)">
         <div horizontal-content id="default-styled-tab-content" class="rounded-lg bg-gray-50 dark:bg-gray-800">
             <div class="flex justify-end">
-                @if (isEditMode){
+                @if (isEditMode) {
                     <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" (saveBtnClick)="editCancel()"
                                   id="cancel-button" [class]="'rounded-full'" type="button"
-                                  saveText="Cancel" savingText="Canceling..."><i class="bi bi-x-circle ms-2"></i></app-save-btn>
+                                  saveText="Cancel" savingText="Canceling..."><i class="bi bi-x-circle ms-2"></i>
+                    </app-save-btn>
                     <div class="flex justify-end ms-2">
-                        @if (this.tabsComponent?.tabs?._activeTab?.id !== '1'){
+                        @if (this.tabsComponent?.tabs?._activeTab?.id !== '1') {
                             <button (click)="previousTab()" type="button"
                                     [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
                                     class="text-white focus:outline-none align-baseline font-medium dark:hover:text-white rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:focus:ring-white dark:focus:ring-2">
@@ -18,7 +19,8 @@
                         <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
                             <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
                                           id="add-employee-button" [class]="'rounded-full'"
-                                          saveText="Create" savingText="Creating..."><i class="bi bi-check2-circle ms-2"></i></app-save-btn>
+                                          saveText="Create" savingText="Creating..."><i
+                                    class="bi bi-check2-circle ms-2"></i></app-save-btn>
                         </ng-template>
                         <ng-template #isNotLastTab>
                             <button (click)="nextTab('next')" type="button"
@@ -32,7 +34,8 @@
                 } @else {
                     <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" type="button"
                                   id="edit-button" [class]="'rounded-full'" (saveBtnClick)="editForm()"
-                                  saveText="Edit" savingText="Editing..."><i class="bi bi-pencil-square ms-2 font-bold"></i></app-save-btn>
+                                  saveText="Edit" savingText="Editing..."><i
+                            class="bi bi-pencil-square ms-2 font-bold"></i></app-save-btn>
                 }
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel"
@@ -127,6 +130,57 @@
                                placeholder="Rony"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                     </app-control-container>
+                </div>
+
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-address" role="tabpanel"
+                 aria-labelledby="dashboard-tab">
+                <div class="addressArray">
+                    <app-address *ngIf="form" [form]="form" [isEditMode]="isEditMode"></app-address>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-joining-details" role="tabpanel"
+                 aria-labelledby="joining-details-tab">
+                <div class="grid md:gap-6 mb-6 md:grid-cols-3">
+                    <app-control-container label="Joining Date" name="joining_date"
+                                           errorMsg="Joining Date is Required">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="joining-date" formControlName="joining_date" type="date"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
+                                   placeholder="Select date">
+                        </div>
+                    </app-control-container>
+                    <app-control-container label="Confirmation Date" name="confirmation_date"
+                                           errorMsg="Confirmation Date is Required">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="confirmation-date" formControlName="confirmation_date" type="date"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
+                                   placeholder="Select date">
+                        </div>
+                    </app-control-container>
+                    <app-control-container errorMsg="Referred by is a required field" label="Referred By"
+                                           name="referred_by_id">
+                        <app-manager-dropdown formControlName="referred_by_id"
+                                              [isEditMode]="isEditMode"></app-manager-dropdown>
+                    </app-control-container>
+                    <app-control-container errorMsg="Status by is a required field" label="Status"
+                                           name="joining_status">
+                        <app-common-select-dropdown-form-control [list]="JOINING_STATUS_LIST"
+                                                                 [formControlType]="commonFormControlTypes.JOINING_STATUS"
+                                                                 formControlName="joining_status"></app-common-select-dropdown-form-control>
+                    </app-control-container>
                     <app-control-container label="Probation Period" name="probation_period"
                                            errorMsg="Probation Period is Required">
                         <div class="flex items-center">
@@ -138,27 +192,17 @@
                             </div>
                         </div>
                     </app-control-container>
-                    <app-control-container label="Date of Joining" name="date_of_joining"
-                                           errorMsg="Date of Joining is Required">
-                        <div class="relative">
-                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                </svg>
+                    <app-control-container label="Notice Period" name="notice_period"
+                                           errorMsg="NoticePeriod is Required">
+                        <div class="flex items-center">
+                            <input id="notice-period" formControlName="notice_period" type="number"
+                                   placeholder="10 Days"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            <div class="ps-2">
+                                Days
                             </div>
-                            <input id="date_of_joining" formControlName="date_of_joining" type="datetime-local"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
-                                   placeholder="Select date">
                         </div>
                     </app-control-container>
-                </div>
-
-            </div>
-            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-address" role="tabpanel"
-                 aria-labelledby="dashboard-tab">
-                <div class="addressArray">
-                    <app-address *ngIf="form" [form]="form" [isEditMode]="isEditMode"></app-address>
                 </div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-employee-position" role="tabpanel"
@@ -166,7 +210,8 @@
                 <div class="grid md:gap-6 mb-6 md:grid-cols-3">
                     <app-control-container errorMsg="Reporting Manager is a required field" label="Reporting Manager"
                                            name="reporting_manager_id">
-                        <app-manager-dropdown formControlName="reporting_manager_id" [isEditMode]="isEditMode"></app-manager-dropdown>
+                        <app-manager-dropdown formControlName="reporting_manager_id"
+                                              [isEditMode]="isEditMode"></app-manager-dropdown>
                     </app-control-container>
                     <app-control-container errorMsg="Department is a required field" label="Department"
                                            name="department_id">

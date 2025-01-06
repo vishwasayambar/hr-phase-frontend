@@ -5,7 +5,7 @@ import {
 	ATTENDANCE_SCHEME_LIST,
 	EMPLOYEE_PROFILE_TABS,
 	GENDER_LIST,
-	GRADE_LIST
+	GRADE_LIST, JOINING_STATUS_LIST, USER_STATUS_LIST
 } from "../../../../shared/constants/constant";
 import {Employee} from "../../../../shared/models/employee";
 import {EmployeeService} from "../../../../shared/services/employee.service";
@@ -122,4 +122,7 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 		this.isEditMode = false;
 		this.form.disable();
 	}
+	
+	protected readonly USER_STATUS_LIST = USER_STATUS_LIST;
+	protected readonly JOINING_STATUS_LIST = JOINING_STATUS_LIST;
 }
