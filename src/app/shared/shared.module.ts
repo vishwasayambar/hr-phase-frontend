@@ -29,6 +29,7 @@ import {
 	CreateDepartmentPopupComponent
 } from "../modules/account/components/create-department-popup/create-department-popup.component";
 import { TrashedDataGridComponent } from './components/trashed-data-grid/trashed-data-grid.component';
+import { CommonSelectDropdownFormControlComponent } from './components/common-select-dropdown-form-control/common-select-dropdown-form-control.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
 	DataGridComponent,
@@ -44,6 +45,7 @@ const COMMON_COMP_LIST: any[] | Type<any> = [
 	UserProfileComponent,
 	SaveCancelBtnComponent,
 	CreateDepartmentPopupComponent,
+	CommonSelectDropdownFormControlComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [

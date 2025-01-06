@@ -1,0 +1,4 @@
+@if (formControlType() === COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES.JOINING_STATUS) {
+    <app-select-dropdown [options]="list"
+                         (selectionChange)="onSelection($event)"></app-select-dropdown>
+}
