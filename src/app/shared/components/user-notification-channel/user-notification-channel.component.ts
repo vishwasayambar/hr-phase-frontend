@@ -3,13 +3,12 @@ import { ReactiveFormsModule, UntypedFormGroup } from "@angular/forms";
 import { ControlContainerComponent } from "../control-container/control-container.component";
 
 @Component({
-	selector: "app-user-notification-channel",
-	standalone: true,
-	imports: [
-		ReactiveFormsModule,
-		ControlContainerComponent
-	],
-	templateUrl: "./user-notification-channel.component.html",
+    selector: "app-user-notification-channel",
+    imports: [
+        ReactiveFormsModule,
+        ControlContainerComponent
+    ],
+    templateUrl: "./user-notification-channel.component.html"
 })
 export class UserNotificationChannelComponent {
 	@Input() label = "Send Alert";

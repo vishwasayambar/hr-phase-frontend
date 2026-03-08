@@ -4,12 +4,11 @@ import { BaseComponent } from "../../base-component";
 import {NgIf} from "@angular/common";
 
 @Component({
-	selector: "app-tabs",
-	standalone: true,
-	imports: [
-		NgIf
-	],
-	templateUrl: "./tabs.component.html",
+    selector: "app-tabs",
+    imports: [
+        NgIf
+    ],
+    templateUrl: "./tabs.component.html"
 })
 export class TabsComponent extends BaseComponent implements OnInit, AfterViewInit {
 	@Input() tabsArr: any = [];

@@ -5,6 +5,7 @@ import {BaseComponent} from "../../../../shared/base-component";
 @Component({
     selector: 'app-account-setting-tabs',
     templateUrl: './account-setting-tabs.component.html',
+    standalone: false
 })
 export class AccountSettingTabsComponent extends BaseComponent {
     accountSettingTabs = Object.values(ACCOUNT_SETTING_TABS)

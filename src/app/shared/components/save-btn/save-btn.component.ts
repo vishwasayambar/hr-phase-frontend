@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-	selector: "app-save-btn",
-	templateUrl: "./save-btn.component.html",
+    selector: "app-save-btn",
+    templateUrl: "./save-btn.component.html",
+    standalone: false
 })
 export class SaveBtnComponent {
 	@Input() isSaving = false;

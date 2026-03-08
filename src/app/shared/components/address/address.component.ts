@@ -5,14 +5,13 @@ import { Address } from "../../models/address";
 import { ControlContainerComponent } from "../control-container/control-container.component";
 
 @Component({
-	selector: "app-address",
-	standalone: true,
-	imports: [
-		ControlContainerComponent,
-		FormsModule,
-		ReactiveFormsModule
-	],
-	templateUrl: "./address.component.html",
+    selector: "app-address",
+    imports: [
+        ControlContainerComponent,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: "./address.component.html"
 })
 export class AddressComponent extends BaseComponent implements OnInit {
 	@Input() form: UntypedFormGroup;

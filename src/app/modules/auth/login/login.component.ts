@@ -6,9 +6,10 @@ import { BaseComponent } from "../../../shared/base-component";
 import { UntypedFormGroup } from "@angular/forms";
 
 @Component({
-	selector: "app-login",
-	templateUrl: "./login.component.html",
-	styleUrl: "./login.component.scss",
+    selector: "app-login",
+    templateUrl: "./login.component.html",
+    styleUrl: "./login.component.scss",
+    standalone: false
 })
 export class LoginComponent extends BaseComponent {
 	form: UntypedFormGroup;

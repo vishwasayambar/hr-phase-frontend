@@ -4,9 +4,10 @@ import { BaseComponent } from "../../../shared/base-component";
 import { AuthenticationService } from "../../../shared/services/authentication.service";
 
 @Component({
-	selector: "app-account-activate",
-	templateUrl: "./account-activate.component.html",
-	styleUrl: "./account-activate.component.scss"
+    selector: "app-account-activate",
+    templateUrl: "./account-activate.component.html",
+    styleUrl: "./account-activate.component.scss",
+    standalone: false
 })
 export class AccountActivateComponent extends BaseComponent implements OnInit {
 	verificationCode: any = null;

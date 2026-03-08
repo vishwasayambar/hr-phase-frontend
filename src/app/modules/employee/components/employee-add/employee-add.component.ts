@@ -7,9 +7,10 @@ import { EmployeeService } from "../../../../shared/services/employee.service";
 import { TabsComponent } from "../../../../shared/ui-components/tabs/tabs.component";
 
 @Component({
-	selector: "app-employee-add",
-	templateUrl: "./employee-add.component.html",
-	styleUrl: "./employee-add.component.scss"
+    selector: "app-employee-add",
+    templateUrl: "./employee-add.component.html",
+    styleUrl: "./employee-add.component.scss",
+    standalone: false
 })
 export class EmployeeAddComponent extends BaseComponent implements OnInit {
 	@ViewChild(TabsComponent) tabsComponent: TabsComponent;

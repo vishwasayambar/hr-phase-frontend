@@ -5,6 +5,7 @@ import {BaseComponent} from "../../../../shared/base-component";
 @Component({
     selector: 'app-roles-and-permission',
     templateUrl: './roles-and-permission.component.html',
+    standalone: false
 })
 export class RolesAndPermissionComponent extends BaseComponent {
     moduleWisePermissionTabs = Object.values(MODULE_WISE_PERMISSION_TABS);

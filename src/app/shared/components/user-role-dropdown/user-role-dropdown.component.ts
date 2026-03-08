@@ -4,20 +4,19 @@ import { BaseComponent } from "../../base-component";
 import { RoleService } from "../../services/role.service";
 
 @Component({
-	selector: "app-user-role-dropdown",
-	standalone: true,
-	imports: [
-		ReactiveFormsModule,
-		FormsModule
-	],
-	templateUrl: "./user-role-dropdown.component.html",
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => UserRoleDropdownComponent),
-			multi: true,
-		},
-	],
+    selector: "app-user-role-dropdown",
+    imports: [
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: "./user-role-dropdown.component.html",
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => UserRoleDropdownComponent),
+            multi: true,
+        },
+    ]
 })
 export class UserRoleDropdownComponent extends BaseComponent implements OnInit, ControlValueAccessor {
 	@Input() isEditMode = true;

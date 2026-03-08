@@ -4,21 +4,20 @@ import { AbstractControl, ControlContainer, NG_VALUE_ACCESSOR } from "@angular/f
 import { ErrorComponent } from "../error/error.component";
 
 @Component({
-	selector: "app-control-container",
-	standalone: true,
-	imports: [
-		ErrorComponent,
-		NgClass,
-		NgIf,
-	],
-	templateUrl: "./control-container.component.html",
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: ControlContainerComponent,
-			multi: true,
-		},
-	],
+    selector: "app-control-container",
+    imports: [
+        ErrorComponent,
+        NgClass,
+        NgIf,
+    ],
+    templateUrl: "./control-container.component.html",
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: ControlContainerComponent,
+            multi: true,
+        },
+    ]
 })
 export class ControlContainerComponent implements OnInit {
 	control: AbstractControl | undefined;

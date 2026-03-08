@@ -5,14 +5,13 @@ import { Bank } from "../../models/bank";
 import { ControlContainerComponent } from "../control-container/control-container.component";
 
 @Component({
-	selector: "app-bank",
-	standalone: true,
-	imports: [
-		ControlContainerComponent,
-		FormsModule,
-		ReactiveFormsModule
-	],
-	templateUrl: "./bank.component.html",
+    selector: "app-bank",
+    imports: [
+        ControlContainerComponent,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: "./bank.component.html"
 })
 export class BankComponent extends BaseComponent implements OnInit {
 	@Input() form: UntypedFormGroup;

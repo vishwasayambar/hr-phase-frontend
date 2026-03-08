@@ -8,7 +8,6 @@ import {SidebarComponent} from "./shared/layouts/sidebar/sidebar.component";
 
 @Component({
     selector: 'app-root',
-    standalone: true,
     imports: [RouterOutlet, NgClass, SidebarComponent, NavbarComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

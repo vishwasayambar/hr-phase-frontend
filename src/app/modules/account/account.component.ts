@@ -5,6 +5,7 @@ import {ACCOUNT_SETTING_TABS} from "../../shared/constants/constant";
 @Component({
     selector: 'app-account',
     templateUrl: './account.component.html',
+    standalone: false
 })
 export class AccountComponent extends BaseComponent {
     accountSettingTabs = Object.values(ACCOUNT_SETTING_TABS)

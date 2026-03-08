@@ -5,6 +5,7 @@ import { BaseComponent } from "../../../shared/base-component";
     selector: "app-logo",
     templateUrl: "./app-logo.component.html",
     styleUrls: ["./app-logo.component.scss"],
+    standalone: false
 })
 export class AppLogoComponent extends BaseComponent implements OnInit {
     constructor(injector: Injector) {
