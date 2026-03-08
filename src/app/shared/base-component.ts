@@ -132,7 +132,6 @@ export abstract class BaseComponent {
 	}
 	
 	showErrorInNotifier(err: ErrorEvent){
-		debugger;
 		this.notify(err?.error?.message, this.NOTIFICATION_TYPES.ERROR);
 	}
 

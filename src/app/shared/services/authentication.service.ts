@@ -48,31 +48,8 @@ export class AuthenticationService {
 		this.currentPermissionSubject.next(permissions);
 		this.storageService.setPermissions(permissions);
 		this.changeAuthStatus(true);
-		// this.updateCurrentRole(user.roles[0]);
-		// Sets customer data to firestore on login
-      this.configService.setAppConfig(tenant)
-		this.router.navigate(["/dashboards"]).then(r => true );
-		//
-		// if (!tenant.is_completed_wizard_setup) {
-		// 			this.router.navigate(["/setups"]);
-		// 		}else{
-		// }
-		// this.configService.appConfig$.subscribe(tenant => {
-		// 	if (!tenant["is_completed_wizard_setup"]) {
-		// 		this.router.navigate(["/setups"]);
-		// 	} else {
-		// 		if (this.redirectUrl) {
-		// 			this.router.navigate([this.redirectUrl]);
-		// 			this.redirectUrl = "";
-		// 		} else {
-		// 			if (permissions.includes(PERMISSION_LIST.JOB_LIST)) {
-		// 				this.router.navigate(["/jobs"]);
-		// 			} else {
-		// 				this.router.navigate(["/dashboards"]);
-		// 			}
-		// 		}
-		// 	}
-		// });
+		this.configService.setAppConfig(tenant);
+		this.router.navigate(["/dashboards"]);
 	}
 
 	login(data: object): Observable<any> {
