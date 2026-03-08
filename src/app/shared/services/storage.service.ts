@@ -9,15 +9,17 @@ export class StorageService {
 	}
 
 	getUser(): any {
-		return JSON.parse(localStorage.getItem("currentUser"));
+		const data = localStorage.getItem("currentUser");
+		return data ? JSON.parse(data) : null;
 	}
 
 	removeUser(): void {
 		localStorage.removeItem("currentUser");
 	}
 
-	getTenant(): Tenant {
-		return JSON.parse(localStorage.getItem("tenant"));
+	getTenant(): Tenant | null {
+		const data = localStorage.getItem("tenant");
+		return data ? JSON.parse(data) : null;
 	}
 
 	setTenant(tenant: Tenant): void {
@@ -64,7 +66,8 @@ export class StorageService {
 	}
 
 	getPermissions(): Array<string> {
-		return JSON.parse(localStorage.getItem("permissions"));
+		const data = localStorage.getItem("permissions");
+		return data ? JSON.parse(data) : [];
 	}
 
 	removePermissions(): void {

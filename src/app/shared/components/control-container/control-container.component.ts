@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { Component, Host, Input, OnInit, Optional, SkipSelf } from "@angular/core";
 import { AbstractControl, ControlContainer, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { ErrorComponent } from "../error/error.component";
@@ -6,10 +6,9 @@ import { ErrorComponent } from "../error/error.component";
 @Component({
     selector: "app-control-container",
     imports: [
-        ErrorComponent,
-        NgClass,
-        NgIf,
-    ],
+    ErrorComponent,
+    NgClass
+],
     templateUrl: "./control-container.component.html",
     providers: [
         {

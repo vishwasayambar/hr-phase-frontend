@@ -39,7 +39,7 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 					this.notify(err.message, this.NOTIFICATION_TYPES.ERROR);
 				}
 
-			}).add(() => this.isCreating = true);
+			}).add(() => this.isCreating = false);
 		} else {
 			this.form = Employee.getForm(new Employee({}));
 		}
@@ -47,8 +47,6 @@ export class EmployeeAddComponent extends BaseComponent implements OnInit {
 
 
 	create() {
-		console.log(this.form.value);
-		debugger;
 		if (this.form.valid) {
 			this.isCreating = true;
 			this.service.create(this.form.value).subscribe({

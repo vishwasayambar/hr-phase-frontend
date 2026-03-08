@@ -34,8 +34,7 @@ export class LoginComponent extends BaseComponent {
 					this.notify("Login successfully!");
 				},
 				error: errorResponse => {
-					console.log("Error Logging in", errorResponse?.error?.text);
-					this.notify(`Login Failed! ${errorResponse?.error?.text}`, this.NOTIFICATION_TYPES.ERROR);
+		this.notify(`Login Failed! ${errorResponse?.error?.text}`, this.NOTIFICATION_TYPES.ERROR);
 				}
 			}).add(() => {
 				this.isLogging = false;

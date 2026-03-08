@@ -1,13 +1,11 @@
 import {AfterViewInit, Component, EventEmitter, Injector, Input, input, OnInit, Output} from "@angular/core";
 import { TabItem, Tabs, TabsInterface, TabsOptions } from "flowbite";
 import { BaseComponent } from "../../base-component";
-import {NgIf} from "@angular/common";
+
 
 @Component({
     selector: "app-tabs",
-    imports: [
-        NgIf
-    ],
+    imports: [],
     templateUrl: "./tabs.component.html"
 })
 export class TabsComponent extends BaseComponent implements OnInit, AfterViewInit {
@@ -24,7 +22,6 @@ export class TabsComponent extends BaseComponent implements OnInit, AfterViewIni
 		activeClasses: "text-blue-600 hover:text-blue-600 dark:text-white dark:hover:text-white border-blue-600 dark:border-white",
 		inactiveClasses: "text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 dark:hover:border-gray-300",
 		onShow: (res) => {
-			console.log(res);
 			this.selectedTabId = res._activeTab.id;
 			this.currentTab.emit(this.selectedTabId);
 		},

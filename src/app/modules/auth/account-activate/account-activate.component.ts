@@ -45,8 +45,7 @@ export class AccountActivateComponent extends BaseComponent implements OnInit {
 					}
 				},
 				() => {
-					// this.notify("Invalid token redirecting to login", this.NOTIFICATION_TYPES.ERROR);
-                    alert("Invalid token redirecting to login")
+					this.notify("Invalid token, redirecting to login", this.NOTIFICATION_TYPES.ERROR);
 					this.router.navigate(["/auth/login"]);
 				},
 			)

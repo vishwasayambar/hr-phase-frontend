@@ -13,8 +13,12 @@ import {RouterLink} from "@angular/router";
     styleUrl: "./navbar.component.scss"
 })
 export class NavbarComponent extends BaseComponent {
+	currentUser: any;
 
 	constructor(injector: Injector) {
 		super(injector);
+		this.authService.currentUser.subscribe(user => {
+			this.currentUser = user;
+		});
 	}
 }
