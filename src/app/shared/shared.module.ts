@@ -14,27 +14,57 @@ import { HoverDirective } from "./directives/hover.directive";
 import { UserPopoverComponent } from "./popovers/user-popover/user-popover.component";
 import { DropdownActionComponent } from "./ui-components/dropdown-action/dropdown-action.component";
 import { TabsComponent } from "./ui-components/tabs/tabs.component";
+import {PaginationComponent} from "./ui-components/pagination/pagination.component";
+import {ConfirmationPopupComponent} from "./components/confirmation-popup/confirmation-popup.component";
+import { UserBadgeComponent } from './components/user-badge/user-badge.component';
+import { ManagerDropdownComponent } from './components/manager-dropdown/manager-dropdown.component';
+import {SearchableDropdownComponent} from "./ui-components/searchable-dropdown/searchable-dropdown.component";
+import { DepartmentDropdownComponent } from './components/department-dropdown/department-dropdown.component';
+import { SelectDropdownComponent } from './ui-components/select-dropdown/select-dropdown.component';
+import { CustomDropdownComponent } from './ui-components/custom-dropdown/custom-dropdown.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { SaveCancelBtnComponent } from './components/save-cancel-btn/save-cancel-btn.component';
+import { DataGridComponent } from './components/data-grid/data-grid.component';
+import {
+	CreateDepartmentPopupComponent
+} from "../modules/account/components/create-department-popup/create-department-popup.component";
+import { TrashedDataGridComponent } from './components/trashed-data-grid/trashed-data-grid.component';
+import { CommonSelectDropdownFormControlComponent } from './components/common-select-dropdown-form-control/common-select-dropdown-form-control.component';
 
 const COMMON_COMP_LIST: any[] | Type<any> = [
+	DataGridComponent,
 	SaveBtnComponent,
+	UserBadgeComponent,
+	UserPopoverComponent,
+	ManagerDropdownComponent,
+	SearchableDropdownComponent,
+	DepartmentDropdownComponent,
+	SelectDropdownComponent,
+	UserRoleDropdownComponent,
+	CustomDropdownComponent,
+	UserProfileComponent,
+	SaveCancelBtnComponent,
+	CreateDepartmentPopupComponent,
+	CommonSelectDropdownFormControlComponent,
 ];
 
 const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
 	DropdownActionComponent,
 	HoverDirective,
-	UserPopoverComponent,
 	UserNotificationChannelComponent,
 	AddressComponent,
 	BankComponent,
-	UserRoleDropdownComponent,
 	ControlContainerComponent,
 	TabsComponent,
+	PaginationComponent,
+	ConfirmationPopupComponent,
 ];
 
 @NgModule({
     declarations: [
         COMMON_COMP_LIST,
-
+        ManagerDropdownComponent,
+        TrashedDataGridComponent,
     ],
 	exports: [
 		COMMON_COMP_LIST,
@@ -42,13 +72,13 @@ const COMMON_STANDALONE_COMP_LIST: any[] | Type<any> = [
 		FormsModule,
 		ReactiveFormsModule,
 	],
-    imports: [
+	imports: [
 		COMMON_STANDALONE_COMP_LIST,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-    ],
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		RouterModule,
+	],
     providers: [],
 })
 export class SharedModule {}

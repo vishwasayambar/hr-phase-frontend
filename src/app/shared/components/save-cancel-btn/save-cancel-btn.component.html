@@ -1,0 +1,16 @@
+<ng-template [ngIf]="!isEditMode" [ngIfElse]="isInEditMode">
+    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" type="button"
+                  id="edit-button" [class]="'rounded-full'" (saveBtnClick)="editForm()"
+                  saveText="Edit" savingText="Editing..."><i class="bi bi-pencil-square ms-2 font-bold"></i></app-save-btn>
+</ng-template>
+<ng-template #isInEditMode>
+    <div class="flex gap-2">
+        <app-save-btn (saveBtnClick)="cancel()"
+                      id="cancel-button" [class]="'rounded-full'" type="button"
+                      [saveText]="cancelText()" [savingText]="cancelingText()"><i class="ms-2" [ngClass]="cancelIconClass()"></i></app-save-btn>
+
+        <app-save-btn [isSaving]="isCreating" (saveBtnClick)="save()"
+                      id="add-employee-button" [class]="'rounded-full'"
+                      [saveText]="saveText()" [savingText]="savingText()"><i class="ms-2" [ngClass]="saveIconClass()"></i></app-save-btn>
+    </div>
+</ng-template>

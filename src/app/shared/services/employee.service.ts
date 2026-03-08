@@ -18,7 +18,11 @@ export class EmployeeService extends BaseService<Employee, number> {
     getEmployeeList(): Observable<any> {
         return this.api.get(this.endpoint + "/getEmployeeList");
     }
-
+    
+    updateStatus(params: { user_id: number, status: boolean }): Observable<any> {
+        return this.api.patch(this.endpoint + "/" + `updateStatus/${params.user_id}`, params);
+    }
+    
     me(): Observable<any> {
         return this.api.get(this.endpoint + "/" + "me");
     }

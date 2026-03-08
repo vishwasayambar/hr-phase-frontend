@@ -1,123 +1,287 @@
-<form (ngSubmit)="create()" [formGroup]="form" *ngIf="form" >
-	<app-tabs [tabsArr]="profileTabs" [showIcon]="true" (currentTab)="setCurrentTab()">
-		<div horizontal-content id="default-styled-tab-content" class="rounded-lg bg-gray-50 dark:bg-gray-800">
-			<div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel"
-				 aria-labelledby="profile-tab">
-				<app-user-notification-channel [form]="form" label="Send Activation Link">
-				</app-user-notification-channel>
-				<div class="grid md:gap-6 mb-6 md:grid-cols-4">
+<form (ngSubmit)="create()" [formGroup]="form" *ngIf="form">
+    <app-tabs [tabsArr]="profileTabs" [showIcon]="true" (currentTab)="setCurrentTab($event)">
+        <div horizontal-content id="default-styled-tab-content" class="rounded-lg bg-gray-50 dark:bg-gray-800">
+            <div class="flex justify-end">
+                @if (isEditMode) {
+                    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" (saveBtnClick)="editCancel()"
+                                  id="cancel-button" [class]="'rounded-full'" type="button"
+                                  saveText="Cancel" savingText="Canceling..."><i class="bi bi-x-circle ms-2"></i>
+                    </app-save-btn>
+                    <div class="flex justify-end ms-2">
+                        @if (this.tabsComponent?.tabs?._activeTab?.id !== '1') {
+                            <button (click)="previousTab()" type="button"
+                                    [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
+                                    class="text-white focus:outline-none align-baseline font-medium dark:hover:text-white rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:focus:ring-white dark:focus:ring-2">
+                                <i class="bi bi-arrow-left"></i>
+                                <span class="ms-2">Previous</span>
+                            </button>
+                        }
+                        <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
+                            <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
+                                          id="add-employee-button" [class]="'rounded-full'"
+                                          saveText="Create" savingText="Creating..."><i
+                                    class="bi bi-check2-circle ms-2"></i></app-save-btn>
+                        </ng-template>
+                        <ng-template #isNotLastTab>
+                            <button (click)="nextTab('next')" type="button"
+                                    [ngClass]="darkThemeBtnClasses + lightThemeBtnClasses"
+                                    class="text-white focus:outline-none align-baseline font-medium rounded-full text-sm px-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-white dark:focus:ring-white dark:focus:ring-2">
+                                <span class="me-2">Next</span>
+                                <i class="bi bi-arrow-right text-xl"></i>
+                            </button>
+                        </ng-template>
+                    </div>
+                } @else {
+                    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating" type="button"
+                                  id="edit-button" [class]="'rounded-full'" (saveBtnClick)="editForm()"
+                                  saveText="Edit" savingText="Editing..."><i
+                            class="bi bi-pencil-square ms-2 font-bold"></i></app-save-btn>
+                }
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel"
+                 aria-labelledby="profile-tab">
+                <app-user-notification-channel [form]="form" label="Send Activation Link">
+                </app-user-notification-channel>
+                <div class="grid md:gap-6 mb-6 md:grid-cols-4">
+                    <app-control-container
+                            errorMsg="Customer type is required field" label="Customer Type" name="role_id">
+                        <app-user-role-dropdown [formControl]="$any(form).controls['role_id']" [isEditMode]="isEditMode"
+                                                id="customer-detail-user-type"></app-user-role-dropdown>
+                    </app-control-container>
 
-					<app-control-container
-							errorMsg="Customer type is required field" label="Customer Type" name="role_id">
-						<app-user-role-dropdown [formControl]="$any(form).controls['role_id']"
-												id="customer-detail-user-type"></app-user-role-dropdown>
-					</app-control-container>
+                    <app-control-container label="Name" name="name" errorMsg="Employee Name is Required">
+                        <input id="name" formControlName="name" type="text"
+                               placeholder="John Smith"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
 
-					<app-control-container label="Name" name="name" errorMsg="Employee Name is Required">
-						<input id="name" formControlName="name" type="text"
-							   placeholder="John Smith"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
+                    <app-control-container label="Display Name" name="display_name" errorMsg="Display Name is Required">
+                        <input id="display_name" formControlName="display_name" type="text"
+                               placeholder="Johny"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Email" name="email" errorMsg="Email is Required">
+                        <input id="email" formControlName="email" type="email"
+                               placeholder="Johny@xyz.com"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Mobile Number" name="mobile_number"
+                                           errorMsg="Mobile Number is Required">
+                        <input id="mobile_number" formControlName="mobile_number" type="number"
+                               placeholder="+91 0000-0000-00"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Phone Number" name="phone_number" errorMsg="Phone Number is Required">
+                        <input id="phone_number" formControlName="phone_number" type="number"
+                               placeholder="0000-0000-00" pattern="/^[789]\d{9}$/" [maxlength]="10"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Date of birth" name="date_of_birth"
+                                           errorMsg="Date of birth is Required">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="date_of_birth" formControlName="date_of_birth" type="datetime-local"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
+                                   placeholder="Select date">
+                        </div>
+                    </app-control-container>
+                    <app-control-container label="Pan Card / Tax Number" name="tax_number"
+                                           errorMsg="Tax number is Required">
+                        <input id="tax_number" formControlName="tax_number" type="text"
+                               placeholder="eg:ABCD1234A"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Aadhaar Number" errorMsg="Tax number is Required"
+                                           name="unique_identification_number">
+                        <input id="unique_identification_number" formControlName="unique_identification_number"
+                               type="text"
+                               placeholder="Type aadhaar number"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container errorMsg="Gender is a required field" label="Gender" name="gender">
+                        <select id="gender" formControlName="gender"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            @for (gender of genderList; track genderList) {
+                                <option>{{ gender }}</option>
+                            }
+                        </select>
+                    </app-control-container>
 
-					<app-control-container label="Name" name="display_name" errorMsg="Display Name is Required">
-						<input id="display_name" formControlName="display_name" type="text"
-							   placeholder="Johny"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
-					<app-control-container label="Email" name="email" errorMsg="Email is Required">
-						<input id="email" formControlName="email" type="email"
-							   placeholder="Johny@xyz.com"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
-					<app-control-container label="Mobile Number" name="mobile_number"
-										   errorMsg="Mobile Number is Required">
-						<input id="mobile_number" formControlName="mobile_number" type="number"
-							   placeholder="+91 0000-0000-00"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
-					<app-control-container label="Phone Number" name="phone_number" errorMsg="Phone Number is Required">
-						<input id="phone_number" formControlName="phone_number" type="number"
-							   placeholder="0000-0000-00" pattern="/^[789]\d{9}$/" [maxlength]="10"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
-					<app-control-container label="Date of birth" name="date_of_birth"
-										   errorMsg="Date of birth is Required">
-						<div class="relative">
-							<div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-								<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-									 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-									<path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-								</svg>
-							</div>
-							<input id="date_of_birth" formControlName="date_of_birth" type="datetime-local"
-								   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-								   placeholder="Select date">
-						</div>
-					</app-control-container>
-					<app-control-container label="Pan Card / Tax Number" name="date_of_birth"
-										   errorMsg="Tax number is Required">
-						<input id="tax_number" formControlName="tax_number" type="text"
-							   placeholder="eg:ABCD1234A"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
-					<app-control-container label="Aadhaar Number" errorMsg="Tax number is Required"
-										   name="unique_identification_number">
-						<input id="unique_identification_number" formControlName="unique_identification_number"
-							   type="text"
-							   placeholder="Type aadhaar number"
-							   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					</app-control-container>
-					<app-control-container errorMsg="Gender is a required field" label="Gender" name="gender">
-						<select id="countries" formControlName="gender"
-								class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-							@for (gender of genderList; track genderList) {
-								<option>{{ gender }}</option>
-							}
-						</select>
-					</app-control-container>
-				</div>
+                    <app-control-container label="Emergency Contact Name" name="emergency_contact_name"
+                                           errorMsg="Emergency Contact Name is Required">
+                        <input id="emergency_contact_name" formControlName="emergency_contact_name" type="text"
+                               placeholder="Johny"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Emergency Contact Number" name="emergency_contact_number"
+                                           errorMsg="Emergency Contact Number is Required">
+                        <input id="emergency_contact_number" formControlName="emergency_contact_number" type="tel"
+                               placeholder="+91 0000-0000-00"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                    <app-control-container label="Father's Name" name="father_name"
+                                           errorMsg="Father's Name is Required">
+                        <input id="father_name" formControlName="father_name" type="text"
+                               placeholder="Rony"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                </div>
 
-			</div>
-			<div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-address" role="tabpanel"
-				 aria-labelledby="dashboard-tab">
-				<div class="addressArray">
-					<app-address *ngIf="form" [form]="form"></app-address>
-				</div>
-			</div>
-			<div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-bank" role="tabpanel"
-				 aria-labelledby="settings-tab">
-				<div class="addressArray">
-					<app-bank *ngIf="form" [form]="form"></app-bank>
-				</div>
-			</div>
-			<div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-educational" role="tabpanel"
-				 aria-labelledby="contacts-tab">
-				<p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-						class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>.
-					Clicking
-					another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-					control
-					the content visibility and styling.</p>
-			</div>
-			<div class="flex justify-end p-3">
-                <ng-template [ngIf]="isLastTab" [ngIfElse]="isNotLastTab">
-                    <app-save-btn [isOnPopup]="true" [isSaving]="isCreating"
-                                  id="add-employee-button"
-                                  saveText="Create" savingText="Creating..."></app-save-btn>
-                </ng-template>
-                <ng-template #isNotLastTab>
-                    <button (click)="nextTab('next')" type="button"
-                            class="text-white bg-blue-400 hover:bg-blue-500 focus:outline-none align-baseline font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-gray-500 dark:hover:bg-gray-50 dark:hover:text-black dark:focus:ring-white dark:focus:ring-2">
-                        <span class="me-2">Next</span>
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </button>
-                </ng-template>
-			</div>
-		</div>
-	</app-tabs>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-address" role="tabpanel"
+                 aria-labelledby="dashboard-tab">
+                <div class="addressArray">
+                    <app-address *ngIf="form" [form]="form" [isEditMode]="isEditMode"></app-address>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-joining-details" role="tabpanel"
+                 aria-labelledby="joining-details-tab">
+                <div class="grid md:gap-6 mb-6 md:grid-cols-3">
+                    <app-control-container label="Joining Date" name="joining_date"
+                                           errorMsg="Joining Date is Required">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="joining-date" formControlName="joining_date" type="date"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
+                                   placeholder="Select date">
+                        </div>
+                    </app-control-container>
+                    <app-control-container label="Confirmation Date" name="confirmation_date"
+                                           errorMsg="Confirmation Date is Required">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="confirmation-date" formControlName="confirmation_date" type="date"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
+                                   placeholder="Select date">
+                        </div>
+                    </app-control-container>
+                    <app-control-container errorMsg="Referred by is a required field" label="Referred By"
+                                           name="referred_by_id">
+                        <app-manager-dropdown formControlName="referred_by_id"
+                                              [isEditMode]="isEditMode"></app-manager-dropdown>
+                    </app-control-container>
+                    <app-control-container errorMsg="Status by is a required field" label="Status"
+                                           name="joining_status">
+                        <app-common-select-dropdown-form-control [list]="JOINING_STATUS_LIST"
+                                                                 [formControlType]="commonFormControlTypes.JOINING_STATUS"
+                                                                 formControlName="joining_status"></app-common-select-dropdown-form-control>
+                    </app-control-container>
+                    <app-control-container label="Probation Period" name="probation_period"
+                                           errorMsg="Probation Period is Required">
+                        <div class="flex items-center">
+                            <input id="probation_period" formControlName="probation_period" type="number"
+                                   placeholder="10 Days"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            <div class="ps-2">
+                                Days
+                            </div>
+                        </div>
+                    </app-control-container>
+                    <app-control-container label="Notice Period" name="notice_period"
+                                           errorMsg="NoticePeriod is Required">
+                        <div class="flex items-center">
+                            <input id="notice-period" formControlName="notice_period" type="number"
+                                   placeholder="10 Days"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            <div class="ps-2">
+                                Days
+                            </div>
+                        </div>
+                    </app-control-container>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-employee-position" role="tabpanel"
+                 aria-labelledby="employee-position-tab">
+                <div class="grid md:gap-6 mb-6 md:grid-cols-3">
+                    <app-control-container errorMsg="Reporting Manager is a required field" label="Reporting Manager"
+                                           name="reporting_manager_id">
+                        <app-manager-dropdown formControlName="reporting_manager_id"
+                                              [isEditMode]="isEditMode"></app-manager-dropdown>
+                    </app-control-container>
+                    <app-control-container errorMsg="Department is a required field" label="Department"
+                                           name="department_id">
+                        <app-department-dropdown formControlName="department_id"></app-department-dropdown>
+                    </app-control-container>
+                    <app-control-container errorMsg="Grade is a required field" label="Grade"
+                                           name="grade">
+                        <select id="grade" formControlName="grade"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            <option disabled selected>Select a department</option>
+                            @for (grade of gradeList; track grade) {
+                                <option>{{ grade }}</option>
+                            }
+                        </select>
+                    </app-control-container>
+                    <app-control-container errorMsg="Attendance Scheme is a required field" label="Attendance Scheme"
+                                           name="attendance_scheme">
+                        <select id="attendance-scheme" formControlName="attendance_scheme"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            <option disabled selected>Select a department</option>
+                            @for (attendance_scheme of attendanceSchemeList; track attendance_scheme) {
+                                <option>{{ attendance_scheme }}</option>
+                            }
+                        </select>
+                    </app-control-container>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-pf-esi-lwf" role="tabpanel"
+                 aria-labelledby="pf-esi-lwf-tab">
+                <div class="grid md:gap-6 mb-6 md:grid-cols-2">
+                    <!--                    TODO:: Need to add more fields later -->
+                    <app-control-container label="PF Number" name="pf_number"
+                                           errorMsg="PF Number is Required">
+                        <div class="flex flex-col">
+                            <input id="pf-number" formControlName="pf_number" type="text"
+                                   placeholder="PY/KRP/1234345456"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                            <div class="ps-2 text-gray-400 text-sm">
+                                <div>
+                                    <span>Format:</span> (Region Code/Office Code/Ext Code/Extn No/Member Acc No)
+                                </div>
+                                <div>
+                                    <span>Example:</span> PY/KRP/1234345456
+                                </div>
+                            </div>
+                        </div>
+                    </app-control-container>
+                    <app-control-container label="UAN Number" name="uan_number"
+                                           errorMsg="UAN Number is Required">
+                        <input id="uan_number" formControlName="uan_number" type="number"
+                               placeholder="PY/KRP/1234345456"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                    </app-control-container>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-bank" role="tabpanel"
+                 aria-labelledby="settings-tab">
+                <div class="addressArray">
+                    <app-bank *ngIf="form" [form]="form" [isEditMode]="isEditMode"></app-bank>
+                </div>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-educational" role="tabpanel"
+                 aria-labelledby="contacts-tab">
+                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
+                        class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>.
+                    Clicking
+                    another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
+                    control
+                    the content visibility and styling.</p>
+            </div>
+        </div>
+    </app-tabs>
 </form>
-

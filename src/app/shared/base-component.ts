@@ -2,9 +2,15 @@ import { Injector } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActiveToast, ToastrService } from "ngx-toastr";
-import {PERMISSION_LIST, TABLE_COLUMN_TEMPLATE} from "./constants/constant";
+import {
+	COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES,
+	ENTITIES,
+	PERMISSION_LIST,
+	TABLE_COLUMN_TEMPLATE
+} from "./constants/constant";
 import { AuthenticationService } from "./services/authentication.service";
 import { LoaderService } from "./services/loader.service";
+import {Employee} from "./models/employee";
 
 export abstract class BaseComponent {
 	isMobileDevice = window.innerWidth < 760;
@@ -18,8 +24,14 @@ export abstract class BaseComponent {
 	authService: AuthenticationService;
 	loadingService: LoaderService
 	notifyService: ToastrService;
+	currentUser: Employee = null;
+	entitites = ENTITIES;
+	commonFormControlTypes = COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES;
+	darkThemeBtnClasses = ' dark:bg-gray-500 dark:hover:bg-pink-700 ';
+	lightThemeBtnClasses = ' bg-pink-500 hover:bg-pink-600 hover:text-white text-white ';
 	tableColumnTemplate = TABLE_COLUMN_TEMPLATE;
 	PERMISSION_LIST = PERMISSION_LIST;
+	entities = ENTITIES;
 
 	NOTIFICATION_TYPES = {
 		INFO: "info",
@@ -36,6 +48,12 @@ export abstract class BaseComponent {
 		this.fb = injector.get(UntypedFormBuilder);
 		this.authService.authStatus.subscribe((isLoggedIn) => {
 			this.isLoggedIn = isLoggedIn;
+		});
+		this.authService.currentUser.subscribe({
+			next: u => (this.currentUser = u),
+			error: (err) => {
+				console.error(err);
+			}
 		});
 		this.authService.currentPermission.subscribe(permissions => {
 			if (permissions) {
@@ -80,7 +98,6 @@ export abstract class BaseComponent {
 	}
 
 	toggleSidebar(){
-		console.log("testing", this.isSidebarCollapsed);
 		this.isSidebarCollapsed = !this.isSidebarCollapsed;
 	}
 
@@ -95,7 +112,29 @@ export abstract class BaseComponent {
 				}, 10);
 			});
 	}
-
+	
+	paramsOfGetListByQuery(currentPage: number, orderBy: string, orderByDirection: string) {
+		return {
+			page: currentPage,
+			paginate: "True",
+			order_by: orderBy,
+			order_by_direction: orderByDirection,
+			per_page: 20,
+		}
+	};
+	
+	// This method is to close FlowBite Modals as its methods not work therefore we are closing by DOM
+	closeModal(id: string){
+		const closeButton = document.getElementById(id);
+		if (closeButton) {
+			closeButton.click();
+		}
+	}
+	
+	showErrorInNotifier(err: ErrorEvent){
+		debugger;
+		this.notify(err?.error?.message, this.NOTIFICATION_TYPES.ERROR);
+	}
 
 	// setLoader(value:boolean) {
 	// 	this.isLoading = value;

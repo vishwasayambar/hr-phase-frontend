@@ -10,12 +10,37 @@ export const AUTH_PATH = "auth/";
 export const DASHBOARD = "/dashboards";
 export const EMPLOYEE_PATH = "employees";
 export const ROLE_PATH = "roles";
+export const DEPARTMENT_PATH = "departments";
 export const PERMISSION_PATH = "permissions";
 
 export enum GENDER_LIST {
     MALE = "Male",
     FEMALE = "Female",
     OTHER = "Other",
+}
+
+export const USER_STATUS_LIST = [
+    'Active',
+    'In Active'
+];
+
+export const JOINING_STATUS_LIST = [
+    'Confirm',
+    'Trainee',
+    'Contract',
+    'Probation',
+];
+
+export enum COMMON_SELECT_DROPDOWN_FORM_CONTROL_TYPES {
+    JOINING_STATUS = "joining_status",
+}
+
+export enum ATTENDANCE_SCHEME_LIST {
+    GENERAL_SCHEME = "General Scheme",
+}
+
+export enum GRADE_LIST {
+  G3 = 'G3',
 }
 
 export enum TENANT_PLANS {
@@ -32,12 +57,36 @@ export enum TABLE_COLUMN_TEMPLATE {
     ACTION = "action",
 }
 
+export enum EMPLOYEE_ACTION_BUTTON_NAME_LIST {
+    VIEW_EMPLOYEE = "View Employee",
+    CHANGE_STATUS = "Change Status",
+    FORGET_USER = "Forget User",
+}
+
+export enum ENTITIES {
+    NAME = "name", // This is for those having id, name to access nameTemplate
+    EMPLOYEE = "employee",
+    ROLE = "role",
+    DEPARTMENT = "department",
+}
+
+export const COMPONENT_SIZES = {
+    DEFAULT: "default",
+    SMALL: "small",
+    SMALL_1X: "small-1x",
+    MEDIUM: "medium",
+    SIDEBAR: "sidebar",
+    LARGE: "large",
+    EXTRA_LARGE: "extra-large",
+    DROPDOWN_PROFILE_IMAGES: "dropdown-profile-image"
+};
+
 export const EMPLOYEE_PROFILE_TABS = [
     {
         id: 1,
         label: "Profile",
         key: "profile",
-        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        icon: "bi bi-person-circle",
         tabElementId: "1",
 		triggerTabsId: "profile-styled-tab",
         triggerEl: "#profile-styled-tab",
@@ -47,7 +96,7 @@ export const EMPLOYEE_PROFILE_TABS = [
         id: 2,
         label: "Address",
         key: "address",
-        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        icon: "bi bi-house-door-fill",
         tabElementId: "2",
 		triggerTabsId: "address-styled-tab",
         triggerEl: "#address-styled-tab",
@@ -55,20 +104,50 @@ export const EMPLOYEE_PROFILE_TABS = [
     },
     {
         id: 3,
+        label: "Joining Details",
+        key: "joining_details",
+        icon: "bi bi-person-rolodex",
+        tabElementId: "3",
+        triggerTabsId: "joining-details-styled-tab",
+        triggerEl: "#joining-details-styled-tab",
+        targetEl: "#styled-joining-details",
+    },
+    {
+        id: 3,
+        label: "Employee Position",
+        key: "employee_position",
+        icon: "bi bi-person-rolodex",
+        tabElementId: "4",
+        triggerTabsId: "employee-position-styled-tab",
+        triggerEl: "#employee-position-styled-tab",
+        targetEl: "#styled-employee-position",
+    },
+    {
+        id: 4,
+        label: "PE,ESI & LWF",
+        key: "pf_esi_lwf",
+        icon: "bi bi-bank2",
+        tabElementId: "5",
+        triggerTabsId: "pf-esi-lwf-styled-tab",
+        triggerEl: "#pf-esi-lwf-styled-tab",
+        targetEl: "#styled-pf-esi-lwf",
+    },
+    {
+        id: 5,
         label: "Bank",
         key: "bank",
-        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
-        tabElementId: "3",
+        icon: "bi bi-bank",
+        tabElementId: "6",
 		triggerTabsId: "bank-styled-tab",
         triggerEl: "#bank-styled-tab",
         targetEl: "#styled-bank",
     },
     {
-        id: 4,
+        id: 6,
         label: "Education",
         key: "educational",
-        tabElementId: "4",
-        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        tabElementId: "7",
+        icon: "bi bi-backpack2",
 		triggerTabsId: "educational-styled-tab",
         triggerEl: "#educational-styled-tab",
         targetEl: "#styled-educational",
@@ -79,7 +158,7 @@ export const ACCOUNT_SETTING_TABS = [
         id: 1,
         label: "Business settings",
         key: "business_settings",
-        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        icon: "bi bi-gear-wide-connected",
         tabElementId: "1",
 		triggerTabsId: "business_setting-tab",
         triggerEl: "#business_setting-tab",
@@ -89,21 +168,22 @@ export const ACCOUNT_SETTING_TABS = [
         id: 2,
         label: "Roles and Permissions",
         key: "roles_and_permissions",
-        icon: "M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z",
+        icon: "bi bi-person-lock",
         tabElementId: "2",
 		triggerTabsId: "roles_and_permission-tab",
         triggerEl: "#roles_and_permission-tab",
         targetEl: "#roles_and_permission",
     },
-    // {
-    //     id: 3,
-    //     label: "Bank",
-    //     key: "bank",
-    //     tabElementId: "3",
-	// 	triggerTabsId: "bank-styled-tab",
-    //     triggerEl: "#bank-styled-tab",
-    //     targetEl: "#styled-bank",
-    // },
+    {
+        id: 3,
+        label: "Department",
+        key: "department",
+        icon: "bi bi-building-fill",
+        tabElementId: "3",
+		triggerTabsId: "department-list-tab",
+        triggerEl: "#department-list-tab",
+        targetEl: "#department-list",
+    },
     // {
     //     id: 4,
     //     label: "Education",

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Injector, Input, input, OnInit, Output} from "@angular/core";
 import { TabItem, Tabs, TabsInterface, TabsOptions } from "flowbite";
 import { BaseComponent } from "../../base-component";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 
 @Component({
     selector: "app-tabs",
@@ -21,10 +21,9 @@ export class TabsComponent extends BaseComponent implements OnInit, AfterViewIni
 	trackingTabId: number;
 	options: TabsOptions = {
 		defaultTabId: "1",
-		activeClasses: "text-blue-600 hover:text-blue-600 dark:text-white dark:hover:text-white border-blue-600 dark:border-white",
-		inactiveClasses: "text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 dark:hover:border-gray-300",
+		activeClasses: "text-white dark:text-white dark:hover:text-white border-blue-600 dark:border-white dark:bg-pink-700",
+		inactiveClasses: "text-white hover:text-blue-300 dark:text-gray-200 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 dark:hover:border-gray-300",
 		onShow: (res) => {
-			console.log(res);
 			this.selectedTabId = res._activeTab.id;
 			this.currentTab.emit(this.selectedTabId);
 		},
@@ -61,6 +60,18 @@ export class TabsComponent extends BaseComponent implements OnInit, AfterViewIni
 		if (this.tabs) {
 			this.trackingTabId = Number(this.selectedTabId);
 			this.trackingTabId++;
+			if (this.tabs._items.length >= this.trackingTabId) {
+				this.tabs.show(this.trackingTabId.toString());
+			}
+		} else {
+			console.error("Tabs instance is not initialized.");
+		}
+	}
+	
+	showPreviousTab(): void {
+		if (this.tabs) {
+			this.trackingTabId = Number(this.selectedTabId);
+			this.trackingTabId--;
 			if (this.tabs._items.length >= this.trackingTabId) {
 				this.tabs.show(this.trackingTabId.toString());
 			}

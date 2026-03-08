@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {Component, EventEmitter, Injector, Input, Output} from "@angular/core";
+import {BaseComponent} from "../../base-component";
 
 @Component({
     selector: "app-save-btn",
     templateUrl: "./save-btn.component.html",
     standalone: false
 })
-export class SaveBtnComponent {
+export class SaveBtnComponent extends BaseComponent {
 	@Input() isSaving = false;
 	@Input() savingText = "Saving...";
 	@Input() saveText = "Save";
@@ -15,11 +16,15 @@ export class SaveBtnComponent {
 	@Input() gaEvent = "create_event_analytics";
 	@Input() height = 35;
 	@Input() width: number | string = "auto";
-	@Input() class = "";
+	@Input() class = "rounded-md";
 	@Input() isDisabled = false;
 	@Input() id = "save-button";
 	@Output() saveBtnClick: EventEmitter<any> = new EventEmitter();
-
+	
+	constructor(injector: Injector) {
+		super(injector);
+	}
+	
 	onSave() {
 		this.saveBtnClick.emit();
 	}

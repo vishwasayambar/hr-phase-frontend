@@ -2,6 +2,7 @@ export class Permission {
     id: number;
     name: string;
     display_name: string;
+    items: any
     module_name: string;
     guard_name: string;
     created_at: Date;

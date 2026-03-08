@@ -23,6 +23,10 @@ export class ApiService {
 	getListByQuery<T>(url: string, params: any): Observable<any> {
 		return this.http.get<T>(this.baseUrl + url, {params});
 	}
+	
+	getTrashedListByQuery<T>(url: string, params: any): Observable<any> {
+		return this.http.get<T>(this.baseUrl + url, {params});
+	}
 
 	post<T>(url: string, params = {}): Observable<any> {
 		return this.http.post<T>(this.baseUrl + url, params);
@@ -38,6 +42,14 @@ export class ApiService {
 
 	delete<T>(url: string): Observable<any> {
 		return this.http.delete<T>(this.baseUrl + url);
+	}
+	
+	permanentDelete<T>(url: string): Observable<any> {
+		return this.http.delete<T>(this.baseUrl + url);
+	}
+	
+	restore<T>(url: string): Observable<any> {
+		return this.http.get<T>(this.baseUrl + url);
 	}
 
 	/**

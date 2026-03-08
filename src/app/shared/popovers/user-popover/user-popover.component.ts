@@ -1,4 +1,6 @@
-import { Component, Input } from "@angular/core";
+import {Component, input} from "@angular/core";
+import {Employee} from "../../models/employee";
+import {COMPONENT_SIZES} from "../../constants/constant";
 
 @Component({
     selector: 'app-user-popover',
@@ -7,6 +9,8 @@ import { Component, Input } from "@angular/core";
     styleUrl: './user-popover.component.scss'
 })
 export class UserPopoverComponent {
-  @Input() id: string;
-
+	protected readonly COMPONENT_SIZES = COMPONENT_SIZES;
+	id = input.required<string>();
+	user = input.required<Employee>();
+	
 }

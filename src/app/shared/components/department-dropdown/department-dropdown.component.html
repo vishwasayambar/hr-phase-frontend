@@ -1,0 +1,4 @@
+@if (departmentList?.length > 0) {
+    <app-select-dropdown [options]="departmentList" [templateType]="ENTITIES.NAME"
+                         (selectionChange)="onDepartmentChange($event)"></app-select-dropdown>
+}

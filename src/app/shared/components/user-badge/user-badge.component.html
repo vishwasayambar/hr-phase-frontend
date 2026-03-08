@@ -1,0 +1,50 @@
+<div>
+    <div (mouseenter)="isHovering = true"
+         (mouseleave)="isHovering = false"
+         class="flex items-center p-1.5 image-container">
+        <div *ngIf="!isShowProfileImage" [ngClass]="size" [ngStyle]="{'background-color':backgroundColor}"
+             class="profile-image" id="display-icon">{{ displayIconText }}
+        </div>
+        @if (!iconOnly){
+            <span class="ms-1"> {{ user.display_name ?? user.name }}</span>
+        }
+        @if (isInDropDown) {
+            <div class="ms-1">
+            <span>
+                 {{ user.display_name ?? user.name }}
+            </span>
+                <span class="text-gray-400 text-sm">
+                 ({{ user.mobile_number }})
+            </span>
+                <div class="text-gray-300">
+                    {{ user.email }}
+                </div>
+            </div>
+        }
+<!--        <div>-->
+            <!--            <img *ngIf="isShowProfileImage" [ngClass]="size" [src]="iconOnly ? user?.avatar : (user?.avatar | profilePictureSize:'small') " alt="Profile Image"-->
+            <!--                 class="profile-image" />-->
+<!--        </div>-->
+<!--        <img class="w-8 h-auto rounded-full dark:border-2"-->
+<!--             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"-->
+<!--             alt="Maria">-->
+        <!--        @if (isHovering && currentUser.id === user.id && isOnProfilePage) {-->
+        <!--            <div class="d-flex justify-content-around action-button gap-1">-->
+        <!--                <div>-->
+        <!--                    <button class="btn bg-light btn-small-12 p-1" title="Upload Profile Picture">-->
+        <!--                        <i class="fa-thin fa-upload" [ngClass]="isMobileDevice ? '' : 'fs-3' "-->
+        <!--                           (click)="fileInput.click()"></i>-->
+        <!--                        <input #fileInput (change)="onFileChange($event)" accept="image/*"-->
+        <!--                               class="custom-file-input"-->
+        <!--                               id="customFile" type="file" style="display:none;">-->
+        <!--                    </button>-->
+        <!--                </div>-->
+        <!--                <div>-->
+        <!--                    <button class="btn bg-light btn-small-12 p-1" (click)="deleteProfile()" title="Delete Profile Picture">-->
+        <!--                        <i class="fa-thin fa-trash" [ngClass]="isMobileDevice ? '' : 'fs-3' "></i>-->
+        <!--                    </button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        }-->
+    </div>
+</div>

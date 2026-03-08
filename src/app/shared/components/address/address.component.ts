@@ -1,8 +1,9 @@
-import { Component, Injector, Input, OnInit } from "@angular/core";
+import { Component, Injector, input, Input, OnInit } from "@angular/core";
 import { FormArray, FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormGroup } from "@angular/forms";
 import { BaseComponent } from "../../base-component";
 import { Address } from "../../models/address";
 import { ControlContainerComponent } from "../control-container/control-container.component";
+import {NgClass} from "@angular/common";
 
 @Component({
     selector: "app-address",
@@ -16,6 +17,7 @@ import { ControlContainerComponent } from "../control-container/control-containe
 export class AddressComponent extends BaseComponent implements OnInit {
 	@Input() form: UntypedFormGroup;
 	@Input() id = "address";
+	isEditMode = input(true);
 	stateList: any = [];
 	cityList: any = [];
 
